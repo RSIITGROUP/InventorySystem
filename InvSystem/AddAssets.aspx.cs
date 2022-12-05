@@ -34,7 +34,7 @@ namespace InvSystem
                         }
                         else
                         {
-                            temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSeriesNo.Text + "'))"));
+                            temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSerialNo.Text + "'))"));
                             if (temp == 1)
                             {
                                 bIsExist = true;
@@ -82,9 +82,9 @@ namespace InvSystem
                         ddBrand.SelectedValue = oDs.Tables[0].Rows[0]["Brand"].ToString();
                         txtModel.Text = oDs.Tables[0].Rows[0]["Model"].ToString();
                         txtSeries.Text = oDs.Tables[0].Rows[0]["Series"].ToString();
-                        txtSeriesNo.Text = oDs.Tables[0].Rows[0]["SerialNo"].ToString();
+                        txtSerialNo.Text = oDs.Tables[0].Rows[0]["SerialNo"].ToString();
                         ddColor.SelectedValue = oDs.Tables[0].Rows[0]["Color"].ToString();
-                        ddType.SelectedValue = oDs.Tables[0].Rows[0]["ScreenSize"].ToString();
+                        txtScrSize.Text = oDs.Tables[0].Rows[0]["ScreenSize"].ToString();
                         txtScrRsl.Text = oDs.Tables[0].Rows[0]["ScreenResolution"].ToString();
                         ddTchScr.SelectedValue = oDs.Tables[0].Rows[0]["TouchScreen"].ToString();
                         txtProcessor.Text = oDs.Tables[0].Rows[0]["Processor"].ToString();
@@ -204,7 +204,7 @@ namespace InvSystem
                         sparamVal = sparamVal + "@Brand:" + ddBrand.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@Model:" + txtModel.Text + ",";
                         sparamVal = sparamVal + "@Series:" + txtSeries.Text + ",";
-                        sparamVal = sparamVal + "@SerialNo:" + txtSeriesNo.Text + ",";
+                        sparamVal = sparamVal + "@SerialNo:" + txtSerialNo.Text + ",";
                         sparamVal = sparamVal + "@Color:" + ddColor.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@ScreenSize:" + txtScrSize.Text + ",";
                         sparamVal = sparamVal + "@ScreenResolution:" + txtScrRsl.Text + ",";

@@ -94,9 +94,9 @@
                                 </div>                                
                             </div>
                             <div class="col-md-3">
-                                <label>Series No</label>
+                                <label>Serial No</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtSeriesNo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtSerialNo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-md-3">

@@ -148,13 +148,13 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtSeries;
         
         /// <summary>
-        /// txtSeriesNo control.
+        /// txtSerialNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSeriesNo;
+        protected global::System.Web.UI.WebControls.TextBox txtSerialNo;
         
         /// <summary>
         /// txtModel control.

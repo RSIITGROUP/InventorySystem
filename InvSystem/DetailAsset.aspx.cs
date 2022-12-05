@@ -43,9 +43,9 @@ namespace InvSystem
                     txtBrand.Text = oDs.Tables[0].Rows[0]["Brand"].ToString();
                     txtModel.Text = oDs.Tables[0].Rows[0]["Model"].ToString();
                     txtSeries.Text = oDs.Tables[0].Rows[0]["Series"].ToString();
-                    txtSeriesNo.Text = oDs.Tables[0].Rows[0]["SerialNo"].ToString();
+                    txtSerialNo.Text = oDs.Tables[0].Rows[0]["SerialNo"].ToString();
                     txtColor.Text = oDs.Tables[0].Rows[0]["Color"].ToString();
-                    txtType.Text = oDs.Tables[0].Rows[0]["ScreenSize"].ToString();
+                    txtScrSize.Text = oDs.Tables[0].Rows[0]["ScreenSize"].ToString();
                     txtScrRsl.Text = oDs.Tables[0].Rows[0]["ScreenResolution"].ToString();
                     txtTchScr.Text = oDs.Tables[0].Rows[0]["TouchScreen"].ToString();
                     txtProcessor.Text = oDs.Tables[0].Rows[0]["Processor"].ToString();
