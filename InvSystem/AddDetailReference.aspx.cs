@@ -84,6 +84,7 @@ namespace InvSystem
                         
                         lblError.ForeColor = System.Drawing.Color.Green;
                         lblError.Text = "Add Reference is Success";
+                        btnAdd.Enabled = false;
                         //Response.Redirect("DetailReference.aspx");
 
                     }
@@ -103,6 +104,7 @@ namespace InvSystem
 
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Update Reference is Success";
+                    btnAdd.Enabled = false;
                     //Response.Redirect("DetailReference.aspx");
                 }
             }

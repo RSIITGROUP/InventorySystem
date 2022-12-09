@@ -80,10 +80,12 @@ namespace InvSystem
                     txtArea.Text = oDs.Tables[0].Rows[0]["Area"].ToString();
                     txtSpot.Text = oDs.Tables[0].Rows[0]["Spot"].ToString();
                     txtHealth.Text = oDs.Tables[0].Rows[0]["Health"].ToString();
+                    txtHostName.Text = oDs.Tables[0].Rows[0]["HostName"].ToString();
+                    txtUser.Text = oDs.Tables[0].Rows[0]["User"].ToString();
 
                     string sqlStr = "SELECT T0.[Version], T1.Name [PlacementCharacteristic], T2.Name [Location], T3.Name [Area],";
-                    sqlStr = sqlStr + "T0.[Spot], REPLACE(CONVERT(NVARCHAR, T0.[CreateDate], 106), ' ', '-')[CreateDate]";
-                    sqlStr = sqlStr + "FROM[PlacementHistory] T0 ";
+                    sqlStr = sqlStr + "T0.[Spot], T0.[User], REPLACE(CONVERT(NVARCHAR, T0.[CreateDate], 106), ' ', '-')[CreateDate]";
+                    sqlStr = sqlStr + "FROM [PlacementHistory] T0 ";
                     sqlStr = sqlStr + "Inner Join Reference T1 on T0.CharacteristicCode = T1.Code ";
                     sqlStr = sqlStr + "Inner Join Reference T2 on T0.LocationCode = T2.Code ";
                     sqlStr = sqlStr + "Inner Join Reference T3 on T0.AreaCode = T3.Code ";

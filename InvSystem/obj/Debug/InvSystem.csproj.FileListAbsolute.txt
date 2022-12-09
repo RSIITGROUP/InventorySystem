@@ -273,7 +273,6 @@ D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Antlr3.Runtime.pdb
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.csprojAssemblyReference.cache
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.csproj.CoreCompileInputs.cache
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.csproj.CopyComplete
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.dll

@@ -73,6 +73,7 @@ namespace InvSystem
 
                         lblError.ForeColor = System.Drawing.Color.Green;
                         lblError.Text = "Add Reference Type is Successfull";
+                        btnAdd.Enabled = false;
                         //Response.Redirect("ReferenceType.aspx");
                     }
                 }
@@ -89,6 +90,7 @@ namespace InvSystem
 
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Update Reference Type is Successfull";
+                    btnAdd.Enabled = false;
                     //Response.Redirect("ReferenceType.aspx");
                 }
             }

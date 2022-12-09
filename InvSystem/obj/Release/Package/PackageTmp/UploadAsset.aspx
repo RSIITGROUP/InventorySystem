@@ -64,11 +64,13 @@
                                             <asp:BoundField DataField="LocationCode" HeaderText="LocationCode" SortExpression="LocationCode" />
                                             <asp:BoundField DataField="AreaCode" HeaderText="AreaCode" SortExpression="AreaCode" />
                                             <asp:BoundField DataField="Spot" HeaderText="Spot" SortExpression="Spot" />
+                                            <asp:BoundField DataField="User" HeaderText="User" SortExpression="User" />
                                             <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
                                             <asp:BoundField DataField="Brand" HeaderText="Brand" SortExpression="Brand" />
                                             <asp:BoundField DataField="Model" HeaderText="Model" SortExpression="Model" />
                                             <asp:BoundField DataField="Series" HeaderText="Series" SortExpression="Series" />
                                             <asp:BoundField DataField="SerialNo" HeaderText="SerialNo" SortExpression="SerialNo" />
+                                            <asp:BoundField DataField="HostName" HeaderText="HostName" SortExpression="HostName" />
                                             <asp:BoundField DataField="Color" HeaderText="Color" SortExpression="Color" />
                                             <asp:BoundField DataField="ScreenSize" HeaderText="ScreenSize" SortExpression="ScreenSize" />
                                             <asp:BoundField DataField="ScreenResolution" HeaderText="ScreenResolution" SortExpression="ScreenResolution" />

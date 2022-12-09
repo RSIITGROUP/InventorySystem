@@ -60,93 +60,31 @@
                                     <asp:TextBox ID="txtAssetCode" CssClass="form-control" runat="server" placeholder="Asset Code" ReadOnly="True"></asp:TextBox>
                                 </div>                                
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label>Description</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtAssetDesc" CssClass="form-control" runat="server" placeholder="Asset Description"></asp:TextBox>
-                                    <div>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Asset Desc is empty" ControlToValidate="txtAssetDesc" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
-                                    </div>
+                                    <asp:TextBox ID="txtAssetDesc" CssClass="form-control" runat="server" placeholder="Asset Description"></asp:TextBox>                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <label>Activa Number</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtActivaNO" CssClass="form-control" runat="server" placeholder="Activa Number" MaxLength="50"></asp:TextBox>
-                                    <div>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Activa No is empty" ControlToValidate="txtActivaNO" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Purchase Date</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtPurchaseDate" CssClass="form-control" runat="server" placeholder="Purchase Date"  TextMode="Date"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*GRPO Doc Num is empty" ControlToValidate="txtPurchaseDate" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
+                                    <asp:TextBox ID="txtPurchaseDate" CssClass="form-control" runat="server" placeholder="Purchase Date"  TextMode="Date"></asp:TextBox>                                     
                                 </div>                                
-                            </div>
-                        </div>
-                        <div class="row  mb-2">       
-                            <div class="col-md-3">
+                            </div>                                   
+                            <div class="col-md-2">
                                 <label>GRPO Doc Num</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtGRPODocNum" CssClass="form-control" runat="server" placeholder="GRPO Doc Num" MaxLength="20"></asp:TextBox>
-                                    <div>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*GRPO Doc Num is empty" ControlToValidate="txtGRPODocNum" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Series</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtSeries" CssClass="form-control" runat="server" placeholder="Series"></asp:TextBox>
-                                </div>                                
-                            </div>
-                            <div class="col-md-3">
-                                <label>Series No</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtSeriesNo" CssClass="form-control" runat="server" placeholder="Series No"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Model</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtModel" runat="server" CssClass="form-control" placeholder="Model"></asp:TextBox>
-                                </div>                                
                             </div>
                         </div>
-                        <div class="row  mb-2">
-                            <div class="col-md-2">
-                                <label>Type</label>
-                                <div class="form-group mb-2">
-                                    <asp:DropDownList ID="ddType" runat="server" Class="form-control"> </asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label>Brand</label>
-                                <div class="form-group mb-2">
-                                    <asp:DropDownList ID="ddBrand" Class="form-control" runat="server" > </asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label>Color</label>
-                                <div class="form-group mb-2">
-                                     <asp:DropDownList ID="ddColor" runat="server"  Class="form-control"></asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Processor</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtProcessor" runat="server" CssClass="form-control" placeholder="Processor"></asp:TextBox>
-                                </div>                                
-                            </div>
-                            <div class="col-md-2">
-                                <label>OS</label>
-                                <div class="form-group mb-2">
-                                    <asp:DropDownList ID="ddOS" Class="form-control" runat="server" > </asp:DropDownList>
-                                </div>
-                            </div>
-                        </div>                      
                         <div class="row">
                             <div class="col">
                                 <hr />
@@ -155,7 +93,7 @@
                         </div>   
                         <div class="row  mb-2">
                             <div class="col-md-2">
-                                <label>Helath</label>
+                                <label>Health</label>
                                 <div class="form-group mb-2">
                                     <asp:DropDownList ID="ddHealth" Class="form-control" runat="server"></asp:DropDownList>
                                 </div>
@@ -178,13 +116,98 @@
                                     <asp:DropDownList ID="ddArea" Class="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <label>Spot</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtSpot" runat="server" CssClass="form-control" placeholder="Spot"></asp:TextBox>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <label>User</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtUser" runat="server" CssClass="form-control" placeholder="User"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr />
+                                 <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Spesification</span></h4>                                
+                            </div>
+                        </div> 
+                        <div class="row  mb-2">
+                            <div class="col-md-2">
+                                <label>Type</label>
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddType" runat="server" Class="form-control"> </asp:DropDownList>
+                                    <div>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*Asset Type is empty" ControlToValidate="ddType" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Brand</label>
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddBrand" Class="form-control" runat="server" > </asp:DropDownList>                                    
+                                    <div>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*Brand Asset is empty" ControlToValidate="ddBrand" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Model</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtModel" runat="server" CssClass="form-control" placeholder="Model"></asp:TextBox>
+                                    <div>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Model is empty" ControlToValidate="txtModel" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="col-md-2">
+                                <label>Series</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtSeries" CssClass="form-control" runat="server" placeholder="Series"></asp:TextBox>
+                                    <div>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*Series is empty" ControlToValidate="txtSeries" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="col-md-3">
+                                <label>Serial No</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtSerialNo" CssClass="form-control" runat="server" placeholder="Series No"></asp:TextBox>
+                                    <div>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Serial No is empty" ControlToValidate="txtSerialNo" Display="Dynamic" ForeColor="Red" CssClass="auto-style1"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mb-2">
+                            <div class="col-md-3">
+                                <label>Host Name</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtHostName" runat="server" CssClass="form-control" placeholder="Host Name"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Color</label>
+                                <div class="form-group mb-2">
+                                     <asp:DropDownList ID="ddColor" runat="server"  Class="form-control"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Processor</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtProcessor" runat="server" CssClass="form-control" placeholder="Processor"></asp:TextBox>
+                                </div>                                
+                            </div>
+                            <div class="col-md-3">
+                                <label>OS</label>
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddOS" Class="form-control" runat="server" > </asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>     
                         <div class="row">
                             <div class="col">
                                 <hr />

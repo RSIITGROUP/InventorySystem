@@ -14,6 +14,7 @@
                     <asp:BoundField DataField="Location" HeaderText="Location" SortExpression="Location" />
                     <asp:BoundField DataField="Area" HeaderText="Area" SortExpression="Area" />
                     <asp:BoundField DataField="Spot" HeaderText="Spot" SortExpression="Spot" />
+                    <asp:BoundField DataField="User" HeaderText="User" SortExpression="User" />
                     <asp:BoundField DataField="CreateDate" HeaderText="Create Date" ReadOnly="True" SortExpression="CreateDate" />
                 </Columns>
             </asp:GridView>
@@ -36,17 +37,23 @@
         <div class="row mb-2">
             <div class="col-md-12 mx-auto">
                 <div class="card">
-                    <div class="card-body">     
+                    <div class="card-body">   
+                        <div class="row  mb-2">
+                            <div class="col">
+                                <%--<br />--%>
+                                <a href="Asset.aspx"><< Back To Asset List</a><br />
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <asp:Button ID="Button1" runat="server" Text="Placement History" CssClass="roundedcorner" Font-Size="Large" />
-                                <asp:Button ID="Button2" runat="server" Text="Health History" CssClass="roundedcorner" Font-Size="Large" />
-                                <br />
+                                <asp:Button ID="Button2" runat="server" Text="Health History" CssClass="roundedcorner" Font-Size="Large" />									  
                             </div>
-                        </div>                        
+                        </div>                                 
+                        
                         <div class="row  mb-2">
                             <div class="col">
-                                <br />
+                               <%-- <br />--%>
                             </div>
                         </div>
                         <div class="row">
@@ -58,86 +65,42 @@
                             <div class="col-md-2">
                                 <label>Code</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtAssetCode" CssClass="form-control" runat="server" placeholder="Asset Code" ReadOnly="True"></asp:TextBox>
+                                    <asp:TextBox ID="txtAssetCode" CssClass="form-control" runat="server" ReadOnly="True"></asp:TextBox>
                                 </div>                                
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label>Description</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtAssetDesc" CssClass="form-control" runat="server"  ReadOnly="true"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtAssetDesc" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>                                    
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <label>Activa Number</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtActivaNO" CssClass="form-control" runat="server" MaxLength="50" ReadOnly="true"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtActivaNO" CssClass="form-control" runat="server" MaxLength="50" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Purchase Date</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtPurchaseDate" CssClass="form-control" runat="server" TextMode="Date"  ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtPurchaseDate" CssClass="form-control" runat="server" TextMode="Date" ReadOnly="true"></asp:TextBox>                                     
                                 </div>                                
-                            </div>
-                        </div>
-                        <div class="row  mb-2">       
-                            <div class="col-md-3">
+                            </div>                                   
+							  
+													  
+                            <div class="col-md-2">
                                 <label>GRPO Doc Num</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtGRPODocNum" CssClass="form-control" runat="server" MaxLength="20" ReadOnly="true"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtGRPODocNum" CssClass="form-control" runat="server" MaxLength="20" ReadOnly="true"></asp:TextBox>
+									  
+								  
+												  
+													 
+															 
+																																	 
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Series</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtSeries" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                                </div>                                
-                            </div>
-                            <div class="col-md-3">
-                                <label>Series No</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtSeriesNo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Model</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtModel" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                </div>                                
                             </div>
                         </div>
-                        <div class="row  mb-2">
-                            <div class="col-md-2">
-                                <label>Type</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtType" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label>Brand</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtBrand" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label>Color</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtColor" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label>Processor</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtProcessor" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                </div>                                
-                            </div>
-                            <div class="col-md-2">
-                                <label>OS</label>
-                                <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtOS" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>                      
                         <div class="row">
                             <div class="col">
                                 <hr />
@@ -151,6 +114,8 @@
                                     <asp:TextBox ID="txtHealth" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
+							  
+											   
                             <div class="col-md-2">
                                 <label>Placement</label>
                                 <div class="form-group mb-2">
@@ -159,8 +124,8 @@
                             </div>
                             <div class="col-md-2">
                                 <label>Location</label>
-                                <div class="form-group mb-2"> 
-                                    <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>       
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -169,13 +134,83 @@
                                     <asp:TextBox ID="txtArea" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <label>Spot</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtSpot" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <label>User</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtUser" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr />
+                                 <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Spesification</span></h4>                                
+                            </div>
+                        </div> 
+                        <div class="row  mb-2">
+                            <div class="col-md-2">
+                                <label>Type</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtType" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Brand</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtBrand" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Model</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtModel" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                </div>                                
+                            </div>
+                            <div class="col-md-2">
+                                <label>Series</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtSeries" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                </div>                                
+                            </div>
+                            <div class="col-md-3">
+                                <label>Serial No</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtSerialNo" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mb-2">
+                            <div class="col-md-3">
+                                <label>Host Name</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtHostName" runat="server" CssClass="form-control" placeholder="Host Name"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Color</label>
+                                <div class="form-group mb-2">
+                                     <asp:TextBox ID="txtColor" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Processor</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtProcessor" runat="server" CssClass="form-control" placeholder="Processor"></asp:TextBox>
+                                </div>                                
+                            </div>
+                            <div class="col-md-3">
+                                <label>OS</label>
+                                <div class="form-group mb-2">
+                                    <asp:TextBox ID="txtOS" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>     
                         <div class="row">
                             <div class="col">
                                 <hr />
@@ -198,7 +233,7 @@
                             <div class="col-md-2">
                                 <label>Touch Screen</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtTchScr" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                     <asp:TextBox ID="txtTchScr" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>                           
                         </div> 
@@ -384,7 +419,7 @@
                             <div class="col-md-3">
                                 <label>Mobile Number</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtPhone" CssClass="form-control" runat="server"  ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtPhone" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -392,7 +427,7 @@
                             <div class="col-md-6">
                                 <label>Remark</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtRemark" CssClass="form-control" runat="server" TextMode="MultiLine" Rows="3" MaxLength="500" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtRemark" CssClass="form-control" runat="server" ReadOnly="true" TextMode="MultiLine" Rows="3" MaxLength="500"></asp:TextBox>
                                 </div>
                             </div>
                         </div>

@@ -114,10 +114,11 @@ namespace InvSystem
                         txtIP.Text = oDs.Tables[0].Rows[0]["IP"].ToString();
                         txtPhone.Text = oDs.Tables[0].Rows[0]["MobileNumber"].ToString();
                         txtRemark.Text = oDs.Tables[0].Rows[0]["Remarks"].ToString();
+                        txtHostName.Text = oDs.Tables[0].Rows[0]["HostName"].ToString();
 
                         oDs = null;
                         oDs = new DataSet();
-                        oDs = oGnl.GetDataSet("select top 1 CharacteristicCode, LocationCode, AreaCode, Spot from PlacementHistory where RID=" + iRID + "order by [Version] desc");
+                        oDs = oGnl.GetDataSet("select top 1 CharacteristicCode, LocationCode, AreaCode, Spot, [User] from PlacementHistory where RID=" + iRID + "order by [Version] desc");
 
                         if (oDs.Tables[0].Rows.Count > 0)
                         {
@@ -125,6 +126,7 @@ namespace InvSystem
                             ddLocation.SelectedValue = oDs.Tables[0].Rows[0]["LocationCode"].ToString();
                             ddArea.SelectedValue = oDs.Tables[0].Rows[0]["AreaCode"].ToString();
                             txtSpot.Text = oDs.Tables[0].Rows[0]["Spot"].ToString();
+                            txtUser.Text = oDs.Tables[0].Rows[0]["User"].ToString();
                         }
                         
                         oDs = null;
@@ -245,6 +247,8 @@ namespace InvSystem
                         sparamVal = sparamVal + "@IP:" + txtIP.Text + ",";
                         sparamVal = sparamVal + "@MobileNumber:" + txtPhone.Text + ",";
                         sparamVal = sparamVal + "@Remarks:" + txtRemark.Text + ",";
+                        sparamVal = sparamVal + "@HostName:" + txtHostName.Text + ",";
+                        sparamVal = sparamVal + "@User:" + txtUser.Text + ",";
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
 
                         DataSet oDs = new DataSet();
@@ -271,6 +275,7 @@ namespace InvSystem
                                 if (btnAdd.Text == "Add")
                                 {
                                     lblError.Text = "Add Asset is Success";
+                                    btnAdd.Enabled = false;
                                 }
                                 else
                                 {

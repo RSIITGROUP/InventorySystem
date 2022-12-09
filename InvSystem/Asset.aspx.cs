@@ -33,7 +33,9 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            DataTable dt = oGnl.GetDataTable("SELECT[AssetCode], [AssetDesc], [ActivaNo], REPLACE(CONVERT(NVARCHAR,[PurchaseDate], 106), ' ', '-')[PurchaseDate],  [GRPODocNo] FROM[Asset]");
+            string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], t0.[ActivaNo], t0.[SerialNo], isnull(t1.[User],'') [User], REPLACE(CONVERT(NVARCHAR,[PurchaseDate], 106), ' ', '-') [PurchaseDate],  [GRPODocNo] ";
+            strQuery = strQuery + "FROM[Asset] T0 left join PlacementHistory T1 on t0.RID = t1.RID and t0.PlacementVersion = t1.[Version] WHERE isnull(T0.[IsDeleted],'N') in ('N','')";
+            DataTable dt = oGnl.GetDataTable(strQuery);
             GridView1.DataSource = dt;
             GridView1.DataBind();
             
@@ -162,6 +164,34 @@ namespace InvSystem
                 }
             }
             return string.Empty;
-        }       
+        }
+
+        protected void Remove_Command(object sender, CommandEventArgs e)
+        {
+            if (Session["User"] == null || Session["UserId"] == null)
+            {
+                Response.Redirect("~/UserLogin.aspx");
+            }
+            else
+            {
+                string assetCode = (string)e.CommandArgument;
+                if (assetCode != "")
+                {
+                    try
+                    {
+                        string sparamVal = "@AssetCode:" + assetCode + ",";
+                        sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                        oGnl.ExecuteDataQuery("Update [Asset] set [IsDeleted]='Y',[UserUpdate] = @UserId, [UpdateDate]=getdate() where [AssetCode] = @AssetCode", sparamVal);
+                        ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ClientScript", "alert(' Asset [" + assetCode + "] has been successfully deleted')", true);
+                        GridView1.DataSource = null;
+                        this.BindGrid();
+                    }
+                    catch (Exception ex)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ClientScript", "alert('Error : " + ex.ToString() + "')", true);
+                    }                    
+                }
+            }
+        }
     }
 }

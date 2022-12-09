@@ -2389,6 +2389,7 @@
     <Compile Include="Asset.aspx.designer.cs">
       <DependentUpon>Asset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Class\ClsAsset.cs" />
     <Compile Include="Class\clsGeneral.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

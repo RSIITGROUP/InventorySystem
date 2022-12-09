@@ -41,6 +41,8 @@
                                         </asp:TemplateField>        
                                         <asp:BoundField DataField="AssetDesc" HeaderText="Asset Desc" SortExpression="AssetDesc" />
                                         <asp:BoundField DataField="ActivaNo" HeaderText="Activa No" SortExpression="ActivaNo" />
+                                        <asp:BoundField DataField="SerialNo" HeaderText="Serial No" SortExpression="SerialNo" />
+                                        <asp:BoundField DataField="User" HeaderText="User" SortExpression="User" />
                                         <asp:BoundField DataField="PurchaseDate" HeaderText="PurchaseDate" SortExpression="Purchase Date" />
                                         <asp:BoundField DataField="GRPODocNo" HeaderText="GRPODocNo" SortExpression="GRPO Doc No" />
                                         <asp:TemplateField HeaderText="Action" ItemStyle-HorizontalAlign="Justify">    
@@ -48,6 +50,9 @@
                                                 <asp:LinkButton ID="Edit" runat="server" OnCommand="Edit_Command"
                                                     CommandArgument='<%# Eval("AssetCode") %>'
                                                     Text="Edit"><i class="fa fa-edit"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="Remove" runat="server" OnClientClick="return confirm('Are you sure you want to delete this asset?');" OnCommand="Remove_Command"
+                                                    CommandArgument='<%# Eval("AssetCode") %>'
+                                                    Text="Edit"><i class="fa fa-trash"></i></asp:LinkButton>
                                                 <asp:LinkButton ID="LinkButton1" runat="server" OnCommand="Print_Command"
                                                     CommandArgument='<%# Eval("AssetCode") %>'
                                                     Text="Print"><i class="fa fa-print"></i></asp:LinkButton>
@@ -76,7 +81,7 @@
                 bSort: true,
                 bPaginate: true
             });
-        });
-        
+        });        
+
     </script>
 </asp:Content>
