@@ -19,6 +19,7 @@ namespace InvSystem
                 LinkButton4.Visible = true;
                 LinkButton5.Visible = true;
                 LinkButton6.Visible = true;
+                LinkButton7.Visible = true;
                 LinkButton5.Text = "Hello " + Session["User"].ToString();
             }
             else
@@ -29,6 +30,7 @@ namespace InvSystem
                 LinkButton4.Visible = false;
                 LinkButton5.Visible = false;
                 LinkButton6.Visible = false;
+                LinkButton7.Visible = false;
                 //Response.Redirect("~/UserLogin.aspx");
             }
         }
@@ -70,6 +72,11 @@ namespace InvSystem
         protected void LinkButton6_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/asset.aspx");
+        }
+
+        protected void LinkButton7_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/configuration.aspx");
         }
     }
 }

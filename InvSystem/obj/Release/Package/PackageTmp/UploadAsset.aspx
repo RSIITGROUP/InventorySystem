@@ -18,12 +18,23 @@
                         <div class="row  mb-2">                            
                             <div class="col">
                                 <br />
+                                <center>
+                                    <h5>Choose Type Of Asset and Download the Excel Template</h5>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-md-3">                                     
+                                <div class="form-group">                                      
+                                    <label><strong>Type</strong></label>
+                                    <asp:DropDownList ID="ddType" runat="server" Class="form-control" OnSelectedIndexChanged="ddType_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                </div>                                
                             </div>
                         </div>
                         <div class="row  mb-3">
                             <div class="col">
                                 <center>
-                                    <h5>Download and Complete the Excel Template</h5>
+                                    <%--<h5>Download and Complete the Excel Template</h5>--%>
                                     <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" CssClass="auto-style1">TemplateUpload.xlsx  <i class="fa fa-download"></i></asp:LinkButton>
                                     <hr />
                                 </center>
@@ -95,14 +106,22 @@
                                             <asp:BoundField DataField="Motherboard" HeaderText="Motherboard" SortExpression="Motherboard" />
                                             <asp:BoundField DataField="ChasingSize" HeaderText="ChasingSize" SortExpression="ChasingSize" />
                                             <asp:BoundField DataField="CameraResolution" HeaderText="CameraResolution" SortExpression="CameraResolution" />
-                                            <asp:BoundField DataField="ChannelQuantity" HeaderText="ChannelQuantity" SortExpression="ChannelQuantity" />
+                                            <asp:BoundField DataField="CameraType" HeaderText="CameraType" SortExpression="CameraType" />
                                             <asp:BoundField DataField="Health" HeaderText="Health" SortExpression="Health" />
-                                            <asp:BoundField DataField="OS" HeaderText="OS" SortExpression="OS" />
+                                            <asp:BoundField DataField="OperatingSystem" HeaderText="OperatingSystem" SortExpression="OperatingSystem" />
                                             <asp:BoundField DataField="Imei" HeaderText="Imei" SortExpression="Imei" />
                                             <asp:BoundField DataField="MACAddress" HeaderText="MACAddress" SortExpression="MACAddress" />
                                             <asp:BoundField DataField="IP" HeaderText="IP" SortExpression="IP" />
                                             <asp:BoundField DataField="MobileNumber" HeaderText="MobileNumber" SortExpression="MobileNumber" />
                                             <asp:BoundField DataField="Remarks" HeaderText="Remarks" SortExpression="Remarks" />
+                                            <asp:BoundField DataField="TypeQuality" HeaderText="TypeQuality" SortExpression="TypeQuality"/>
+                                            <asp:BoundField DataField="TypePort" HeaderText="TypePort" SortExpression="TypePort"/>
+                                            <asp:BoundField DataField="TypeSystem" HeaderText="TypeSystem" SortExpression="TypeSystem"/>
+                                            <asp:BoundField DataField="PortQuantity" HeaderText="PortQuantity" SortExpression="PortQuantity"/>
+                                            <asp:BoundField DataField="SFPPortQuantity" HeaderText="SFPPortQuantity" SortExpression="SFPPortQuantity"/>
+                                            <asp:BoundField DataField="FrequencyBand" HeaderText="FrequencyBand" SortExpression="FrequencyBand"/>
+                                            <asp:BoundField DataField="TypeConnectivity" HeaderText="TypeConnectivity" SortExpression="TypeConnectivity"/>
+                                            <asp:BoundField DataField="TypeFungsi" HeaderText="TypeFungsi" SortExpression="TypeFungsi"/>
                                         </Columns>
                                     </asp:GridView>
                                 </center>

@@ -44,9 +44,9 @@ namespace InvSystem.Class
         private string motherboard;
         private string chasingsize;
         private string cameraresolution;
-        private string channelquantity;
+        private string cameratype;
         private string health;
-        private string os;
+        private string operatingsystem;
         private string imei;
         private string macaddress;
         private string ip;
@@ -54,6 +54,15 @@ namespace InvSystem.Class
         private string remarks;
         private string hostname;
         private string user;
+
+        private string typequality;
+        private string typeport;
+        private string typesystem;
+        private string portquantity;
+        private string sfpportquantity;
+        private string frequencyband;
+        private string typeconnectivity;
+        private string typefunctionality;
 
         public string AssetDesc    
         {
@@ -240,20 +249,20 @@ namespace InvSystem.Class
             get { return cameraresolution; }
             set { cameraresolution = value; }
         }
-        public string ChannelQuantity
+        public string CameraType
         {
-            get { return channelquantity; }
-            set { channelquantity = value; }
+            get { return cameratype; }
+            set { cameratype = value; }
         }
         public string Health
         {
             get { return health; }
             set { health = value; }
         }
-        public string OS
+        public string OperatingSystem
         {
-            get { return os; }
-            set { os = value; }
+            get { return operatingsystem; }
+            set { operatingsystem = value; }
         }
         public string Imei
         {
@@ -289,6 +298,46 @@ namespace InvSystem.Class
         {
             get { return user; }
             set { user = value; }
+        }
+        public string TypeQuality
+        {
+            get { return typequality; }
+            set { typequality = value; }
+        }
+        public string TypePort
+        {
+            get { return typeport; }
+            set { typeport = value; }
+        }
+        public string TypeSystem
+        {
+            get { return typesystem; }
+            set { typesystem = value; }
+        }
+        public string PortQuantity
+        {
+            get { return portquantity; }
+            set { portquantity = value; }
+        }
+        public string SfpPortQuantity
+        {
+            get { return sfpportquantity; }
+            set { sfpportquantity = value; }
+        }
+        public string FrequencyBand
+        {
+            get { return frequencyband; }
+            set { frequencyband = value; }
+        }
+        public string TypeConnectivity
+        {
+            get { return typeconnectivity; }
+            set { typeconnectivity = value; }
+        }
+        public string TypeFunctionality
+        {
+            get { return typefunctionality; }
+            set { typefunctionality = value; }
         }
     }
 }

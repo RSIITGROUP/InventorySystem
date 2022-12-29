@@ -24,14 +24,14 @@ namespace InvSystem
                     int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Reference where Name='" + txtName.Text.Trim() + "' and RefCode ='" + drType.SelectedItem.Value + "'"));                    
                     if (temp == 1)
                     {
-                        //Label2.Text = "Asset already exist";
+                        lblError.Text = "Reference already exist";
                         bIsExist = true;
                     }
                 }
             }
             else
             {
-                oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType]  ORDER BY [Code]", drType);
+                oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType]  ORDER BY [Name]", drType);
                 SetStatusDD();
                 if (Request.QueryString["Action"] == "edit")
                 {
@@ -40,7 +40,7 @@ namespace InvSystem
                     oDs = oGnl.GetDataSet("select [Code], [RefCode], [Name], [Status] from Reference where Code='" + Request.QueryString["Code"] + "'");
 
                     //SetRefType(Request.QueryString["Action"], oDs.Tables[0].Rows[0]["RefCode"].ToString());
-                    oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType] where [Code]='" + oDs.Tables[0].Rows[0]["RefCode"].ToString() + "' ORDER BY [Code]", drType);
+                    oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType] where [Code]='" + oDs.Tables[0].Rows[0]["RefCode"].ToString() + "' ORDER BY [Name]", drType);
                     txtCode.Text = oDs.Tables[0].Rows[0]["Code"].ToString();
                     txtName.Text = oDs.Tables[0].Rows[0]["Name"].ToString();
                     drType.SelectedValue = oDs.Tables[0].Rows[0]["RefCode"].ToString();
@@ -81,11 +81,15 @@ namespace InvSystem
                         sparamVal = sparamVal + "@status:" + drStatus.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
                         oGnl.ExecuteDataQuery("insert into Reference ([Code],[RefCode],[Name],[Status],[UserCreate],[CreateDate]) values (@code,@RefCode,@name,@status,@UserId,getdate())", sparamVal);
-                        
+
                         lblError.ForeColor = System.Drawing.Color.Green;
                         lblError.Text = "Add Reference is Success";
                         btnAdd.Enabled = false;
                         //Response.Redirect("DetailReference.aspx");
+
+                    }
+                    else
+                    {
 
                     }
                 }
@@ -139,6 +143,18 @@ namespace InvSystem
         protected void drType_TextChanged(object sender, EventArgs e)
         {
             txtCode.Text = GenerateCode(drType.SelectedItem.Value);
+        }
+
+        protected void btnNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("AddDetailReference.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error:" + ex.ToString();
+            }
         }
     }
 }

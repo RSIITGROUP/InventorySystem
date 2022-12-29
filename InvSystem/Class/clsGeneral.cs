@@ -56,6 +56,24 @@ namespace InvSystem.Class
             }            
         }
 
+        public void SeListBox(string sSqlStr, ListBox dr)
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(sSqlStr))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = con;
+                    con.Open();
+                    dr.DataSource = cmd.ExecuteReader();
+                    dr.DataTextField = "Name";
+                    dr.DataValueField = "Code";
+                    dr.DataBind();
+                    con.Close();
+                }
+            }
+        }
+
         public string Encrypt(string clearText)
         {
             string EncryptionKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";

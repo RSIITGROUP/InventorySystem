@@ -182,11 +182,13 @@
     <Content Include="AddDetailReference.aspx" />
     <Content Include="AddReferenceType.aspx" />
     <Content Include="AddAssets.aspx" />
+    <Content Include="ajax\fonts\fontawesome-webfont.svg" />
     <Content Include="Asset.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
+    <Content Include="Configuration.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2315,6 +2317,10 @@
     <Content Include="fontawesome\webfonts\fa-solid-900.woff2" />
     <Content Include="fontawesome\webfonts\fa-v4compatibility.ttf" />
     <Content Include="fontawesome\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="ajax\fonts\fontawesome-webfont.eot" />
+    <Content Include="ajax\fonts\fontawesome-webfont.ttf" />
+    <Content Include="ajax\fonts\fontawesome-webfont.woff" />
+    <Content Include="ajax\fonts\fontawesome-webfont.woff2" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Home.aspx" />
@@ -2391,6 +2397,13 @@
     </Compile>
     <Compile Include="Class\ClsAsset.cs" />
     <Compile Include="Class\clsGeneral.cs" />
+    <Compile Include="Configuration.aspx.cs">
+      <DependentUpon>Configuration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuration.aspx.designer.cs">
+      <DependentUpon>Configuration.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2474,7 +2487,7 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="template\TemplateUpload.xlsx" />
+    <Content Include="template\TemplateUploadOri.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

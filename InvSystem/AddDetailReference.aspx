@@ -121,9 +121,10 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col">                                
-                                    <div class="d-grid gap-2 mb-2">
-                                        <asp:Button class="btn btn-success btn-lg" ID="btnAdd" runat="server" Text="Login" OnClick="btnAdd_Click" />
-                                    </div>
+                                    <center>
+                                        <asp:Button class="btn btn-success" ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                                        <asp:Button class="btn btn-info" ID="btnNew" runat="server" Text="New" OnClick="btnNew_Click" CausesValidation="false"/>
+                                    </center>
                                 </div>
                             </div>
                         </div>    

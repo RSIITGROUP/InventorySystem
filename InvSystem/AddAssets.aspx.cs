@@ -14,12 +14,12 @@ namespace InvSystem
         bool bIsExist = false;
         bool bIsErr = false;
         clsGeneral oGnl = new clsGeneral();
+        System.Web.UI.HtmlControls.HtmlControl div;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["User"] == null || Session["UserId"] == null)
             {
-                Response.Redirect("~/UserLogin.aspx");
-            }
+                Response.Redirect("~/UserLogin.aspx");            }
             else {
                 lblError.Text = "";
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -55,10 +55,31 @@ namespace InvSystem
                     SeDropDown("09", ddStrType);
                     SeDropDown("10", ddChrType);
                     SeDropDown("11", ddColor);
-                    SeDropDown("12", ddOS);
+                    SeDropDown("12", ddOperatingSystem);
                     SeDropDown("13", ddCshSize);
                     SeDropDown("14", ddHealth);
                     SeDropDown("15", ddTchScr);
+                    SeDropDown("16", ddScrSize);
+                    SeDropDown("17", ddScrRsl);
+                    SeDropDown("18", ddBtrType);
+                    SeDropDown("19", ddProcessor);
+                    SeDropDown("20", ddTypeQuality);
+                    SeDropDown("21", ddTypePort);
+                    SeDropDown("22", ddTypeSystem);
+                    SeDropDown("23", ddPortQuantity);
+                    SeDropDown("24", ddSFPPortQuantity);
+                    SeDropDown("25", ddFrequencyBand);
+                    SeDropDown("26", ddTypeConnectivity);
+                    SeDropDown("27", ddTypeFunctionality);
+                    SeDropDown("28", ddUnitVoltage);
+                    SeDropDown("29", ddUnitAmps);
+                    SeDropDown("30", ddUnitWatt);
+                    SeDropDown("28", ddBtrVoltage);
+                    SeDropDown("29", ddBtrAmps);
+                    SeDropDown("30", ddBtrWatt);
+                    SeDropDown("31", ddCameraType);
+                    SeDropDown("32", ddResolution);
+
                     if (Request.QueryString["Action"] == "edit")
                     {
                         int iRID = 0;
@@ -84,10 +105,10 @@ namespace InvSystem
                         txtSeries.Text = oDs.Tables[0].Rows[0]["Series"].ToString();
                         txtSerialNo.Text = oDs.Tables[0].Rows[0]["SerialNo"].ToString();
                         ddColor.SelectedValue = oDs.Tables[0].Rows[0]["Color"].ToString();
-                        txtScrSize.Text = oDs.Tables[0].Rows[0]["ScreenSize"].ToString();
-                        txtScrRsl.Text = oDs.Tables[0].Rows[0]["ScreenResolution"].ToString();
+                        ddScrSize.SelectedValue = oDs.Tables[0].Rows[0]["ScreenSize"].ToString();
+                        ddScrRsl.SelectedValue = oDs.Tables[0].Rows[0]["ScreenResolution"].ToString();
                         ddTchScr.SelectedValue = oDs.Tables[0].Rows[0]["TouchScreen"].ToString();
-                        txtProcessor.Text = oDs.Tables[0].Rows[0]["Processor"].ToString();
+                        ddProcessor.SelectedValue = oDs.Tables[0].Rows[0]["Processor"].ToString();
                         ddVGABrand.SelectedValue = oDs.Tables[0].Rows[0]["VGABrand"].ToString();
                         ddVGAType.SelectedValue = oDs.Tables[0].Rows[0]["VGAType"].ToString();
                         txtVGASize.Text = oDs.Tables[0].Rows[0]["VGASize"].ToString();
@@ -97,24 +118,33 @@ namespace InvSystem
                         ddStrType.SelectedValue = oDs.Tables[0].Rows[0]["Storagetype"].ToString();
                         txtStrSize.Text = oDs.Tables[0].Rows[0]["StorageSize"].ToString();
                         ddChrType.SelectedValue = oDs.Tables[0].Rows[0]["ChargerType"].ToString();
-                        txtVoltage.Text = oDs.Tables[0].Rows[0]["UnitVoltage"].ToString();
-                        txtAmps.Text = oDs.Tables[0].Rows[0]["UnitAmps"].ToString();
-                        txtWatt.Text = oDs.Tables[0].Rows[0]["UnitWatt"].ToString();
-                        txtBtrType.Text = oDs.Tables[0].Rows[0]["BatteryType"].ToString();
-                        txtBtrVoltage.Text = oDs.Tables[0].Rows[0]["BatteryVoltage"].ToString();
-                        txtBtrAmps.Text = oDs.Tables[0].Rows[0]["BatteryAmps"].ToString();
-                        txtBtrWatt.Text = oDs.Tables[0].Rows[0]["BatteryWatt"].ToString();
+                        ddUnitVoltage.SelectedValue = oDs.Tables[0].Rows[0]["UnitVoltage"].ToString();
+                        ddUnitAmps.SelectedValue = oDs.Tables[0].Rows[0]["UnitAmps"].ToString();
+                        ddUnitWatt.SelectedValue = oDs.Tables[0].Rows[0]["UnitWatt"].ToString();
+                        ddBtrType.SelectedValue = oDs.Tables[0].Rows[0]["BatteryType"].ToString();
+                        ddBtrVoltage.SelectedValue = oDs.Tables[0].Rows[0]["BatteryVoltage"].ToString();
+                        ddBtrAmps.SelectedValue = oDs.Tables[0].Rows[0]["BatteryAmps"].ToString();
+                        ddBtrWatt.SelectedValue = oDs.Tables[0].Rows[0]["BatteryWatt"].ToString();
                         txtMotherboard.Text = oDs.Tables[0].Rows[0]["Motherboard"].ToString();
                         ddCshSize.SelectedValue = oDs.Tables[0].Rows[0]["ChasingSize"].ToString();
-                        txtResolution.Text = oDs.Tables[0].Rows[0]["CameraResolution"].ToString();
-                        txtCnlQty.Text = oDs.Tables[0].Rows[0]["ChannelQuantity"].ToString();
-                        ddOS.SelectedValue = oDs.Tables[0].Rows[0]["OS"].ToString();
+                        ddResolution.SelectedValue = oDs.Tables[0].Rows[0]["CameraResolution"].ToString();
+                        ddCameraType.SelectedValue = oDs.Tables[0].Rows[0]["CameraType"].ToString();
+                        ddOperatingSystem.SelectedValue = oDs.Tables[0].Rows[0]["OperatingSystem"].ToString();
                         txtImei.Text = oDs.Tables[0].Rows[0]["Imei"].ToString();
                         txtMacAddr.Text = oDs.Tables[0].Rows[0]["MACAddress"].ToString();   
                         txtIP.Text = oDs.Tables[0].Rows[0]["IP"].ToString();
                         txtPhone.Text = oDs.Tables[0].Rows[0]["MobileNumber"].ToString();
                         txtRemark.Text = oDs.Tables[0].Rows[0]["Remarks"].ToString();
                         txtHostName.Text = oDs.Tables[0].Rows[0]["HostName"].ToString();
+
+                        ddTypeQuality.SelectedValue = oDs.Tables[0].Rows[0]["TypeQuality"].ToString();
+                        ddTypePort.SelectedValue = oDs.Tables[0].Rows[0]["TypePort"].ToString();
+                        ddTypeSystem.SelectedValue = oDs.Tables[0].Rows[0]["TypeSystem"].ToString();
+                        ddPortQuantity.SelectedValue = oDs.Tables[0].Rows[0]["PortQuantity"].ToString();
+                        ddSFPPortQuantity.SelectedValue = oDs.Tables[0].Rows[0]["SFPPortQuantity"].ToString();
+                        ddFrequencyBand.SelectedValue = oDs.Tables[0].Rows[0]["FrequencyBand"].ToString();
+                        ddTypeConnectivity.SelectedValue = oDs.Tables[0].Rows[0]["TypeConnectivity"].ToString();
+                        ddTypeFunctionality.SelectedValue = oDs.Tables[0].Rows[0]["TypeFunctionality"].ToString();
 
                         oDs = null;
                         oDs = new DataSet();
@@ -138,6 +168,7 @@ namespace InvSystem
                         }
 
                         txtAssetCode.ReadOnly = true;
+                        ddType.Enabled = false;
                     }
                     else
                     {
@@ -146,15 +177,10 @@ namespace InvSystem
                         txtAssetCode.ReadOnly = true;
                         txtVGASize.Text = "0";
                         txtRAMSize.Text = "0";
-                        txtStrSize.Text = "0";
-                        txtVoltage.Text = "0";
-                        txtAmps.Text = "0";
-                        txtWatt.Text = "0";
-                        txtBtrVoltage.Text = "0";
-                        txtBtrAmps.Text = "0";
-                        txtBtrWatt.Text = "0";
-                        txtCnlQty.Text = "0";
+                        txtStrSize.Text = "0";   
+                        ddType.Enabled = true;
                     }
+                    SetVisibleDiv(ddType.SelectedItem.Value);
                 }
             }            
         }
@@ -172,7 +198,6 @@ namespace InvSystem
                     int errNo = 0;
                     string errMsg = "";
                     string sparamVal = "";
-                    string tValue = "0";
 
                     if (ddPlacement.SelectedItem.Value == "02")
                     {
@@ -208,10 +233,10 @@ namespace InvSystem
                         sparamVal = sparamVal + "@Series:" + txtSeries.Text + ",";
                         sparamVal = sparamVal + "@SerialNo:" + txtSerialNo.Text + ",";
                         sparamVal = sparamVal + "@Color:" + ddColor.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@ScreenSize:" + txtScrSize.Text + ",";
-                        sparamVal = sparamVal + "@ScreenResolution:" + txtScrRsl.Text + ",";
+                        sparamVal = sparamVal + "@ScreenSize:" + ddScrSize.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@ScreenResolution:" + ddScrRsl.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@TouchScreen:" + ddTchScr.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Processor:" + txtProcessor.Text + ",";
+                        sparamVal = sparamVal + "@Processor:" + ddProcessor.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@VGABrand:" + ddVGABrand.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@VGAType:" + ddVGAType.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@VGASize:" + txtVGASize.Text + ",";
@@ -221,27 +246,19 @@ namespace InvSystem
                         sparamVal = sparamVal + "@Storagetype:" + ddStrType.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@StorageSize:" + txtStrSize.Text + ",";
                         sparamVal = sparamVal + "@ChargerType:" + ddChrType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@UnitVoltage:" + txtVoltage.Text + ",";
-                        tValue = "0";
-                        if (txtAmps.Text == ""){tValue = "0";}else { tValue = txtAmps.Text; }
-                        sparamVal = sparamVal + "@UnitAmps:" + tValue + ",";
-                        tValue = "0";
-                        if (txtWatt.Text == "") { tValue = "0"; } else { tValue = txtWatt.Text; }
-                        sparamVal = sparamVal + "@UnitWatt:" + tValue + ",";
-                        sparamVal = sparamVal + "@BatteryType:" + txtBtrType.Text + ",";
-                        sparamVal = sparamVal + "@BatteryVoltage:" + txtBtrVoltage.Text + ",";
-                        tValue = "0";
-                        if (txtBtrAmps.Text == "") { tValue = "0"; } else { tValue = txtBtrAmps.Text; }
-                        sparamVal = sparamVal + "@BatteryAmps:" + tValue + ",";
-                        tValue = "0";
-                        if (txtBtrWatt.Text == "") { tValue = "0"; } else { tValue = txtBtrWatt.Text; }
-                        sparamVal = sparamVal + "@BatteryWatt:" + tValue + ",";
+                        sparamVal = sparamVal + "@UnitVoltage:" + ddUnitVoltage.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@UnitAmps:" + ddUnitAmps.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@UnitWatt:" + ddUnitWatt.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@BatteryType:" + ddBtrType.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@BatteryVoltage:" + ddBtrVoltage.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@BatteryAmps:" + ddBtrAmps.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@BatteryWatt:" + ddBtrWatt.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@Motherboard:" + txtMotherboard.Text + ",";
                         sparamVal = sparamVal + "@ChasingSize:" + ddCshSize.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@CameraResolution:" + txtResolution.Text + ",";
-                        sparamVal = sparamVal + "@ChannelQuantity:" + txtCnlQty.Text + ",";
+                        sparamVal = sparamVal + "@CameraResolution:" + ddResolution.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@CameraType:" + ddCameraType.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@Health:" + ddHealth.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@OS:" + ddOS.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@OperatingSystem:" + ddOperatingSystem.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@Imei:" + txtImei.Text + ",";
                         sparamVal = sparamVal + "@MACAddress:" + txtMacAddr.Text + ",";
                         sparamVal = sparamVal + "@IP:" + txtIP.Text + ",";
@@ -249,6 +266,14 @@ namespace InvSystem
                         sparamVal = sparamVal + "@Remarks:" + txtRemark.Text + ",";
                         sparamVal = sparamVal + "@HostName:" + txtHostName.Text + ",";
                         sparamVal = sparamVal + "@User:" + txtUser.Text + ",";
+                        sparamVal = sparamVal + "@TypeQuality:" + ddTypeQuality.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@TypePort:" + ddTypePort.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@TypeSystem:" + ddTypeSystem.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@PortQuantity:" + ddPortQuantity.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@SFPPortQuantity:" + ddSFPPortQuantity.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@FrequencyBand:" + ddFrequencyBand.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@TypeConnectivity:" + ddTypeConnectivity.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@TypeFunctionality:" + ddTypeFunctionality.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
 
                         DataSet oDs = new DataSet();
@@ -302,7 +327,7 @@ namespace InvSystem
         {
             try
             {
-                oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='" + refCode + "'  and [Status] = 'A' ORDER BY [Code]", dr);
+                oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='" + refCode + "'  and [Status] = 'A' ORDER BY [Name]", dr);
             }
             catch (Exception ex)
             {
@@ -331,6 +356,84 @@ namespace InvSystem
                 lblError.Text = "Error:" + ex.ToString();
             }
             return code;
+        }
+
+        protected void ddType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetVisibleDiv(ddType.SelectedItem.Value);
+        }
+
+        protected void SetVisibleDiv(string type)
+        {
+            string sparamVal = "";
+            Processor.Visible = false;
+            OperatingSystem.Visible = false;
+            Motherboard.Visible = false;
+            ScreenSize.Visible = false;
+            ScreenResolution.Visible = false;
+            TouchScreen.Visible = false;
+            VGABrand.Visible = false;
+            VGAType.Visible = false;
+            VGASize.Visible = false;
+            RAMType.Visible = false;
+            RAMMHz.Visible = false;
+            RAMSize.Visible = false;
+            Storagetype.Visible = false;
+            StorageSize.Visible = false;
+            ChargerType.Visible = false;
+            UnitVoltage.Visible = false;
+            UnitAmps.Visible = false;
+            UnitWatt.Visible = false;
+            BatteryType.Visible = false;
+            BatteryVoltage.Visible = false;
+            BatteryAmps.Visible = false;
+            BatteryWatt.Visible = false;
+            ChasingSize.Visible = false;
+            CameraResolution.Visible = false;
+            CameraType.Visible = false;
+            HostName.Visible = false;
+            MACAddress.Visible = false;
+            TypeConnectivity.Visible = false;
+            TypeFunctionality.Visible = false;
+            IP.Visible = false;
+            Imei.Visible = false;
+            MobileNumber.Visible = false;
+            Remarks.Visible = false;
+            TypeQuality.Visible = false;
+            TypePort.Visible = false;
+            TypeSystem.Visible = false;
+            PortQuantity.Visible = false;
+            SFPPortQuantity.Visible = false;
+            FrequencyBand.Visible = false;
+            TypeConnectivity.Visible = false;
+            TypeFunctionality.Visible = false;
+
+            Detail1.Visible = false;
+            Detail2.Visible = false;
+            Detail3.Visible = false;
+            Detail4.Visible = false;
+            Detail5.Visible = false;
+            Detail6.Visible = false;
+            Detail7.Visible = false;
+            Detail8.Visible = false;
+
+            DataSet oDs = new DataSet();
+            sparamVal = sparamVal + "@type:" + type + ",";
+            sparamVal = sparamVal + "@action:1";
+            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal);
+            if (oDs.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in oDs.Tables[0].Rows)
+                {
+                    div = (System.Web.UI.HtmlControls.HtmlControl)mains.FindControl(row[0].ToString());
+                    div.Visible = true;
+                }
+                Detail9.Visible = true;
+            }
+            else
+            {
+                Detail9.Visible = false;
+            }
         }
     }
 }

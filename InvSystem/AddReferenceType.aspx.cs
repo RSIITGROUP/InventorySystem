@@ -61,37 +61,45 @@ namespace InvSystem
         {
             try
             {
-                if (btnAdd.Text == "Add")
+                if (txtTagCode.Text.Trim().Length == 1)
                 {
-                    if (!bIsExist)
+                    if (btnAdd.Text == "Add")
                     {
+                        if (!bIsExist)
+                        {
+                            string sparamVal = "@code:" + txtCode.Text.Trim() + ",";
+                            sparamVal = sparamVal + "@name:" + txtType.Text + ",";
+                            sparamVal = sparamVal + "@TagCode:" + txtTagCode.Text.Trim() + ",";
+                            sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                            oGnl.ExecuteDataQuery("insert into ReferenceType ([Code],[Name],[TagCode],[UserCreate],[CreateDate]) values (@code,@name,@TagCode,@UserId,getdate())", sparamVal);
+
+                            lblError.ForeColor = System.Drawing.Color.Green;
+                            lblError.Text = "Add Reference Type is Successfull";
+                            btnAdd.Enabled = false;
+                            //Response.Redirect("ReferenceType.aspx");
+                        }
+                    }
+                    else
+                    {
+                        string sInsUser = "Update ReferenceType set ";
+                        sInsUser += "[Name]=@name, [TagCode] = @TagCode,[UserUpdate] = @UserId, [UpdateDate] = getdate() ";
+                        sInsUser += "where [Code] = @code";
                         string sparamVal = "@code:" + txtCode.Text.Trim() + ",";
                         sparamVal = sparamVal + "@name:" + txtType.Text + ",";
                         sparamVal = sparamVal + "@TagCode:" + txtTagCode.Text.Trim() + ",";
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
-                        oGnl.ExecuteDataQuery("insert into ReferenceType ([Code],[Name],[TagCode],[UserCreate],[CreateDate]) values (@code,@name,@TagCode,@UserId,getdate())", sparamVal);
+                        oGnl.ExecuteDataQuery(sInsUser, sparamVal);
 
                         lblError.ForeColor = System.Drawing.Color.Green;
-                        lblError.Text = "Add Reference Type is Successfull";
+                        lblError.Text = "Update Reference Type is Successfull";
                         btnAdd.Enabled = false;
                         //Response.Redirect("ReferenceType.aspx");
                     }
                 }
                 else
                 {
-                    string sInsUser = "Update ReferenceType set ";
-                    sInsUser += "[Name]=@name, [TagCode] = @TagCode,[UserUpdate] = @UserId, [UpdateDate] = getdate() ";
-                    sInsUser += "where [Code] = @code";
-                    string sparamVal = "@code:" + txtCode.Text.Trim() + ",";
-                    sparamVal = sparamVal + "@name:" + txtType.Text + ",";
-                    sparamVal = sparamVal + "@TagCode:" + txtTagCode.Text.Trim() + ",";
-                    sparamVal = sparamVal + "@UserId:" + Session["UserId"];
-                    oGnl.ExecuteDataQuery(sInsUser, sparamVal);
-
-                    lblError.ForeColor = System.Drawing.Color.Green;
-                    lblError.Text = "Update Reference Type is Successfull";
-                    btnAdd.Enabled = false;
-                    //Response.Redirect("ReferenceType.aspx");
+                    lblError.Text = "Tag Code must be one character";
+                    lblError.ForeColor = System.Drawing.Color.Red;
                 }
             }
             catch (Exception ex)

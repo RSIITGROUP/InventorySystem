@@ -45,6 +45,7 @@
                                         <asp:BoundField DataField="User" HeaderText="User" SortExpression="User" />
                                         <asp:BoundField DataField="PurchaseDate" HeaderText="PurchaseDate" SortExpression="Purchase Date" />
                                         <asp:BoundField DataField="GRPODocNo" HeaderText="GRPODocNo" SortExpression="GRPO Doc No" />
+                                        <asp:BoundField DataField="Remark" HeaderText="Remark" SortExpression="Remark" />
                                         <asp:TemplateField HeaderText="Action" ItemStyle-HorizontalAlign="Justify">    
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="Edit" runat="server" OnCommand="Edit_Command"
@@ -58,6 +59,8 @@
                                                     Text="Print"><i class="fa fa-print"></i></asp:LinkButton>
                                                 <%--<asp:Button ID="Btn1" runat="server" OnCommand="Print_Command" CssClass="fa fa-print" CommandArgument='<%# Eval("AssetCode") %>' Text="Print" />--%><%--<i class="fa fa-print"></asp:Button>--%>
                                             </ItemTemplate> 
+
+<ItemStyle HorizontalAlign="Justify"></ItemStyle>
                                         </asp:TemplateField>
                                     </Columns>
                                     <EmptyDataTemplate>

@@ -76,6 +76,15 @@ namespace InvSystem {
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
         
         /// <summary>
+        /// mains control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mains;
+        
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>
@@ -238,6 +247,42 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtSerialNo;
         
         /// <summary>
+        /// txtColor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtColor;
+        
+        /// <summary>
+        /// Detail9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail9;
+        
+        /// <summary>
+        /// Detail1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail1;
+        
+        /// <summary>
+        /// HostName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl HostName;
+        
+        /// <summary>
         /// txtHostName control.
         /// </summary>
         /// <remarks>
@@ -247,13 +292,13 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtHostName;
         
         /// <summary>
-        /// txtColor control.
+        /// Processor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtColor;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Processor;
         
         /// <summary>
         /// txtProcessor control.
@@ -265,13 +310,76 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtProcessor;
         
         /// <summary>
-        /// txtOS control.
+        /// OperatingSystem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOS;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl OperatingSystem;
+        
+        /// <summary>
+        /// txtOperatingSystem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOperatingSystem;
+        
+        /// <summary>
+        /// TypeConnectivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TypeConnectivity;
+        
+        /// <summary>
+        /// txtTypeConnectivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTypeConnectivity;
+        
+        /// <summary>
+        /// TypeFunctionality control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TypeFunctionality;
+        
+        /// <summary>
+        /// txtTypeFunctionality control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTypeFunctionality;
+        
+        /// <summary>
+        /// Detail2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail2;
+        
+        /// <summary>
+        /// ScreenSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ScreenSize;
         
         /// <summary>
         /// txtScrSize control.
@@ -283,6 +391,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtScrSize;
         
         /// <summary>
+        /// ScreenResolution control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ScreenResolution;
+        
+        /// <summary>
         /// txtScrRsl control.
         /// </summary>
         /// <remarks>
@@ -290,6 +407,15 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtScrRsl;
+        
+        /// <summary>
+        /// TouchScreen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TouchScreen;
         
         /// <summary>
         /// txtTchScr control.
@@ -301,6 +427,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtTchScr;
         
         /// <summary>
+        /// VGABrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VGABrand;
+        
+        /// <summary>
         /// txtVGABrand control.
         /// </summary>
         /// <remarks>
@@ -308,6 +443,15 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVGABrand;
+        
+        /// <summary>
+        /// VGAType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VGAType;
         
         /// <summary>
         /// txtVGAType control.
@@ -319,6 +463,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtVGAType;
         
         /// <summary>
+        /// VGASize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VGASize;
+        
+        /// <summary>
         /// txtVGASize control.
         /// </summary>
         /// <remarks>
@@ -326,6 +479,33 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVGASize;
+        
+        /// <summary>
+        /// Detail3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail3;
+        
+        /// <summary>
+        /// Detail4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail4;
+        
+        /// <summary>
+        /// RAMType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RAMType;
         
         /// <summary>
         /// txtRAMType control.
@@ -337,6 +517,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtRAMType;
         
         /// <summary>
+        /// RAMMHz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RAMMHz;
+        
+        /// <summary>
         /// txtRAMMHz control.
         /// </summary>
         /// <remarks>
@@ -344,6 +533,15 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRAMMHz;
+        
+        /// <summary>
+        /// RAMSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RAMSize;
         
         /// <summary>
         /// txtRAMSize control.
@@ -355,6 +553,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtRAMSize;
         
         /// <summary>
+        /// Storagetype control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Storagetype;
+        
+        /// <summary>
         /// txtStrType control.
         /// </summary>
         /// <remarks>
@@ -362,6 +569,15 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStrType;
+        
+        /// <summary>
+        /// StorageSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl StorageSize;
         
         /// <summary>
         /// txtStrSize control.
@@ -373,6 +589,24 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtStrSize;
         
         /// <summary>
+        /// Detail5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail5;
+        
+        /// <summary>
+        /// ChargerType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChargerType;
+        
+        /// <summary>
         /// txtChrType control.
         /// </summary>
         /// <remarks>
@@ -382,67 +616,67 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtChrType;
         
         /// <summary>
-        /// txtVoltage control.
+        /// UnitVoltage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVoltage;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UnitVoltage;
         
         /// <summary>
-        /// txtAmps control.
+        /// txtUnitVoltage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAmps;
+        protected global::System.Web.UI.WebControls.TextBox txtUnitVoltage;
         
         /// <summary>
-        /// txtWatt control.
+        /// UnitAmps control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWatt;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UnitAmps;
         
         /// <summary>
-        /// txtBtrType control.
+        /// txtUnitAmps control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBtrType;
+        protected global::System.Web.UI.WebControls.TextBox txtUnitAmps;
         
         /// <summary>
-        /// txtBtrVoltage control.
+        /// UnitWatt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBtrVoltage;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UnitWatt;
         
         /// <summary>
-        /// txtBtrAmps control.
+        /// txtUnitWatt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBtrAmps;
+        protected global::System.Web.UI.WebControls.TextBox txtUnitWatt;
         
         /// <summary>
-        /// txtBtrWatt control.
+        /// Motherboard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBtrWatt;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Motherboard;
         
         /// <summary>
         /// txtMotherboard control.
@@ -454,6 +688,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtMotherboard;
         
         /// <summary>
+        /// ChasingSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChasingSize;
+        
+        /// <summary>
         /// txtCshSize control.
         /// </summary>
         /// <remarks>
@@ -461,6 +704,96 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCshSize;
+        
+        /// <summary>
+        /// Detail6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail6;
+        
+        /// <summary>
+        /// BatteryType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BatteryType;
+        
+        /// <summary>
+        /// txtBtrType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBtrType;
+        
+        /// <summary>
+        /// BatteryVoltage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BatteryVoltage;
+        
+        /// <summary>
+        /// txtBtrVoltage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBtrVoltage;
+        
+        /// <summary>
+        /// BatteryAmps control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BatteryAmps;
+        
+        /// <summary>
+        /// txtBtrAmps control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBtrAmps;
+        
+        /// <summary>
+        /// BatteryWatt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BatteryWatt;
+        
+        /// <summary>
+        /// txtBtrWatt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBtrWatt;
+        
+        /// <summary>
+        /// CameraResolution control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CameraResolution;
         
         /// <summary>
         /// txtResolution control.
@@ -472,13 +805,157 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtResolution;
         
         /// <summary>
-        /// txtCnlQty control.
+        /// CameraType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCnlQty;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CameraType;
+        
+        /// <summary>
+        /// txtCameraType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCameraType;
+        
+        /// <summary>
+        /// Detail7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail7;
+        
+        /// <summary>
+        /// TypeQuality control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TypeQuality;
+        
+        /// <summary>
+        /// txtTypeQuality control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTypeQuality;
+        
+        /// <summary>
+        /// TypePort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TypePort;
+        
+        /// <summary>
+        /// txtTypePort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTypePort;
+        
+        /// <summary>
+        /// TypeSystem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TypeSystem;
+        
+        /// <summary>
+        /// txtTypeSystem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTypeSystem;
+        
+        /// <summary>
+        /// PortQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PortQuantity;
+        
+        /// <summary>
+        /// txtPortQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPortQuantity;
+        
+        /// <summary>
+        /// SFPPortQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SFPPortQuantity;
+        
+        /// <summary>
+        /// txtSFPPortQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSFPPortQuantity;
+        
+        /// <summary>
+        /// FrequencyBand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FrequencyBand;
+        
+        /// <summary>
+        /// txtFrequencyBand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFrequencyBand;
+        
+        /// <summary>
+        /// Detail8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Detail8;
+        
+        /// <summary>
+        /// Imei control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Imei;
         
         /// <summary>
         /// txtImei control.
@@ -490,6 +967,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtImei;
         
         /// <summary>
+        /// MACAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MACAddress;
+        
+        /// <summary>
         /// txtMacAddr control.
         /// </summary>
         /// <remarks>
@@ -497,6 +983,15 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMacAddr;
+        
+        /// <summary>
+        /// IP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl IP;
         
         /// <summary>
         /// txtIP control.
@@ -508,6 +1003,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtIP;
         
         /// <summary>
+        /// MobileNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MobileNumber;
+        
+        /// <summary>
         /// txtPhone control.
         /// </summary>
         /// <remarks>
@@ -515,6 +1019,15 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        
+        /// <summary>
+        /// Remarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Remarks;
         
         /// <summary>
         /// txtRemark control.

@@ -25,6 +25,11 @@ namespace InvSystem
             {
                 Label1.Text = "";
                 Label1.ForeColor = Color.Green;
+                if (!IsPostBack)
+                {
+                    oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='04' and [Status] = 'A' ORDER BY [Name]", ddType);
+                    CopyTemplate("S001");
+                }
             }
         }
 
@@ -68,7 +73,7 @@ namespace InvSystem
                                 ExcelPackage package = new ExcelPackage(FileUpload1.FileContent);
                                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                                 ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
-                                int colNum = 0;
+                                //int colNum = 0;
                                 int errNo = 0;
                                 string colHeader = "";
                                 string sparamVal = "";
@@ -130,13 +135,22 @@ namespace InvSystem
                                         else if (colHeader == "Motherboard") { oAsset.MotherBoard = workSheet.Cells[rowNumber, colNumber].Text; }
                                         else if (colHeader == "ChasingSize") { oAsset.ChasingSize = workSheet.Cells[rowNumber, colNumber].Text; }
                                         else if (colHeader == "CameraResolution") { oAsset.CameraResolution = workSheet.Cells[rowNumber, colNumber].Text; }
-                                        else if (colHeader == "ChannelQuantity") { oAsset.ChannelQuantity = workSheet.Cells[rowNumber, colNumber].Text; }
-                                        else if (colHeader == "OS") { oAsset.OS = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "CameraType") { oAsset.CameraType = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "OperatingSystem") { oAsset.OperatingSystem = workSheet.Cells[rowNumber, colNumber].Text; }
                                         else if (colHeader == "Imei") { oAsset.Imei = workSheet.Cells[rowNumber, colNumber].Text; }
                                         else if (colHeader == "MACAddress") { oAsset.MacAddress = workSheet.Cells[rowNumber, colNumber].Text; }
                                         else if (colHeader == "IP") { oAsset.IP = workSheet.Cells[rowNumber, colNumber].Text; }
                                         else if (colHeader == "MobileNumber") { oAsset.MobileNumber = workSheet.Cells[rowNumber, colNumber].Text; }
                                         else if (colHeader == "Remarks") { oAsset.Remarks = workSheet.Cells[rowNumber, colNumber].Text; }
+
+                                        else if (colHeader == "TypeQuality") { oAsset.TypeQuality = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "TypePort") { oAsset.TypePort = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "TypeSystem") { oAsset.TypeSystem = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "PortQuantity") { oAsset.PortQuantity = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "SFPPortQuantity") { oAsset.SfpPortQuantity = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "FrequencyBand") { oAsset.FrequencyBand = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "TypeConnectivity") { oAsset.TypeConnectivity = workSheet.Cells[rowNumber, colNumber].Text; }
+                                        else if (colHeader == "TypeFunctionality") { oAsset.TypeFunctionality = workSheet.Cells[rowNumber, colNumber].Text; }
                                         //colNum = colNum + 1;
                                     }
                                     if (errNo == 0)
@@ -178,15 +192,24 @@ namespace InvSystem
                                         sparamVal = sparamVal + "@Motherboard:" + oAsset.MotherBoard + ",";
                                         sparamVal = sparamVal + "@ChasingSize:" + oAsset.ChasingSize + ",";
                                         sparamVal = sparamVal + "@CameraResolution:" + oAsset.CameraResolution + ",";
-                                        sparamVal = sparamVal + "@ChannelQuantity:" + oAsset.ChannelQuantity + ",";
+                                        sparamVal = sparamVal + "@CameraType:" + oAsset.CameraType + ",";
                                         sparamVal = sparamVal + "@Health:" + oAsset.Health + ",";
-                                        sparamVal = sparamVal + "@OS:" + oAsset.OS + ",";
+                                        sparamVal = sparamVal + "@OperatingSystem:" + oAsset.OperatingSystem + ",";
                                         sparamVal = sparamVal + "@Imei:" + oAsset.Imei + ",";
                                         sparamVal = sparamVal + "@MACAddress:" + oAsset.MacAddress + ",";
                                         sparamVal = sparamVal + "@IP:" + oAsset.IP + ",";
                                         sparamVal = sparamVal + "@MobileNumber:" + oAsset.MobileNumber + ",";
                                         sparamVal = sparamVal + "@Remarks:" + oAsset.Remarks + ",";
                                         sparamVal = sparamVal + "@HostName:" + oAsset.HostName + ",";
+                                        sparamVal = sparamVal + "@User:" + oAsset.User + ",";
+
+                                        sparamVal = sparamVal + "@TypeQuality:" + oAsset.TypeQuality + ",";
+                                        sparamVal = sparamVal + "@TypePort:" + oAsset.TypePort + ",";
+                                        sparamVal = sparamVal + "@TypeSystem:" + oAsset.TypeSystem + ",";
+                                        sparamVal = sparamVal + "@PortQuantity:" + oAsset.PortQuantity + ",";
+                                        sparamVal = sparamVal + "@SFPPortQuantity:" + oAsset.SfpPortQuantity + ",";
+                                        sparamVal = sparamVal + "@FrequencyBand:" + oAsset.FrequencyBand + ",";
+                                        sparamVal = sparamVal + "@TypeFunctionality:" + oAsset.TypeFunctionality + ",";
                                         sparamVal = sparamVal + "@User:" + oAsset.User + ",";
                                         sparamVal = sparamVal + "@BulkId:" + bulkId.ToString() + ",@UserId:" + Session["UserId"];
                                         oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal);
@@ -238,7 +261,6 @@ namespace InvSystem
                                     }
                                 }
 
-
                                 string sQlStr = "SELECT [AssetDesc],[ActivaNo],[PurchaseDate],[GRPODocNo]";
                                 sQlStr = sQlStr + ",[Placement],[LocationCode],[AreaCode],[Spot],[User]";
                                 sQlStr = sQlStr + ",[Type],[Brand],[Model],[Series],[SerialNo],[HostName]";
@@ -247,8 +269,10 @@ namespace InvSystem
                                 sQlStr = sQlStr + ",[RAMType],[RAMMHz],[RAMSize],[Storagetype],[StorageSize]";
                                 sQlStr = sQlStr + ",[ChargerType],[UnitVoltage],[UnitAmps],[UnitWatt]";
                                 sQlStr = sQlStr + ",[BatteryType],[BatteryVoltage],[BatteryAmps],[BatteryWatt]";
-                                sQlStr = sQlStr + ",[Motherboard],[ChasingSize],[CameraResolution],[ChannelQuantity]";
-                                sQlStr = sQlStr + ",[Health],[OS],[Imei],[MACAddress],[IP],[MobileNumber],[Remarks],[HostName],[User]";
+                                sQlStr = sQlStr + ",[Motherboard],[ChasingSize],[CameraResolution],[CameraType]";
+                                sQlStr = sQlStr + ",[Health],[OperatingSystem],[Imei],[MACAddress],[IP],[MobileNumber],[Remarks]";
+                                sQlStr = sQlStr + ",[TypeQuality],[TypePort],[TypeSystem],[PortQuantity],[SFPPortQuantity]";
+                                sQlStr = sQlStr + ",[FrequencyBand],[TypeConnectivity],[TypeFungsi],[HostName],[User]";
                                 sQlStr = sQlStr + "FROM [dbo].[Asset_Temp] ";
                                 sQlStr = sQlStr + "where[BulkId] = " + bulkId.ToString() + " Order By RID";
                                 dt = oGnl.GetDataTable(sQlStr);
@@ -266,157 +290,7 @@ namespace InvSystem
 
                                 //Required for jQuery DataTables to work.
                                 GridView1.UseAccessibleHeader = true;
-                                GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
-
-                                //int totCol = workSheet.Dimension.End.Column;
-                                //int totRow = workSheet.Dimension.End.Row;
-
-                                ////int nColumn = 0;
-                                //string sparamVal = "";
-
-                                //var dataTable = workSheet.Cells["A1:AU" + totRow].ToDataTable(c =>
-                                //{
-                                //    c.DataTableName = "MyDataTable";
-                                //    c.DataTableNamespace = "MyNamespace";
-                                //    c.FirstRowIsColumnNames = true;
-                                //});
-
-                                //DataTable dts = new DataTable();
-                                //dts = dataTable;
-                                //DataRow[] dr = dts.Select();
-                                //int errNo = 0;
-                                //string errMsg = "";
-                                //DataSet oDs = new DataSet();
-                                //foreach (DataRow row in dr)
-                                //{
-                                //    if (errNo == 0)
-                                //    {
-                                //        sparamVal = sparamVal + "@AssetDesc:" + row["AssetDesc"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@ActivaNo:" + row["ActivaNo"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@PurchaseDate:" + row["PurchaseDate"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@GRPODocNo:" + row["GRPODocNo"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Placement:" + row["Placement"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@LocationCode:" + row["LocationCode"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@AreaCode:" + row["AreaCode"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Spot:" + row["Spot"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Type:" + row["Type"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Brand:" + row["Brand"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Model:" + row["Model"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Series:" + row["Series"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@SerialNo:" + row["SerialNo"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Color:" + row["Color"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@ScreenSize:" + row["ScreenSize"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@ScreenResolution:" + row["ScreenResolution"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@TouchScreen:" + row["TouchScreen"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Processor:" + row["Processor"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@VGABrand:" + row["VGABrand"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@VGAType:" + row["VGAType"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@VGASize:" + row["VGASize"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@RAMType:" + row["RAMType"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@RAMMHz:" + row["RAMMHz"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@RAMSize:" + row["RAMSize"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Storagetype:" + row["Storagetype"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@StorageSize:" + row["StorageSize"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@ChargerType:" + row["ChargerType"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@UnitVoltage:" + row["UnitVoltage"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@UnitAmps:" + row["UnitAmps"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@UnitWatt:" + row["UnitWatt"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@BatteryType:" + row["BatteryType"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@BatteryVoltage:" + row["BatteryVoltage"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@BatteryAmps:" + row["BatteryAmps"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@BatteryWatt:" + row["BatteryWatt"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Motherboard:" + row["Motherboard"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@ChasingSize:" + row["ChasingSize"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@CameraResolution:" + row["CameraResolution"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@ChannelQuantity:" + row["ChannelQuantity"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Health:" + row["Health"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@OS:" + row["OS"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Imei:" + row["Imei"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@MACAddress:" + row["MACAddress"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@IP:" + row["IP"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@MobileNumber:" + row["MobileNumber"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@Remarks:" + row["Remarks"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@HostName:" + row["HostName"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@User:" + row["User"].ToString() + ",";
-                                //        sparamVal = sparamVal + "@BulkId:" + bulkId.ToString() + ",@UserId:" + Session["UserId"];
-                                //        oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal);
-
-                                //        errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
-                                //        errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
-                                //        if (errNo != 0)
-                                //        {
-                                //            Label1.ForeColor = System.Drawing.Color.Red;
-                                //            Label1.Text = errMsg;
-                                //            break;
-                                //        }                                        
-                                //    }
-                                //}
-
-                                //if (errNo == 0)
-                                //{
-                                //    sparamVal = "";
-                                //    sparamVal = "@BulkId:" + bulkId.ToString();
-                                //    oDs = oGnl.ExecuteSP("SP_VALIDATE_ASSET", sparamVal);
-
-                                //    errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
-                                //    errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
-                                //    if (errNo != 0)
-                                //    {
-                                //        Label1.ForeColor = System.Drawing.Color.Red;
-                                //        Label1.Text = errMsg;
-                                //    }
-                                //}
-
-                                //if (errNo == 0)
-                                //{
-                                //    sparamVal = "";
-                                //    sparamVal = "@BulkId:" + bulkId.ToString();
-                                //    oDs = oGnl.ExecuteSP("SP_POST_ASSETBULK", sparamVal);
-
-                                //    errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
-                                //    errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
-                                //    if (errNo != 0)
-                                //    {
-                                //        Label1.ForeColor = System.Drawing.Color.Red;
-                                //        Label1.Text = errMsg;
-                                //    }
-                                //    else
-                                //    {
-                                //        Label1.ForeColor = System.Drawing.Color.Green;
-                                //        Label1.Text = "Upload Asset is Success";
-                                //        Button2.Enabled = false;
-                                //    }
-                                //}
-
-
-                                //string sQlStr = "SELECT [AssetDesc],[ActivaNo],[PurchaseDate],[GRPODocNo]";
-                                //sQlStr = sQlStr + ",[Placement],[LocationCode],[AreaCode],[Spot]";
-                                //sQlStr = sQlStr + ",[Type],[Brand],[Model],[Series],[SerialNo]";
-                                //sQlStr = sQlStr + ",[Color],[ScreenSize],[ScreenResolution],[TouchScreen]";
-                                //sQlStr = sQlStr + ",[Processor],[VGABrand],[VGAType],[VGASize]";
-                                //sQlStr = sQlStr + ",[RAMType],[RAMMHz],[RAMSize],[Storagetype],[StorageSize]";
-                                //sQlStr = sQlStr + ",[ChargerType],[UnitVoltage],[UnitAmps],[UnitWatt]";
-                                //sQlStr = sQlStr + ",[BatteryType],[BatteryVoltage],[BatteryAmps],[BatteryWatt]";
-                                //sQlStr = sQlStr + ",[Motherboard],[ChasingSize],[CameraResolution],[ChannelQuantity]";
-                                //sQlStr = sQlStr + ",[Health],[OS],[Imei],[MACAddress],[IP],[MobileNumber],[Remarks],[HostName],[User]";
-                                //sQlStr = sQlStr + "FROM [dbo].[Asset_Temp] ";
-                                //sQlStr = sQlStr + "where[BulkId] = " + bulkId.ToString() + " Order By RID";
-                                //DataTable dt = oGnl.GetDataTable(sQlStr);
-
-                                //GridView1.DataSource = dt;
-                                //GridView1.DataBind();
-
-                                //if (GridView1.Rows.Count <= 0)
-                                //{
-                                //    dt.Rows.Add(dt.NewRow());
-                                //    GridView1.DataSource = dt;
-                                //    GridView1.DataBind();
-                                //    GridView1.Rows[0].Visible = false;
-                                //}
-
-                                ////Required for jQuery DataTables to work.
-                                //GridView1.UseAccessibleHeader = true;
-                                //GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
+                                GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;                                
                             }
                             else
                             {
@@ -454,6 +328,46 @@ namespace InvSystem
                 Label1.Text = "Error:" + ex.ToString();
             }
             return bulkId;
+        }
+
+        protected void ddType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CopyTemplate(ddType.SelectedItem.Value);
+        }
+
+        protected void CopyTemplate(string sType)
+        {
+            FileInfo existingFile = new FileInfo(Server.MapPath("~/template/TemplateUploadOri.xlsx"));
+
+            using (ExcelPackage package = new ExcelPackage(existingFile))
+            {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                //get the first worksheet in the workbook
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
+                int colCount = worksheet.Dimension.End.Column;  //get Column Count
+                DataSet oDs = new DataSet();
+                int tField = 0;
+                oDs = oGnl.GetDataSet("select InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + sType + "') order by InfID");
+                for (int col = 1; col <= colCount; col++)
+                {
+                    if (oDs.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow row in oDs.Tables[0].Rows)
+                        {
+                            if (worksheet.Cells[1, col].Text == row[0].ToString())
+                            {
+                                worksheet.DeleteColumn(col);
+                                tField = tField + 1;
+                            }
+                            if (oDs.Tables[0].Rows.Count == tField)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                package.SaveAs(Server.MapPath("~/template/TemplateUpload.xlsx"));
+            }
         }
     }
 }

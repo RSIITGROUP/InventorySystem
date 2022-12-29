@@ -14,6 +14,7 @@ namespace InvSystem
     public partial class DetailAsset : System.Web.UI.Page
     {
         clsGeneral oGnl = new clsGeneral();
+        System.Web.UI.HtmlControls.HtmlControl div;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["User"] == null || Session["UserId"] == null)
@@ -58,9 +59,9 @@ namespace InvSystem
                     txtStrType.Text = oDs.Tables[0].Rows[0]["Storagetype"].ToString();
                     txtStrSize.Text = oDs.Tables[0].Rows[0]["StorageSize"].ToString();
                     txtChrType.Text = oDs.Tables[0].Rows[0]["ChargerType"].ToString();
-                    txtVoltage.Text = oDs.Tables[0].Rows[0]["UnitVoltage"].ToString();
-                    txtAmps.Text = oDs.Tables[0].Rows[0]["UnitAmps"].ToString();
-                    txtWatt.Text = oDs.Tables[0].Rows[0]["UnitWatt"].ToString();
+                    txtUnitVoltage.Text = oDs.Tables[0].Rows[0]["UnitVoltage"].ToString();
+                    txtUnitAmps.Text = oDs.Tables[0].Rows[0]["UnitAmps"].ToString();
+                    txtUnitWatt.Text = oDs.Tables[0].Rows[0]["UnitWatt"].ToString();
                     txtBtrType.Text = oDs.Tables[0].Rows[0]["BatteryType"].ToString();
                     txtBtrVoltage.Text = oDs.Tables[0].Rows[0]["BatteryVoltage"].ToString();
                     txtBtrAmps.Text = oDs.Tables[0].Rows[0]["BatteryAmps"].ToString();
@@ -68,8 +69,8 @@ namespace InvSystem
                     txtMotherboard.Text = oDs.Tables[0].Rows[0]["Motherboard"].ToString();
                     txtCshSize.Text = oDs.Tables[0].Rows[0]["ChasingSize"].ToString();
                     txtResolution.Text = oDs.Tables[0].Rows[0]["CameraResolution"].ToString();
-                    txtCnlQty.Text = oDs.Tables[0].Rows[0]["ChannelQuantity"].ToString();
-                    txtOS.Text = oDs.Tables[0].Rows[0]["OS"].ToString();
+                    txtCameraType.Text = oDs.Tables[0].Rows[0]["CameraType"].ToString();
+                    txtOperatingSystem.Text = oDs.Tables[0].Rows[0]["OperatingSystem"].ToString();
                     txtImei.Text = oDs.Tables[0].Rows[0]["Imei"].ToString();
                     txtMacAddr.Text = oDs.Tables[0].Rows[0]["MACAddress"].ToString();
                     txtIP.Text = oDs.Tables[0].Rows[0]["IP"].ToString();
@@ -82,6 +83,15 @@ namespace InvSystem
                     txtHealth.Text = oDs.Tables[0].Rows[0]["Health"].ToString();
                     txtHostName.Text = oDs.Tables[0].Rows[0]["HostName"].ToString();
                     txtUser.Text = oDs.Tables[0].Rows[0]["User"].ToString();
+
+                    txtTypeQuality.Text = oDs.Tables[0].Rows[0]["TypeQuality"].ToString();
+                    txtTypePort.Text = oDs.Tables[0].Rows[0]["TypePort"].ToString();
+                    txtTypeSystem.Text = oDs.Tables[0].Rows[0]["TypeSystem"].ToString();
+                    txtPortQuantity.Text = oDs.Tables[0].Rows[0]["PortQuantity"].ToString();
+                    txtSFPPortQuantity.Text = oDs.Tables[0].Rows[0]["SFPPortQuantity"].ToString();
+                    txtFrequencyBand.Text = oDs.Tables[0].Rows[0]["FrequencyBand"].ToString();
+                    txtTypeConnectivity.Text = oDs.Tables[0].Rows[0]["TypeConnectivity"].ToString();
+                    txtTypeFunctionality.Text = oDs.Tables[0].Rows[0]["TypeFunctionality"].ToString();
 
                     string sqlStr = "SELECT T0.[Version], T1.Name [PlacementCharacteristic], T2.Name [Location], T3.Name [Area],";
                     sqlStr = sqlStr + "T0.[Spot], T0.[User], REPLACE(CONVERT(NVARCHAR, T0.[CreateDate], 106), ' ', '-')[CreateDate]";
@@ -102,6 +112,8 @@ namespace InvSystem
                     sqlStr = sqlStr + "order by T0.[Version] desc";
 
                     BindGrid(GridView2, sqlStr);
+
+                    SetVisibleDiv(txtType.Text);
                 }
             }
         }
@@ -114,6 +126,76 @@ namespace InvSystem
             //Required for jQuery DataTables to work.
             gv.UseAccessibleHeader = true;
             gv.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+
+        protected void SetVisibleDiv(string type)
+        {
+            string sparamVal = "";
+            Processor.Visible = false;
+            OperatingSystem.Visible = false;
+            Motherboard.Visible = false;
+            ScreenSize.Visible = false;
+            ScreenResolution.Visible = false;
+            TouchScreen.Visible = false;
+            VGABrand.Visible = false;
+            VGAType.Visible = false;
+            VGASize.Visible = false;
+            RAMType.Visible = false;
+            RAMMHz.Visible = false;
+            RAMSize.Visible = false;
+            Storagetype.Visible = false;
+            StorageSize.Visible = false;
+            ChargerType.Visible = false;
+            UnitVoltage.Visible = false;
+            UnitAmps.Visible = false;
+            UnitWatt.Visible = false;
+            BatteryType.Visible = false;
+            BatteryVoltage.Visible = false;
+            BatteryAmps.Visible = false;
+            BatteryWatt.Visible = false;
+            ChasingSize.Visible = false;
+            CameraResolution.Visible = false;
+            CameraType.Visible = false;
+            HostName.Visible = false;
+            MACAddress.Visible = false;
+            IP.Visible = false;
+            Imei.Visible = false;
+            MobileNumber.Visible = false;
+            Remarks.Visible = false;
+            TypeQuality.Visible = false;
+            TypePort.Visible = false;
+            TypeSystem.Visible = false;
+            PortQuantity.Visible = false;
+            SFPPortQuantity.Visible = false;
+            FrequencyBand.Visible = false;
+            TypeConnectivity.Visible = false;
+            TypeFunctionality.Visible = false;
+            Detail1.Visible = false;
+            Detail2.Visible = false;
+            Detail3.Visible = false;
+            Detail4.Visible = false;
+            Detail5.Visible = false;
+            Detail6.Visible = false;
+            Detail7.Visible = false;
+            Detail8.Visible = false;
+
+            DataSet oDs = new DataSet();
+            sparamVal = sparamVal + "@type:" + type + ",";
+            sparamVal = sparamVal + "@action:2";
+            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal);
+            if (oDs.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in oDs.Tables[0].Rows)
+                {
+                    div = (System.Web.UI.HtmlControls.HtmlControl)mains.FindControl(row[0].ToString());
+                    div.Visible = true;
+                }
+                Detail9.Visible = true;
+            }
+            else
+            {
+                Detail9.Visible = false;
+            }
         }
     }
 }
