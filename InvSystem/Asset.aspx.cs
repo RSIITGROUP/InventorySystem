@@ -33,8 +33,8 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], t0.[ActivaNo], t0.[SerialNo], isnull(t1.[User],'') [User], REPLACE(CONVERT(NVARCHAR,[PurchaseDate], 106), ' ', '-') [PurchaseDate],  [GRPODocNo], [Remarks] [Remark]";
-            strQuery = strQuery + "FROM [Asset] T0 left join PlacementHistory T1 on t0.RID = t1.RID and t0.PlacementVersion = t1.[Version] WHERE isnull(T0.[IsDeleted],'N') in ('N','')";
+            string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], t0.[ActivaNo], t0.[SerialNo], t2.[Name] [User],  [GRPODocNo], T0.[Remarks] [Remark] ";
+            strQuery = strQuery + "FROM [Asset] T0 left join PlacementHistory T1 on t0.RID = t1.RID and t0.PlacementVersion = t1.[Version] Left JOIN [EndUser] T2 on T2.[ID] = T1.[User] WHERE isnull(T0.[IsDeleted],'N') in ('N','')";
             DataTable dt = oGnl.GetDataTable(strQuery);
             GridView1.DataSource = dt;
             GridView1.DataBind();

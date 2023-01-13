@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Asset.aspx.cs" Inherits="InvSystem.Asset" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="EndUser.aspx.cs" Inherits="InvSystem.EndUser" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                       <h4>Asset List</h4>
+                                       <h4>End User List</h4>
                                 </center>
                             </div>
                         </div>                        
@@ -21,43 +21,35 @@
                         </div>
                         <div class="row  mb-3">
                             <div class="col">
-                                <%--<i class="fa fa-add"></i>
-                                <asp:Button class="btn btn-primary btn-sm fa fa-add" ID="Button1" runat="server" Text="Add Asset" />--%>
                                 <button id="Button1" class="btn btn-primary" onserverclick="Button1_Click" runat="server"><i class="fa fa-add"></i> Add</button>
-                                <button id="Button2" class="btn btn-primary" onserverclick="Button2_Click" runat="server"><i class="fa fa-upload"></i> Upload</button>
                             </div>
                         </div>
                         <div class="row  mb-2">
                             <div class="col">
                                 <asp:GridView  ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCreated="GridView1_RowCreated">
                                     <Columns>
-                                       <asp:TemplateField HeaderText="Asset Code">
+                                       <asp:TemplateField HeaderText="NIK">
                                             <ItemTemplate>
                                                 <asp:HyperLink ID="HyperLink1" runat="server"
-                                                    NavigateUrl='<%# Eval("AssetCode", "~/DetailAsset.aspx?assetCode={0}&Action=detail") %>' 
-                                                    Text='<%# Eval("AssetCode") %>'>
+                                                    NavigateUrl='<%# Eval("ID", "~/DetailEndUser.aspx?ID={0}&Action=detail") %>' 
+                                                    Text='<%# Eval("NIK") %>'>
                                                 </asp:HyperLink>
                                             </ItemTemplate>
                                         </asp:TemplateField>        
-                                        <asp:BoundField DataField="AssetDesc" HeaderText="Asset Desc" SortExpression="AssetDesc" />
-                                        <asp:BoundField DataField="ActivaNo" HeaderText="Activa No" SortExpression="ActivaNo" />
-                                        <asp:BoundField DataField="SerialNo" HeaderText="Serial No" SortExpression="SerialNo" />
-                                        <asp:BoundField DataField="User" HeaderText="User" SortExpression="User" />
-                                        <%--<asp:BoundField DataField="PurchaseDate" HeaderText="PurchaseDate" SortExpression="Purchase Date" />--%>
-                                        <asp:BoundField DataField="GRPODocNo" HeaderText="GRPODocNo" SortExpression="GRPO Doc No" />
-                                        <asp:BoundField DataField="Remark" HeaderText="Remark" SortExpression="Remark" />
+                                        <%--<asp:BoundField DataField="NIK" HeaderText="NIK" SortExpression="NIK" />--%>
+                                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                                        <asp:BoundField DataField="Region" HeaderText="Region" SortExpression="Region" />
+                                        <asp:BoundField DataField="Department" HeaderText="Department" SortExpression="Department" />
+                                        <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+                                        <asp:BoundField DataField="Remarks" HeaderText="Remarks" SortExpression="Remarks" />
                                         <asp:TemplateField HeaderText="Action" ItemStyle-HorizontalAlign="Justify">    
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="Edit" runat="server" OnCommand="Edit_Command"
-                                                    CommandArgument='<%# Eval("AssetCode") %>'
+                                                    CommandArgument='<%# Eval("ID") %>'
                                                     Text="Edit"><i class="fa fa-edit"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="Remove" runat="server" OnClientClick="return confirm('Are you sure you want to delete this asset?');" OnCommand="Remove_Command"
-                                                    CommandArgument='<%# Eval("AssetCode") %>'
-                                                    Text="Edit"><i class="fa fa-trash"></i></asp:LinkButton>
-                                                <asp:LinkButton ID="LinkButton1" runat="server" OnCommand="Print_Command"
-                                                    CommandArgument='<%# Eval("AssetCode") %>'
-                                                    Text="Print"><i class="fa fa-print"></i></asp:LinkButton>
-                                                <%--<asp:Button ID="Btn1" runat="server" OnCommand="Print_Command" CssClass="fa fa-print" CommandArgument='<%# Eval("AssetCode") %>' Text="Print" />--%><%--<i class="fa fa-print"></asp:Button>--%>
+                                                <%--<asp:LinkButton ID="Remove" runat="server" OnClientClick="return confirm('Are you sure you want to delete this End User?');" OnCommand="Remove_Command"
+                                                    CommandArgument='<%# Eval("ID") %>'
+                                                    Text="Edit"><i class="fa fa-trash"></i></asp:LinkButton>--%>
                                             </ItemTemplate> 
 
 <ItemStyle HorizontalAlign="Justify"></ItemStyle>

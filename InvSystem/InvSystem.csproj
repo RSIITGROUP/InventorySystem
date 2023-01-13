@@ -178,6 +178,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddEndUser.aspx" />
     <Content Include="ajax\css\font-awesome.min.css" />
     <Content Include="AddDetailReference.aspx" />
     <Content Include="AddReferenceType.aspx" />
@@ -199,7 +200,9 @@
     <Content Include="datatables\js\datatables.min.js" />
     <Content Include="Default.aspx" />
     <Content Include="DetailAsset.aspx" />
+    <Content Include="DetailEndUser.aspx" />
     <Content Include="DetailReference.aspx" />
+    <Content Include="EndUser.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fontawesome\css\all.css" />
     <Content Include="fontawesome\css\all.min.css" />
@@ -2357,6 +2360,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="SignUp.aspx" />
+    <Content Include="TestBarcode.aspx" />
     <Content Include="UploadAsset.aspx" />
     <Content Include="UserLogin.aspx" />
     <Content Include="Web.config">
@@ -2371,6 +2375,13 @@
     </Compile>
     <Compile Include="AddDetailReference.aspx.designer.cs">
       <DependentUpon>AddDetailReference.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddEndUser.aspx.cs">
+      <DependentUpon>AddEndUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddEndUser.aspx.designer.cs">
+      <DependentUpon>AddEndUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddReferenceType.aspx.cs">
       <DependentUpon>AddReferenceType.aspx</DependentUpon>
@@ -2425,12 +2436,26 @@
     <Compile Include="DetailAsset.aspx.designer.cs">
       <DependentUpon>DetailAsset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DetailEndUser.aspx.cs">
+      <DependentUpon>DetailEndUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetailEndUser.aspx.designer.cs">
+      <DependentUpon>DetailEndUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DetailReference.aspx.cs">
       <DependentUpon>DetailReference.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DetailReference.aspx.designer.cs">
       <DependentUpon>DetailReference.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EndUser.aspx.cs">
+      <DependentUpon>EndUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EndUser.aspx.designer.cs">
+      <DependentUpon>EndUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2463,6 +2488,13 @@
     </Compile>
     <Compile Include="SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestBarcode.aspx.cs">
+      <DependentUpon>TestBarcode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestBarcode.aspx.designer.cs">
+      <DependentUpon>TestBarcode.aspx</DependentUpon>
     </Compile>
     <Compile Include="UploadAsset.aspx.cs">
       <DependentUpon>UploadAsset.aspx</DependentUpon>

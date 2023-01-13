@@ -79,6 +79,7 @@ namespace InvSystem
                     SeDropDown("30", ddBtrWatt);
                     SeDropDown("31", ddCameraType);
                     SeDropDown("32", ddResolution);
+                    oGnl.SeDropDown("select convert(nvarchar,[ID]) [Code], [Name] from EndUser where (UsrStatus='A' or ltrim(rtrim(NIK))='NA') order by [Name]", ddUser);
 
                     if (Request.QueryString["Action"] == "edit")
                     {
@@ -156,7 +157,7 @@ namespace InvSystem
                             ddLocation.SelectedValue = oDs.Tables[0].Rows[0]["LocationCode"].ToString();
                             ddArea.SelectedValue = oDs.Tables[0].Rows[0]["AreaCode"].ToString();
                             txtSpot.Text = oDs.Tables[0].Rows[0]["Spot"].ToString();
-                            txtUser.Text = oDs.Tables[0].Rows[0]["User"].ToString();
+                            ddUser.SelectedValue = oDs.Tables[0].Rows[0]["User"].ToString();
                         }
                         
                         oDs = null;
@@ -265,7 +266,7 @@ namespace InvSystem
                         sparamVal = sparamVal + "@MobileNumber:" + txtPhone.Text + ",";
                         sparamVal = sparamVal + "@Remarks:" + txtRemark.Text + ",";
                         sparamVal = sparamVal + "@HostName:" + txtHostName.Text + ",";
-                        sparamVal = sparamVal + "@User:" + txtUser.Text + ",";
+                        sparamVal = sparamVal + "@User:" + ddUser.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@TypeQuality:" + ddTypeQuality.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@TypePort:" + ddTypePort.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@TypeSystem:" + ddTypeSystem.SelectedItem.Value + ",";
@@ -312,7 +313,12 @@ namespace InvSystem
                                 lblError.ForeColor = System.Drawing.Color.Red;
                                 lblError.Text = errMsg;
                             }
-                        }                        
+                        }
+                    }
+                    else
+                    {
+                        lblError.ForeColor = System.Drawing.Color.Red;
+                        lblError.Text = "Asset is already exist";
                     }
                 }
                 catch (Exception ex)

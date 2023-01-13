@@ -111,7 +111,8 @@
                             <div class="col-md-2">
                                 <label>User</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtUser" runat="server" CssClass="form-control" placeholder="User"></asp:TextBox>
+                                    <%--<asp:TextBox ID="txtUser" runat="server" CssClass="form-control" placeholder="User"></asp:TextBox>--%>
+                                    <asp:DropDownList ID="ddUser" Class="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

@@ -279,3 +279,4 @@ D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Release\InvSystem.csproj.CopyComplete
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Release\InvSystem.dll
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Release\InvSystem.pdb
+D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.Web.Administration.dll

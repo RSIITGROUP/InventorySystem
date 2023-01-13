@@ -256,6 +256,7 @@ D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\System.Web.Optimization.dll
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\WebGrease.dll
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.Web.Delegation.dll
+D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.Web.Administration.dll
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.Web.Deployment.Tracing.dll
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\EPPlus.xml
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.Bcl.AsyncInterfaces.xml
@@ -273,6 +274,7 @@ D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Antlr3.Runtime.pdb
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.csprojAssemblyReference.cache
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.csproj.CoreCompileInputs.cache
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.csproj.CopyComplete
 D:\Dede\WORK\Case\Inventory IT\Sample\Others\Sample\Empty\Final\InventorySystem\InvSystem\obj\Debug\InvSystem.dll

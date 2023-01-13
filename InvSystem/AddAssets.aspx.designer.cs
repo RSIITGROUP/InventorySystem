@@ -112,13 +112,13 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtSpot;
         
         /// <summary>
-        /// txtUser control.
+        /// ddUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUser;
+        protected global::System.Web.UI.WebControls.DropDownList ddUser;
         
         /// <summary>
         /// ddType control.

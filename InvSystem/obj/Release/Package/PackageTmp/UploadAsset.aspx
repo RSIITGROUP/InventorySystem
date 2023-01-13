@@ -121,7 +121,7 @@
                                             <asp:BoundField DataField="SFPPortQuantity" HeaderText="SFPPortQuantity" SortExpression="SFPPortQuantity"/>
                                             <asp:BoundField DataField="FrequencyBand" HeaderText="FrequencyBand" SortExpression="FrequencyBand"/>
                                             <asp:BoundField DataField="TypeConnectivity" HeaderText="TypeConnectivity" SortExpression="TypeConnectivity"/>
-                                            <asp:BoundField DataField="TypeFungsi" HeaderText="TypeFungsi" SortExpression="TypeFungsi"/>
+                                            <asp:BoundField DataField="TypeFunctionality" HeaderText="TypeFunctionality" SortExpression="TypeFunctionality"/>
                                         </Columns>
                                     </asp:GridView>
                                 </center>

@@ -15,6 +15,7 @@ namespace InvSystem
     public partial class UploadAsset : System.Web.UI.Page
     {
         clsGeneral oGnl = new clsGeneral();
+        bool isReload = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["User"] == null || Session["UserId"] == null)
@@ -209,10 +210,11 @@ namespace InvSystem
                                         sparamVal = sparamVal + "@PortQuantity:" + oAsset.PortQuantity + ",";
                                         sparamVal = sparamVal + "@SFPPortQuantity:" + oAsset.SfpPortQuantity + ",";
                                         sparamVal = sparamVal + "@FrequencyBand:" + oAsset.FrequencyBand + ",";
+                                        sparamVal = sparamVal + "@TypeConnectivity:" + oAsset.TypeConnectivity + ",";
                                         sparamVal = sparamVal + "@TypeFunctionality:" + oAsset.TypeFunctionality + ",";
-                                        sparamVal = sparamVal + "@User:" + oAsset.User + ",";
+                                        //sparamVal = sparamVal + "@UserId:" + Session["UserId"] + ",";
                                         sparamVal = sparamVal + "@BulkId:" + bulkId.ToString() + ",@UserId:" + Session["UserId"];
-                                        oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal);
+                                        oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal);                                       
 
                                         errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                                         errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -272,7 +274,7 @@ namespace InvSystem
                                 sQlStr = sQlStr + ",[Motherboard],[ChasingSize],[CameraResolution],[CameraType]";
                                 sQlStr = sQlStr + ",[Health],[OperatingSystem],[Imei],[MACAddress],[IP],[MobileNumber],[Remarks]";
                                 sQlStr = sQlStr + ",[TypeQuality],[TypePort],[TypeSystem],[PortQuantity],[SFPPortQuantity]";
-                                sQlStr = sQlStr + ",[FrequencyBand],[TypeConnectivity],[TypeFungsi],[HostName],[User]";
+                                sQlStr = sQlStr + ",[FrequencyBand],[TypeConnectivity],[TypeFunctionality],[HostName],[User]";
                                 sQlStr = sQlStr + "FROM [dbo].[Asset_Temp] ";
                                 sQlStr = sQlStr + "where[BulkId] = " + bulkId.ToString() + " Order By RID";
                                 dt = oGnl.GetDataTable(sQlStr);
@@ -338,7 +340,77 @@ namespace InvSystem
         protected void CopyTemplate(string sType)
         {
             FileInfo existingFile = new FileInfo(Server.MapPath("~/template/TemplateUploadOri.xlsx"));
+            DeleteColExl(existingFile, sType);
+            //FileInfo currentFile = new FileInfo(Server.MapPath("~/template/TemplateUpload.xlsx"));
+            //while (isReload == true)
+            //{               
+            //    DeleteColExl(currentFile, sType);
+            //}
 
+            //using (ExcelPackage package = new ExcelPackage(existingFile))
+            //{
+            //    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            //    //get the first worksheet in the workbook
+            //    ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
+            //    int colCount = worksheet.Dimension.End.Column;  //get Column Count
+            //    DataSet oDs = new DataSet();
+            //    int tField = 0;
+            //    int sfirs = 0;
+            //    if (sType != "S001")
+            //    {
+            //        oDs = oGnl.GetDataSet("select InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + sType + "') order by InfID");
+            //        //for (int col = 1; col <= colCount; col++)
+            //        //{
+            //        //    if (oDs.Tables[0].Rows.Count > 0)
+            //        //    {
+            //        //        foreach (DataRow row in oDs.Tables[0].Rows)
+            //        //        {
+            //        //            if (worksheet.Cells[1, col].Text == row[0].ToString())
+            //        //            {
+            //        //                worksheet.DeleteColumn(col);
+            //        //                tField = tField + 1;
+            //        //            }
+            //        //            if (oDs.Tables[0].Rows.Count == tField)
+            //        //            {
+            //        //                break;
+            //        //            }
+            //        //        }
+            //        //    }
+            //        //}
+            //        for (int col = 1; col <= colCount; col++)
+            //        {
+            //            if (oDs.Tables[0].Rows.Count > 0)
+            //            {
+            //                foreach (DataRow row in oDs.Tables[0].Rows)
+            //                {
+            //                    if (worksheet.Cells[1, col].Text == row[0].ToString())
+            //                    {
+            //                        //worksheet.DeleteColumn(col);
+            //                        if (sfirs == 0)
+            //                        {
+            //                            sfirs = col;
+            //                        }
+            //                        tField = tField + 1;
+            //                    }
+            //                    //if (oDs.Tables[0].Rows.Count == tField)
+            //                    //{
+            //                    //    break;
+            //                    //}
+            //                }
+            //            }
+            //        }
+            //        if (sfirs != 0)
+            //        {
+            //            worksheet.DeleteColumn(sfirs, tField);
+            //        }
+            //    }                
+            //    package.SaveAs(Server.MapPath("~/template/TemplateUpload.xlsx"));
+            //}
+        }
+
+        protected void DeleteColExl(FileInfo existingFile, string sType)
+        {
+            isReload = false;
             using (ExcelPackage package = new ExcelPackage(existingFile))
             {
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -347,27 +419,61 @@ namespace InvSystem
                 int colCount = worksheet.Dimension.End.Column;  //get Column Count
                 DataSet oDs = new DataSet();
                 int tField = 0;
-                oDs = oGnl.GetDataSet("select InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + sType + "') order by InfID");
-                for (int col = 1; col <= colCount; col++)
+                int sfirs = 0;
+                int iCurPos = 0;
+                int tColumn = 0;
+                if (sType != "S001")
                 {
-                    if (oDs.Tables[0].Rows.Count > 0)
+                    oDs = oGnl.GetDataSet("select InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + sType + "') order by InfID");
+                    tColumn = oDs.Tables[0].Rows.Count;
+                    for (int col = 1; col <= colCount; col++)
                     {
-                        foreach (DataRow row in oDs.Tables[0].Rows)
+                        if (oDs.Tables[0].Rows.Count > 0)
                         {
-                            if (worksheet.Cells[1, col].Text == row[0].ToString())
+                            foreach (DataRow row in oDs.Tables[0].Rows)
                             {
-                                worksheet.DeleteColumn(col);
-                                tField = tField + 1;
-                            }
-                            if (oDs.Tables[0].Rows.Count == tField)
-                            {
-                                break;
+                                if (worksheet.Cells[1, col].Text == row[0].ToString())
+                                {
+                                    //worksheet.DeleteColumn(col);
+
+                                    if (sfirs == 0)
+                                    {
+                                        sfirs = col;
+                                    }
+
+                                    if (iCurPos != 0)
+                                    {
+                                        if (iCurPos + 1 != col)
+                                        {
+                                            isReload = true;
+                                            break;
+                                        }
+
+                                    }
+                                    iCurPos = col;                                    
+                                    tField = tField + 1;
+                                }
                             }
                         }
                     }
+                    if (sfirs != 0)
+                    {
+                        ExcelComment cmd = worksheet.Cells[1, sfirs, 1, sfirs + tField].Comment;
+                        worksheet.Comments.Remove(cmd);
+                        //cmd = worksheet.Cells[1, (55 - tField) + 1, 1, 55].Comment;
+                        //worksheet.Comments.Remove(cmd);
+                        worksheet.DeleteColumn(sfirs, tField);
+                    }
                 }
+
                 package.SaveAs(Server.MapPath("~/template/TemplateUpload.xlsx"));
-            }
+
+                if (isReload == true)
+                {
+                    FileInfo currentFile = new FileInfo(Server.MapPath("~/template/TemplateUpload.xlsx"));
+                    DeleteColExl(currentFile, sType);
+                }
+            }            
         }
     }
 }
