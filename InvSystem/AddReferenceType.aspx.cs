@@ -23,7 +23,7 @@ namespace InvSystem
             {
                 if (btnAdd.Text == "Add")
                 {
-                    int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from ReferenceType where Name='" + txtType.Text.Trim() + "'"));
+                    int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from ReferenceType where Name='" + txtType.Text.Trim() + "'", 1));
                     if (temp == 1)
                     {
                         lblError.Text = "Reference Type is already exist";
@@ -43,7 +43,7 @@ namespace InvSystem
                     btnAdd.Text = "Edit";
 
                     DataSet oDs = new DataSet();
-                    oDs = oGnl.GetDataSet("select [Code], isnull([Name],'') [Name], [TagCode] from ReferenceType where Code='" + Request.QueryString["Code"] + "'");
+                    oDs = oGnl.GetDataSet("select [Code], isnull([Name],'') [Name], [TagCode] from ReferenceType where Code='" + Request.QueryString["Code"] + "'", 1);
 
                     txtCode.Text = oDs.Tables[0].Rows[0]["Code"].ToString();
                     txtType.Text = oDs.Tables[0].Rows[0]["Name"].ToString();
@@ -71,7 +71,7 @@ namespace InvSystem
                             sparamVal = sparamVal + "@name:" + txtType.Text + ",";
                             sparamVal = sparamVal + "@TagCode:" + txtTagCode.Text.Trim() + ",";
                             sparamVal = sparamVal + "@UserId:" + Session["UserId"];
-                            oGnl.ExecuteDataQuery("insert into ReferenceType ([Code],[Name],[TagCode],[UserCreate],[CreateDate]) values (@code,@name,@TagCode,@UserId,getdate())", sparamVal);
+                            oGnl.ExecuteDataQuery("insert into ReferenceType ([Code],[Name],[TagCode],[UserCreate],[CreateDate]) values (@code,@name,@TagCode,@UserId,getdate())", sparamVal, Convert.ToChar(","), 1);
 
                             lblError.ForeColor = System.Drawing.Color.Green;
                             lblError.Text = "Add Reference Type is Successfull";
@@ -88,7 +88,7 @@ namespace InvSystem
                         sparamVal = sparamVal + "@name:" + txtType.Text + ",";
                         sparamVal = sparamVal + "@TagCode:" + txtTagCode.Text.Trim() + ",";
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
-                        oGnl.ExecuteDataQuery(sInsUser, sparamVal);
+                        oGnl.ExecuteDataQuery(sInsUser, sparamVal, Convert.ToChar(","), 1);
 
                         lblError.ForeColor = System.Drawing.Color.Green;
                         lblError.Text = "Update Reference Type is Successfull";
@@ -114,7 +114,7 @@ namespace InvSystem
             try
             {
                 DataSet oDs = new DataSet();
-                oDs = oGnl.GetDataSet("select right('00' + convert(varchar(2), convert(int,isnull(max(code),'0')) + 1),2) [code] from ReferenceType");
+                oDs = oGnl.GetDataSet("select right('00' + convert(varchar(2), convert(int,isnull(max(code),'0')) + 1),2) [code] from ReferenceType", 1);
 
                 code = oDs.Tables[0].Rows[0]["code"].ToString();
             }
@@ -130,7 +130,7 @@ namespace InvSystem
             bool tagcode = false;
             try
             {
-                int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from ReferenceType where [TagCode]='" + txtTagCode.Text.Trim() + "'"));
+                int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from ReferenceType where [TagCode]='" + txtTagCode.Text.Trim() + "'", 1));
                 if (temp == 1)
                 {
                     tagcode = true;

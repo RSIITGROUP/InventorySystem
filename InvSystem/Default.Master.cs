@@ -4,36 +4,50 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using InvSystem.Class;
 
 namespace InvSystem
 {
     public partial class Default : System.Web.UI.MasterPage
     {
+        System.Web.UI.WebControls.LinkButton lButton;
+        clsGeneral oGnl = new clsGeneral();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["User"] != null)
             {
-                LinkButton1.Visible = true;
+                string sparamVal = "";
+                DataSet oDs = new DataSet();
+                sparamVal = sparamVal + "@UsrId:" + Session["UserId"];
+                oDs = oGnl.ExecuteSP("SP_GET_LISTMENU", sparamVal, 1);
+                if (oDs.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in oDs.Tables[0].Rows)
+                    {
+                        lButton = (System.Web.UI.WebControls.LinkButton)mains.FindControl(row[0].ToString());
+                        lButton.Visible = true;
+                    }
+                }
+
                 LinkButton2.Visible = false;
                 LinkButton3.Visible = false;
                 LinkButton4.Visible = true;
                 LinkButton5.Visible = true;
-                LinkButton6.Visible = true;
-                LinkButton7.Visible = true;
                 LinkButton5.Text = "Hello " + Session["User"].ToString();
-                LinkButton8.Visible = true;
             }
             else
             {
-                LinkButton1.Visible = false;
+                AssetReferences.Visible = false;
                 LinkButton2.Visible = true;
                 LinkButton3.Visible = true;
                 LinkButton4.Visible = false;
                 LinkButton5.Visible = false;
-                LinkButton6.Visible = false;
-                LinkButton7.Visible = false;
-                //Response.Redirect("~/UserLogin.aspx");
-                LinkButton8.Visible = false;
+                Inventory.Visible = false;
+                AssetAttributes.Visible = false;
+                EndUser.Visible = false;
+                navbarDropdown.Visible = false;
+                UserAccessMenu.Visible = false;
             }
         }
 
@@ -85,5 +99,25 @@ namespace InvSystem
         {
             Response.Redirect("~/EndUser.aspx");
         }
+
+        protected void LinkButton9_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UserAccessMenu.aspx");
+        }
+
+        protected void LinkButton10_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddRequest.aspx?action=add");
+        }
+
+        protected void LinkButton11_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ListRequest.aspx");
+        }
+
+        //protected void LinkButton12_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("~/AddRequest.aspx?action=add");
+        //}
     }
 }

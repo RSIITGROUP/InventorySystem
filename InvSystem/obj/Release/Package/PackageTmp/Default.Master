@@ -14,9 +14,10 @@
     <script src="Scripts/jquery-3.3.1.slim.min.js"></script>
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="bootstrap/js/popper.min.js"></script>
+    <%--<script src="https://unpkg.com/@popperjs/core@2"></script>--%>
+    <%--<script src="bootstrap/js/bootstrap.bundle.min.js"></script>--%>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="datatables/js/datatables.min.js"></script>
+    <script src="datatables/js/datatables.min.js"></script>    
 
     <style type="text/css">         
         body {
@@ -40,7 +41,7 @@
     <form id="form1" runat="server">
         <div class="ctainer">
             <div>
-                <div>
+                <div id="mains" runat="server">
                     <nav class="navbar navbar-expand-lg bg-light">
                         <a class="navbar-brand" href="Home.aspx">
                             <i class="fa fa-home"></i>
@@ -53,16 +54,44 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item active">
-                                    <asp:LinkButton class="nav-link" ID="LinkButton6" runat="server" OnClick="LinkButton6_Click" Visible="false" CausesValidation="false">Inventory</asp:LinkButton>
+                                    <asp:LinkButton class="nav-link" ID="Inventory" runat="server" OnClick="LinkButton6_Click" Visible="false" CausesValidation="false">Inventory</asp:LinkButton>
                                 </li>
-                                <li class="nav-item active">
-                                    <asp:LinkButton class="nav-link" ID="LinkButton8" runat="server" OnClick="LinkButton8_Click" Visible="false" CausesValidation="false">End User</asp:LinkButton>
+                                <li class="nav-item">
+                                    <asp:LinkButton class="nav-link" ID="EndUser" runat="server" OnClick="LinkButton8_Click" Visible="false" CausesValidation="false">End User</asp:LinkButton>
                                 </li>
-                                <li class="nav-item active">
-                                    <asp:LinkButton class="nav-link" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" Visible="false" CausesValidation="false">References</asp:LinkButton>
+                                <li class="nav-item dropdown">                                  
+                                  <asp:LinkButton class="nav-link dropdown-toggle" ID="navbarDropdown" runat="server" data-bs-toggle="dropdown" aria-expanded="false"  Visible="false" CausesValidation="false">Configuration</asp:LinkButton>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="AssetAttributes" runat="server" OnClick="LinkButton7_Click" Visible="false" CausesValidation="false">Asset Attributes</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="AssetReferences" runat="server" OnClick="LinkButton1_Click" Visible="false" CausesValidation="false">Asset References</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="UserAccessMenu" runat="server" OnClick="LinkButton9_Click" Visible="false" CausesValidation="false">User Setting</asp:LinkButton>
+                                    </li>
+                                     <%-- <li>
+                                        <asp:LinkButton class="dropdown-item" ID="RequestApprover" runat="server" OnClick="LinkButton12_Click" Visible="false" CausesValidation="false">Request Approver</asp:LinkButton>
+                                    </li>--%>
+                                  </ul>
                                 </li>
-                                <li class="nav-item active">
-                                    <asp:LinkButton class="nav-link" ID="LinkButton7" runat="server" OnClick="LinkButton7_Click" Visible="false" CausesValidation="false">Configuration</asp:LinkButton>
+                                 <%--<li class="nav-item">
+                                    <asp:LinkButton class="nav-link" ID="Warehouse" runat="server" OnClick="LinkButton10_Click" Visible="false" CausesValidation="false">Warehouse</asp:LinkButton>
+                                </li>--%>
+                                <li class="nav-item dropdown">                                  
+                                  <asp:LinkButton class="nav-link dropdown-toggle" ID="navbarWarehouse" runat="server" data-bs-toggle="dropdown" aria-expanded="false"  Visible="false" CausesValidation="false">Warehouse</asp:LinkButton>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarWarehouse">
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="NewRequest" runat="server" OnClick="LinkButton10_Click" Visible="false" CausesValidation="false">New Request</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="ListRequest" runat="server" OnClick="LinkButton11_Click" Visible="false" CausesValidation="false">List Request</asp:LinkButton>
+                                    </li>
+                                      <%--<li>
+                                        <asp:LinkButton class="dropdown-item" ID="ApproveRequest" runat="server" OnClick="LinkButton12_Click" Visible="false" CausesValidation="false">Approve Request</asp:LinkButton>
+                                    </li>--%>
+                                  </ul>
                                 </li>
                             </ul>
                             <ul class="navbar-nav">

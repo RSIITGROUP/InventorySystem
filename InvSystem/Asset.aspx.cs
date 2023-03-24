@@ -35,7 +35,7 @@ namespace InvSystem
         {
             string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], t0.[ActivaNo], t0.[SerialNo], t2.[Name] [User],  [GRPODocNo], T0.[Remarks] [Remark] ";
             strQuery = strQuery + "FROM [Asset] T0 left join PlacementHistory T1 on t0.RID = t1.RID and t0.PlacementVersion = t1.[Version] Left JOIN [EndUser] T2 on T2.[ID] = T1.[User] WHERE isnull(T0.[IsDeleted],'N') in ('N','')";
-            DataTable dt = oGnl.GetDataTable(strQuery);
+            DataTable dt = oGnl.GetDataTable(strQuery, 1);
             GridView1.DataSource = dt;
             GridView1.DataBind();
             
@@ -78,6 +78,36 @@ namespace InvSystem
             {
                 Response.Redirect("~/AddAssets.aspx?Action=new");
             }
+
+        }
+
+        protected DataTable GetDataTable(GridView dtg)
+        {
+            DataTable dt = new DataTable();
+
+            // add the columns to the datatable            
+            if (dtg.HeaderRow != null)
+            {
+
+                for (int i = 0; i < dtg.HeaderRow.Cells.Count; i++)
+                {
+                    dt.Columns.Add(dtg.HeaderRow.Cells[i].Text);
+                }
+            }
+
+            //  add each of the data rows to the table
+            foreach (GridViewRow row in dtg.Rows)
+            {
+                DataRow dr;
+                dr = dt.NewRow();
+
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    dr[i] = row.Cells[i].Text.Replace(" ", "");
+                }
+                dt.Rows.Add(dr);
+            }
+            return dt;
         }
 
         protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
@@ -181,7 +211,7 @@ namespace InvSystem
                     {
                         string sparamVal = "@AssetCode:" + assetCode + ",";
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
-                        oGnl.ExecuteDataQuery("Update [Asset] set [IsDeleted]='Y',[UserUpdate] = @UserId, [UpdateDate]=getdate() where [AssetCode] = @AssetCode", sparamVal);
+                        oGnl.ExecuteDataQuery("Update [Asset] set [IsDeleted]='Y',[UserUpdate] = @UserId, [UpdateDate]=getdate() where [AssetCode] = @AssetCode", sparamVal, Convert.ToChar(","), 1);
                         ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ClientScript", "alert(' Asset [" + assetCode + "] has been successfully deleted')", true);
                         GridView1.DataSource = null;
                         this.BindGrid();

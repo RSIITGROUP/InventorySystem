@@ -179,11 +179,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddEndUser.aspx" />
+    <Content Include="AddRequest.aspx" />
+    <Content Include="AddRequestItem.aspx" />
     <Content Include="ajax\css\font-awesome.min.css" />
     <Content Include="AddDetailReference.aspx" />
     <Content Include="AddReferenceType.aspx" />
     <Content Include="AddAssets.aspx" />
     <Content Include="ajax\fonts\fontawesome-webfont.svg" />
+    <Content Include="ApproveRequest.aspx" />
     <Content Include="Asset.aspx" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
@@ -195,6 +198,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CreateRequest.aspx" />
     <Content Include="css\customstylesheet.css" />
     <Content Include="datatables\css\datatables.min.css" />
     <Content Include="datatables\js\datatables.min.js" />
@@ -2327,8 +2331,14 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Home.aspx" />
+    <Content Include="imgs\addnew.png" />
+    <Content Include="imgs\cancel.png" />
+    <Content Include="imgs\delete.png" />
+    <Content Include="imgs\edit.png" />
     <Content Include="imgs\generaluser.png" />
     <Content Include="imgs\home.png" />
+    <Content Include="imgs\save.png" />
+    <Content Include="ListRequest.aspx" />
     <Content Include="Reference.aspx" />
     <Content Include="ReferenceType.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -2362,6 +2372,7 @@
     <Content Include="SignUp.aspx" />
     <Content Include="TestBarcode.aspx" />
     <Content Include="UploadAsset.aspx" />
+    <Content Include="UserAccessMenu.aspx" />
     <Content Include="UserLogin.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2397,6 +2408,27 @@
     <Compile Include="AddAssets.aspx.designer.cs">
       <DependentUpon>AddAssets.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddRequest.aspx.cs">
+      <DependentUpon>AddRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddRequest.aspx.designer.cs">
+      <DependentUpon>AddRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddRequestItem.aspx.cs">
+      <DependentUpon>AddRequestItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddRequestItem.aspx.designer.cs">
+      <DependentUpon>AddRequestItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApproveRequest.aspx.cs">
+      <DependentUpon>ApproveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApproveRequest.aspx.designer.cs">
+      <DependentUpon>ApproveRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Asset.aspx.cs">
@@ -2407,6 +2439,7 @@
       <DependentUpon>Asset.aspx</DependentUpon>
     </Compile>
     <Compile Include="Class\ClsAsset.cs" />
+    <Compile Include="Class\ClsEndUser.cs" />
     <Compile Include="Class\clsGeneral.cs" />
     <Compile Include="Configuration.aspx.cs">
       <DependentUpon>Configuration.aspx</DependentUpon>
@@ -2414,6 +2447,13 @@
     </Compile>
     <Compile Include="Configuration.aspx.designer.cs">
       <DependentUpon>Configuration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateRequest.aspx.cs">
+      <DependentUpon>CreateRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateRequest.aspx.designer.cs">
+      <DependentUpon>CreateRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -2467,6 +2507,13 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ListRequest.aspx.cs">
+      <DependentUpon>ListRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListRequest.aspx.designer.cs">
+      <DependentUpon>ListRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reference.aspx.cs">
       <DependentUpon>Reference.aspx</DependentUpon>
@@ -2503,6 +2550,13 @@
     <Compile Include="UploadAsset.aspx.designer.cs">
       <DependentUpon>UploadAsset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserAccessMenu.aspx.cs">
+      <DependentUpon>UserAccessMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserAccessMenu.aspx.designer.cs">
+      <DependentUpon>UserAccessMenu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserLogin.aspx.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2520,6 +2574,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="template\TemplateUploadOri.xlsx" />
+    <Content Include="template\TemplateUser.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

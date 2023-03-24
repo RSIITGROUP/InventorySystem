@@ -22,7 +22,7 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            DataTable dt = oGnl.GetDataTable("SELECT t0.[Code], t1.[name] [Reference Type], t0.[Name], case when t0.[Status] ='A' then 'Active' else 'InActive' end [Status], REPLACE(CONVERT(NVARCHAR,t0.[CreateDate], 106), ' ', '-') [CreateDate] FROM [Reference] t0 inner join [ReferenceType] t1 on T0.[RefCode] = T1.[Code]");
+            DataTable dt = oGnl.GetDataTable("SELECT t0.[Code], t1.[name] [Reference Type], t0.[Name], case when t0.[Status] ='A' then 'Active' else 'InActive' end [Status], REPLACE(CONVERT(NVARCHAR,t0.[CreateDate], 106), ' ', '-') [CreateDate] FROM [Reference] t0 inner join [ReferenceType] t1 on T0.[RefCode] = T1.[Code]", 1);
             GridView1.DataSource = dt;
             GridView1.DataBind();
 

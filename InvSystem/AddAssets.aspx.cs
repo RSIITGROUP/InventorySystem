@@ -27,14 +27,14 @@ namespace InvSystem
                 {
                     if (btnAdd.Text == "Add")
                     {
-                        int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode='" + txtAssetCode.Text + "'"));
+                        int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode='" + txtAssetCode.Text + "'", 1));
                         if (temp == 1)
                         {
                             bIsExist = true;
                         }
                         else
                         {
-                            temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSerialNo.Text + "'))"));
+                            temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSerialNo.Text + "'))", 1));
                             if (temp == 1)
                             {
                                 bIsExist = true;
@@ -79,7 +79,7 @@ namespace InvSystem
                     SeDropDown("30", ddBtrWatt);
                     SeDropDown("31", ddCameraType);
                     SeDropDown("32", ddResolution);
-                    oGnl.SeDropDown("select convert(nvarchar,[ID]) [Code], [Name] from EndUser where (UsrStatus='A' or ltrim(rtrim(NIK))='NA') order by [Name]", ddUser);
+                    oGnl.SeDropDown("select convert(nvarchar,[ID]) [Code], [Name] from EndUser where (UsrStatus='A' or ltrim(rtrim(NIK))='NA') order by [Name]", ddUser, 1);
 
                     if (Request.QueryString["Action"] == "edit")
                     {
@@ -88,7 +88,7 @@ namespace InvSystem
                         txtAssetCode.ReadOnly = true;
 
                         DataSet oDs = new DataSet();
-                        oDs = oGnl.GetDataSet("select * from Asset where AssetCode='" + Request.QueryString["assetCode"] + "'");
+                        oDs = oGnl.GetDataSet("select * from Asset where AssetCode='" + Request.QueryString["assetCode"] + "'", 1);
 
                         iRID = Convert.ToInt32(oDs.Tables[0].Rows[0]["RID"].ToString());
                         txtAssetCode.Text = oDs.Tables[0].Rows[0]["AssetCode"].ToString();
@@ -149,7 +149,7 @@ namespace InvSystem
 
                         oDs = null;
                         oDs = new DataSet();
-                        oDs = oGnl.GetDataSet("select top 1 CharacteristicCode, LocationCode, AreaCode, Spot, [User] from PlacementHistory where RID=" + iRID + "order by [Version] desc");
+                        oDs = oGnl.GetDataSet("select top 1 CharacteristicCode, LocationCode, AreaCode, Spot, [User] from PlacementHistory where RID=" + iRID + "order by [Version] desc", 1);
 
                         if (oDs.Tables[0].Rows.Count > 0)
                         {
@@ -162,7 +162,7 @@ namespace InvSystem
                         
                         oDs = null;
                         oDs = new DataSet();
-                        oDs = oGnl.GetDataSet("select top 1 HealthCode from HealtHistory where RID=" + iRID + "order by [Version] desc");
+                        oDs = oGnl.GetDataSet("select top 1 HealthCode from HealtHistory where RID=" + iRID + "order by [Version] desc", 1);
                         if (oDs.Tables[0].Rows.Count > 0)
                         {
                             ddHealth.SelectedValue = oDs.Tables[0].Rows[0]["HealthCode"].ToString();
@@ -278,7 +278,7 @@ namespace InvSystem
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
 
                         DataSet oDs = new DataSet();
-                        oDs = oGnl.ExecuteSP("SP_VAL_ASSET", sparamVal);
+                        oDs = oGnl.ExecuteSP("SP_VAL_ASSET", sparamVal, 1);
 
                         errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                         errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -290,7 +290,7 @@ namespace InvSystem
 
                         if (errNo == 0)
                         {
-                            oDs = oGnl.ExecuteSP("SP_POST_ASSET", sparamVal);
+                            oDs = oGnl.ExecuteSP("SP_POST_ASSET", sparamVal, 1);
 
                             errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                             errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -333,7 +333,7 @@ namespace InvSystem
         {
             try
             {
-                oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='" + refCode + "'  and [Status] = 'A' ORDER BY [Name]", dr);
+                oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='" + refCode + "'  and [Status] = 'A' ORDER BY [Name]", dr, 1);
             }
             catch (Exception ex)
             {
@@ -347,7 +347,7 @@ namespace InvSystem
             try
             {
                 DataSet oDs = new DataSet();
-                oDs = oGnl.GetDataSet("select 'RSI-IT-' + Right(Year(getDate()),2) + '-' + right('0000' + convert(varchar(4),convert(int,RIGHT(isnull([AssetCode],'0'),4)) + 1),4) [Code] from [dbo].[Asset] where [AssetCode] like 'RSI-IT-" + DateTime.Today.ToString("yy") + "-%' order by [AssetCode] desc");
+                oDs = oGnl.GetDataSet("select top 1 'RSI-IT-' + Right(Year(getDate()),2) + '-' + right('0000' + convert(varchar(4),convert(int,RIGHT(isnull([AssetCode],'0'),4)) + 1),4) [Code] from [dbo].[Asset] where [AssetCode] like 'RSI-IT-" + DateTime.Today.ToString("yy") + "-%' order by [AssetCode] desc", 1);
                 if (oDs.Tables[0].Rows.Count > 0)
                 {
                     txtAssetCode.Text = oDs.Tables[0].Rows[0]["Code"].ToString();
@@ -426,7 +426,7 @@ namespace InvSystem
             DataSet oDs = new DataSet();
             sparamVal = sparamVal + "@type:" + type + ",";
             sparamVal = sparamVal + "@action:1";
-            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal);
+            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal, 1);
             if (oDs.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in oDs.Tables[0].Rows)

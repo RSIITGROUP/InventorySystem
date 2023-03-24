@@ -31,40 +31,94 @@ namespace InvSystem {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// LinkButton6 control.
+        /// mains control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton6;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mains;
         
         /// <summary>
-        /// LinkButton8 control.
+        /// Inventory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton8;
+        protected global::System.Web.UI.WebControls.LinkButton Inventory;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// EndUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton EndUser;
         
         /// <summary>
-        /// LinkButton7 control.
+        /// navbarDropdown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton7;
+        protected global::System.Web.UI.WebControls.LinkButton navbarDropdown;
+        
+        /// <summary>
+        /// AssetAttributes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton AssetAttributes;
+        
+        /// <summary>
+        /// AssetReferences control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton AssetReferences;
+        
+        /// <summary>
+        /// UserAccessMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton UserAccessMenu;
+        
+        /// <summary>
+        /// navbarWarehouse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton navbarWarehouse;
+        
+        /// <summary>
+        /// NewRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton NewRequest;
+        
+        /// <summary>
+        /// ListRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ListRequest;
         
         /// <summary>
         /// LinkButton2 control.

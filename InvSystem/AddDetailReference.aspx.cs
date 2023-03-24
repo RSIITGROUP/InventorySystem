@@ -21,7 +21,7 @@ namespace InvSystem
             {
                 if (btnAdd.Text == "Add")
                 {
-                    int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Reference where Name='" + txtName.Text.Trim() + "' and RefCode ='" + drType.SelectedItem.Value + "'"));                    
+                    int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Reference where Name='" + txtName.Text.Trim() + "' and RefCode ='" + drType.SelectedItem.Value + "'", 1));                    
                     if (temp == 1)
                     {
                         lblError.Text = "Reference already exist";
@@ -31,16 +31,16 @@ namespace InvSystem
             }
             else
             {
-                oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType]  ORDER BY [Name]", drType);
+                oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType]  ORDER BY [Name]", drType, 1);
                 SetStatusDD();
                 if (Request.QueryString["Action"] == "edit")
                 {
                     btnAdd.Text = "Edit";
                     DataSet oDs = new DataSet();
-                    oDs = oGnl.GetDataSet("select [Code], [RefCode], [Name], [Status] from Reference where Code='" + Request.QueryString["Code"] + "'");
+                    oDs = oGnl.GetDataSet("select [Code], [RefCode], [Name], [Status] from Reference where Code='" + Request.QueryString["Code"] + "'", 1);
 
                     //SetRefType(Request.QueryString["Action"], oDs.Tables[0].Rows[0]["RefCode"].ToString());
-                    oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType] where [Code]='" + oDs.Tables[0].Rows[0]["RefCode"].ToString() + "' ORDER BY [Name]", drType);
+                    oGnl.SeDropDown("SELECT[Code], [Name] FROM [ReferenceType] where [Code]='" + oDs.Tables[0].Rows[0]["RefCode"].ToString() + "' ORDER BY [Name]", drType, 1);
                     txtCode.Text = oDs.Tables[0].Rows[0]["Code"].ToString();
                     txtName.Text = oDs.Tables[0].Rows[0]["Name"].ToString();
                     drType.SelectedValue = oDs.Tables[0].Rows[0]["RefCode"].ToString();
@@ -80,7 +80,7 @@ namespace InvSystem
                         sparamVal = sparamVal + "@name:" + txtName.Text + ",";
                         sparamVal = sparamVal + "@status:" + drStatus.SelectedItem.Value + ",";
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
-                        oGnl.ExecuteDataQuery("insert into Reference ([Code],[RefCode],[Name],[Status],[UserCreate],[CreateDate]) values (@code,@RefCode,@name,@status,@UserId,getdate())", sparamVal);
+                        oGnl.ExecuteDataQuery("insert into Reference ([Code],[RefCode],[Name],[Status],[UserCreate],[CreateDate]) values (@code,@RefCode,@name,@status,@UserId,getdate())", sparamVal, Convert.ToChar(","), 1);
 
                         lblError.ForeColor = System.Drawing.Color.Green;
                         lblError.Text = "Add Reference is Success";
@@ -104,7 +104,7 @@ namespace InvSystem
                     sparamVal = sparamVal + "@name:" + txtName.Text + ",";
                     sparamVal = sparamVal + "@status:" + drStatus.SelectedItem.Value + ",";
                     sparamVal = sparamVal + "@UserId:" + Session["UserId"];
-                    oGnl.ExecuteDataQuery(sInsUser, sparamVal);
+                    oGnl.ExecuteDataQuery(sInsUser, sparamVal, Convert.ToChar(","), 1);
 
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Update Reference is Success";
@@ -124,7 +124,7 @@ namespace InvSystem
             try
             {
                 DataSet oDs = new DataSet();
-                oDs = oGnl.GetDataSet("select max(t1.[TagCode]) + right('000' + convert(varchar(3), convert(int,isnull(max(right(t0.code,3)),'0')) + 1),3) [code] from [ReferenceType] T1 left join [Reference] T0 on t0.[RefCode] = T1.[Code] where T1.[Code] = '" + refType + "'");
+                oDs = oGnl.GetDataSet("select max(t1.[TagCode]) + right('000' + convert(varchar(3), convert(int,isnull(max(right(t0.code,3)),'0')) + 1),3) [code] from [ReferenceType] T1 left join [Reference] T0 on t0.[RefCode] = T1.[Code] where T1.[Code] = '" + refType + "'", 1);
 
                 code = oDs.Tables[0].Rows[0]["code"].ToString();
             }

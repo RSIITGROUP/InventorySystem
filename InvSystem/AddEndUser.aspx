@@ -39,7 +39,7 @@
                             <div class="col-md-3">
                                 <label>Email</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" placeholder="Email" MaxLength="30"></asp:TextBox>
+                                    <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" placeholder="Email" MaxLength="40"></asp:TextBox>
                                     <div>
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="*Wrong format Email" ControlToValidate="txtEmail" Display="Dynamic" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                                     </div>

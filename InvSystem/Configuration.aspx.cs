@@ -26,9 +26,9 @@ namespace InvSystem
                 lblError.ForeColor = System.Drawing.Color.Red;
                 if (!IsPostBack)
                 {
-                    oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='04' and [Status] = 'A' ORDER BY [Name]", ddType);
-                    oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='S001')", lstSource);
-                    oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID in (select InfID from [AssetConfiguration] where [Type]='S001')", lstDestination);
+                    oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='04' and [Status] = 'A' ORDER BY [Name]", ddType, 1);
+                    oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='S001')", lstSource, 1);
+                    oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID in (select InfID from [AssetConfiguration] where [Type]='S001')", lstDestination, 1);
                 }                    
             }
         }
@@ -120,7 +120,7 @@ namespace InvSystem
                     sparamVal = sparamVal + "@UserId:" + Session["UserId"];
 
                     DataSet oDs = new DataSet();
-                    oDs = oGnl.ExecuteSP("SP_POST_ASSETCONFIGURATION", sparamVal);
+                    oDs = oGnl.ExecuteSP("SP_POST_ASSETCONFIGURATION", sparamVal, 1);
 
                     errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                     errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -148,8 +148,8 @@ namespace InvSystem
 
         protected void ddType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + ddType.SelectedItem.Value + "')", lstSource);
-            oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID in (select InfID from [AssetConfiguration] where [Type]='" + ddType.SelectedItem.Value + "')", lstDestination);
+            oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + ddType.SelectedItem.Value + "')", lstSource, 1);
+            oGnl.SeListBox("select InfID as [Code], InfName as [Name] from AssetDetailField where InfID in (select InfID from [AssetConfiguration] where [Type]='" + ddType.SelectedItem.Value + "')", lstDestination, 1);
 
         }
 

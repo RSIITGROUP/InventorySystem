@@ -3,7 +3,7 @@
   <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Server=.;Database=ASSETDB;User ID=sa;Password=P@ssw0rd;Trusted_Connection=True" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="D:\\Dede\\WORK\\Case\\Inventory\ IT\\Sample\\Others\\Sample\\Empty\\Final\\InventorySystem\\InvSystem\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
-  <parameter name="ASSETDBConnectionString-Web.config Connection String" description="ASSETDBConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=.;Initial Catalog=ASSETDB;User ID=sa;Password=P@ssw0rd" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\Dede\\WORK\\Case\\Inventory\ IT\\Sample\\Others\\Sample\\Empty\\Final\\InventorySystem\\InvSystem\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ASSETDBConnectionString']/@connectionString" />
+  <parameter name="whsConnection-Web.config Connection String" description="whsConnection Connection String used in web.config by the application to access the database." defaultValue="Server=10.40.10.177;Database=CS_Online;User ID=user_Trancend;Password=user_Trancend_23#;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Dede\\WORK\\Case\\Inventory\ IT\\Sample\\Others\\Sample\\Empty\\Final\\InventorySystem\\InvSystem\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='whsConnection']/@connectionString" />
   </parameter>
 </parameters>

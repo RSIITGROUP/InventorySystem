@@ -30,7 +30,7 @@ namespace InvSystem
                 {
                     if (btnAdd.Text == "Add")
                     {
-                        int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from [EndUser] where [NIK]='" + txtNIK.Text + "'"));
+                        int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from [EndUser] where [NIK]='" + txtNIK.Text + "'",1));
                         if (temp == 1)
                         {
                             bIsExist = true;
@@ -42,7 +42,7 @@ namespace InvSystem
                     SeDropDown("01", ddRegion);
                     SeDropDown("33", ddDepartment);
                     SetStatusDD();
-                    oGnl.SeListBox("select [RID] as [Code], [AssetCode] + ' - ' + [AssetDesc] as [Name] from Asset where [RID] not in (select [RID] from [dbo].[EndUsrAssetMap]) and isnull(IsDeleted,'N') ='N'", lstSource);
+                    oGnl.SeListBox("select [RID] as [Code], [AssetCode] + ' - ' + [AssetDesc] as [Name] from Asset where [RID] not in (select [RID] from [dbo].[EndUsrAssetMap]) and isnull(IsDeleted,'N') ='N'", lstSource, 1);
                     if (Request.QueryString["Action"] == "edit")
                     {
                         int id = 0;
@@ -50,7 +50,7 @@ namespace InvSystem
                         txtNIK.ReadOnly = true;
 
                         DataSet oDs = new DataSet();
-                        oDs = oGnl.GetDataSet("select * from [EndUser] where [ID]=" + Request.QueryString["ID"] + "");
+                        oDs = oGnl.GetDataSet("select * from [EndUser] where [ID]=" + Request.QueryString["ID"] + "", 1);
 
                         id = Convert.ToInt32(oDs.Tables[0].Rows[0]["ID"].ToString());
                         txtNIK.Text = oDs.Tables[0].Rows[0]["NIK"].ToString();
@@ -66,7 +66,7 @@ namespace InvSystem
                         ddStatus.SelectedValue = oDs.Tables[0].Rows[0]["UsrStatus"].ToString();
                         txtRemark.Text = oDs.Tables[0].Rows[0]["Remarks"].ToString();
 
-                        oGnl.SeListBox("select [RID] as [Code], [AssetCode] + ' - ' + [AssetDesc] as [Name] from Asset where [RID] in (select [RID] from [dbo].[EndUsrAssetMap] where [USRID]=" + Request.QueryString["ID"] + " ) and isnull(IsDeleted,'N') ='N'", lstDestination);
+                        oGnl.SeListBox("select [RID] as [Code], [AssetCode] + ' - ' + [AssetDesc] as [Name] from Asset where [RID] in (select [RID] from [dbo].[EndUsrAssetMap] where [USRID]=" + Request.QueryString["ID"] + " ) and isnull(IsDeleted,'N') ='N'", lstDestination, 1);
                     }
                     else
                     {
@@ -94,7 +94,7 @@ namespace InvSystem
         {
             try
             {
-                oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='" + refCode + "'  and [Status] = 'A' ORDER BY [Name]", dr);
+                oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='" + refCode + "'  and [Status] = 'A' ORDER BY [Name]", dr, 1);
             }
             catch (Exception ex)
             {
@@ -152,7 +152,7 @@ namespace InvSystem
                         sparamVal = sparamVal + "@UserId:" + Session["UserId"];
 
                         DataSet oDs = new DataSet();
-                        oDs = oGnl.ExecuteSP("SP_POST_ENDUSR", sparamVal);
+                        oDs = oGnl.ExecuteSP("SP_POST_ENDUSR", sparamVal, 1);
 
                         errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                         errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();

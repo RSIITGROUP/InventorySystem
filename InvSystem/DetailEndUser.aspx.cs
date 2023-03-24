@@ -24,7 +24,7 @@ namespace InvSystem
                 {
                     int id = 0;
                     DataSet oDs = new DataSet();
-                    oDs = oGnl.GetDataSet("select * from V_DetailEndUsr where ID='" + Request.QueryString["ID"] + "'");
+                    oDs = oGnl.GetDataSet("select * from V_DetailEndUsr where ID='" + Request.QueryString["ID"] + "'", 1);
 
                     id = Convert.ToInt32(oDs.Tables[0].Rows[0]["ID"].ToString());
                     txtNIK.Text = oDs.Tables[0].Rows[0]["NIK"].ToString();
@@ -39,7 +39,7 @@ namespace InvSystem
                     txtTalenta.Text = oDs.Tables[0].Rows[0]["TalentaUsrId"].ToString();
                     txtStatus.Text = oDs.Tables[0].Rows[0]["UsrStatus"].ToString();
                     txtRemark.Text = oDs.Tables[0].Rows[0]["Remarks"].ToString();
-                    oGnl.SeListBox("select [RID] as [Code], [AssetCode] + ' - ' + [AssetDesc] as [Name] from Asset where [RID] in (select [RID] from [dbo].[EndUsrAssetMap] where [USRID]=" + Request.QueryString["ID"] + " ) and isnull(IsDeleted,'N') ='N'", lstDestination);
+                    oGnl.SeListBox("select [RID] as [Code], [AssetCode] + ' - ' + [AssetDesc] as [Name] from Asset where [RID] in (select [RID] from [dbo].[EndUsrAssetMap] where [USRID]=" + Request.QueryString["ID"] + " ) and isnull(IsDeleted,'N') ='N'", lstDestination, 1);
                 }
             }
         }

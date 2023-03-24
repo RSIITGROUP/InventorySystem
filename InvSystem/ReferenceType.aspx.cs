@@ -29,7 +29,7 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            DataTable dt = oGnl.GetDataTable("SELECT [Code], [Name], [TagCode], REPLACE(CONVERT(NVARCHAR,[CreateDate], 106), ' ', '-') [CreateDate] FROM [ReferenceType]");
+            DataTable dt = oGnl.GetDataTable("SELECT [Code], [Name], [TagCode], REPLACE(CONVERT(NVARCHAR,[CreateDate], 106), ' ', '-') [CreateDate] FROM [ReferenceType]", 1);
             GridView1.DataSource = dt;
             GridView1.DataBind();
 

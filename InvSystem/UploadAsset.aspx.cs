@@ -28,7 +28,7 @@ namespace InvSystem
                 Label1.ForeColor = Color.Green;
                 if (!IsPostBack)
                 {
-                    oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='04' and [Status] = 'A' ORDER BY [Name]", ddType);
+                    oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='04' and [Status] = 'A' ORDER BY [Name]", ddType, 1);
                     CopyTemplate("S001");
                 }
             }
@@ -214,7 +214,7 @@ namespace InvSystem
                                         sparamVal = sparamVal + "@TypeFunctionality:" + oAsset.TypeFunctionality + ",";
                                         //sparamVal = sparamVal + "@UserId:" + Session["UserId"] + ",";
                                         sparamVal = sparamVal + "@BulkId:" + bulkId.ToString() + ",@UserId:" + Session["UserId"];
-                                        oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal);                                       
+                                        oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal, 1);                                       
 
                                         errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                                         errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -231,7 +231,7 @@ namespace InvSystem
                                 {
                                     sparamVal = "";
                                     sparamVal = "@BulkId:" + bulkId.ToString();
-                                    oDs = oGnl.ExecuteSP("SP_VALIDATE_ASSET", sparamVal);
+                                    oDs = oGnl.ExecuteSP("SP_VALIDATE_ASSET", sparamVal, 1);
 
                                     errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                                     errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -246,7 +246,7 @@ namespace InvSystem
                                 {
                                     sparamVal = "";
                                     sparamVal = "@BulkId:" + bulkId.ToString();
-                                    oDs = oGnl.ExecuteSP("SP_POST_ASSETBULK", sparamVal);
+                                    oDs = oGnl.ExecuteSP("SP_POST_ASSETBULK", sparamVal, 1);
 
                                     errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                                     errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -277,7 +277,7 @@ namespace InvSystem
                                 sQlStr = sQlStr + ",[FrequencyBand],[TypeConnectivity],[TypeFunctionality],[HostName],[User]";
                                 sQlStr = sQlStr + "FROM [dbo].[Asset_Temp] ";
                                 sQlStr = sQlStr + "where[BulkId] = " + bulkId.ToString() + " Order By RID";
-                                dt = oGnl.GetDataTable(sQlStr);
+                                dt = oGnl.GetDataTable(sQlStr, 1);
 
                                 GridView1.DataSource = dt;
                                 GridView1.DataBind();
@@ -321,7 +321,7 @@ namespace InvSystem
             try
             {
                 DataSet oDs = new DataSet();
-                oDs = oGnl.GetDataSet("select isnull(max([BulkId]),0) + 1 [bulkId] from [Asset_Temp]");
+                oDs = oGnl.GetDataSet("select isnull(max([BulkId]),0) + 1 [bulkId] from [Asset_Temp]", 1);
 
                 bulkId = Convert.ToInt32(oDs.Tables[0].Rows[0]["bulkId"].ToString());
             }
@@ -424,7 +424,7 @@ namespace InvSystem
                 int tColumn = 0;
                 if (sType != "S001")
                 {
-                    oDs = oGnl.GetDataSet("select InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + sType + "') order by InfID");
+                    oDs = oGnl.GetDataSet("select InfName as [Name] from AssetDetailField where InfID not in (select InfID from [AssetConfiguration] where [Type]='" + sType + "') order by InfID", 1);
                     tColumn = oDs.Tables[0].Rows.Count;
                     for (int col = 1; col <= colCount; col++)
                     {

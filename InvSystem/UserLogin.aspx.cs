@@ -26,15 +26,15 @@ namespace InvSystem
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Users where UserName='" + txtUserName.Text.Trim() + "'"));
+            int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Users where UserName='" + txtUserName.Text.Trim() + "'", 1));
 
             if (temp == 1)
             {
-                string sPassword = oGnl.GetValueField("select Password from Users where UserName='" + txtUserName.Text.Trim() + "'");
+                string sPassword = oGnl.GetValueField("select Password from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
                 if (sPassword == oGnl.Encrypt(txtPassword.Text))
                 {
                     Session["User"] = txtUserName.Text.Trim();
-                    Session["UserId"] = oGnl.GetValueField("select Id from Users where UserName='" + txtUserName.Text.Trim() + "'");
+                    Session["UserId"] = oGnl.GetValueField("select Id from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
                     lblError.Text = "User Name and Password match";
                     lblError.ForeColor = System.Drawing.Color.Green;
                     Response.Redirect("Home.aspx");

@@ -14,9 +14,12 @@ namespace InvSystem.Class
 {
     public class clsGeneral
     {
-        public DataSet GetDataSet(string sSqlStr)
+        public DataSet GetDataSet(string sSqlStr, int typeConn)
         {
-            SqlConnection oCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
+            SqlConnection oCon = new SqlConnection(conStr);
             SqlDataAdapter oDA = new SqlDataAdapter(sSqlStr, oCon);
             DataSet oDs = new DataSet();
             oDA.Fill(oDs);
@@ -24,10 +27,13 @@ namespace InvSystem.Class
             return oDs;
         }
 
-        public DataTable GetDataTable(string sSqlStr)
+        public DataTable GetDataTable(string sSqlStr, int typeConn)
         {
             DataTable dt = new DataTable();
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
+            using (SqlConnection con = new SqlConnection(conStr))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter(sSqlStr, con))
                 {
@@ -38,9 +44,14 @@ namespace InvSystem.Class
             return dt;
         }
 
-        public void SeDropDown(string sSqlStr, DropDownList dr)
+        public void SeDropDown(string sSqlStr, DropDownList dr, int typeConn)
         {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            DataTable dt = new DataTable();
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
+
+            using (SqlConnection con = new SqlConnection(conStr))
             {
                 using (SqlCommand cmd = new SqlCommand(sSqlStr))
                 {
@@ -56,9 +67,14 @@ namespace InvSystem.Class
             }            
         }
 
-        public void SeListBox(string sSqlStr, ListBox dr)
+        public void SeListBox(string sSqlStr, ListBox dr, int typeConn)
         {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            DataTable dt = new DataTable();
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
+
+            using (SqlConnection con = new SqlConnection(conStr))
             {
                 using (SqlCommand cmd = new SqlCommand(sSqlStr))
                 {
@@ -96,8 +112,11 @@ namespace InvSystem.Class
             return clearText;
         }
 
-        public string GetValueField(string sSqlStr)
+        public string GetValueField(string sSqlStr, int typeConn)
         {
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
             SqlConnection oCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             oCon.Open();
             SqlCommand oComm = new SqlCommand(sSqlStr, oCon);
@@ -106,12 +125,16 @@ namespace InvSystem.Class
             return sValue;
         }
 
-        public void ExecuteDataQuery(string sSqlStr, string sPrmVal)
+        public void ExecuteDataQuery(string sSqlStr, string sPrmVal, char separator, int typeConn)
         {
-            string[] sParam = sPrmVal.Split(',');
+            string[] sParam = sPrmVal.Split(separator);
             string[] sValue = null;
 
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
             SqlConnection oCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+
             oCon.Open();
             SqlCommand oComm = new SqlCommand(sSqlStr, oCon);
             
@@ -125,13 +148,17 @@ namespace InvSystem.Class
             oCon.Close();
         }
 
-        public DataSet ExecuteSP(string sSqlStr, string sPrmVal)
+        public DataSet ExecuteSP(string sSqlStr, string sPrmVal, int typeConn)
         {
             string[] sParam = sPrmVal.Split(',');
             string[] sValue = null;
 
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
             SqlConnection oCon = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            oCon.Open();
+
+            //oCon.Open();
             SqlCommand oComm = new SqlCommand(sSqlStr, oCon);
 
             foreach (string str in sParam)
@@ -145,6 +172,7 @@ namespace InvSystem.Class
             oDA.SelectCommand = oComm;
             DataSet oDs = new DataSet();
             oDA.Fill(oDs);
+            //oCon.Close();
 
             return oDs;
         }

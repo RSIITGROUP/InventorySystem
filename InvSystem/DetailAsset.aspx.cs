@@ -27,7 +27,7 @@ namespace InvSystem
                 {
                     int iRID = 0;
                     DataSet oDs = new DataSet();
-                    oDs = oGnl.GetDataSet("select * from V_DetailAsset where AssetCode='" + Request.QueryString["assetCode"] + "'");
+                    oDs = oGnl.GetDataSet("select * from V_DetailAsset where AssetCode='" + Request.QueryString["assetCode"] + "'", 1);
 
                     iRID = Convert.ToInt32(oDs.Tables[0].Rows[0]["RID"].ToString());
                     txtAssetCode.Text = oDs.Tables[0].Rows[0]["AssetCode"].ToString();
@@ -121,7 +121,7 @@ namespace InvSystem
 
         private void BindGrid(GridView gv, string sSqlStr)
         {
-            gv.DataSource = oGnl.GetDataTable(sSqlStr);
+            gv.DataSource = oGnl.GetDataTable(sSqlStr, 1);
             gv.DataBind();
 
             //Required for jQuery DataTables to work.
@@ -183,7 +183,7 @@ namespace InvSystem
             DataSet oDs = new DataSet();
             sparamVal = sparamVal + "@type:" + type + ",";
             sparamVal = sparamVal + "@action:2";
-            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal);
+            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal, 1);
             if (oDs.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in oDs.Tables[0].Rows)

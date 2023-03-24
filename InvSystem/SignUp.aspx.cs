@@ -14,11 +14,12 @@ namespace InvSystem
         bool bIsExist = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string passwd = oGnl.Encrypt("Welcome1");
             lblError.Text = "";
             lblError.ForeColor = System.Drawing.Color.Red;
             if (IsPostBack)
             {
-                int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Users where UserName='" + txtUserName.Text + "'"));
+                int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Users where UserName='" + txtUserName.Text + "'", 1));
                 if (temp == 1)
                 {
                     lblError.Text = "User already exist";
@@ -38,7 +39,7 @@ namespace InvSystem
                     sparamVal = sparamVal + "@usrname:" + txtUserName.Text.Trim() + ",";
                     sparamVal = sparamVal + "@email:" + txtEmail.Text + ",";
                     sparamVal = sparamVal + "@password:" + oGnl.Encrypt(txtPassword.Text);
-                    oGnl.ExecuteDataQuery("insert into Users (FirstName,LastName,UserName,Email,Password) values (@firstname,@lastname,@usrname,@email,@password)", sparamVal)
+                    oGnl.ExecuteDataQuery("insert into Users (FirstName,LastName,UserName,Email,Password) values (@firstname,@lastname,@usrname,@email,@password)", sparamVal, Convert.ToChar(","), 1)
                    
                    /* Response.Write("Registration is Success")*/;
                     lblError.Text = "Sign Up is Success";
