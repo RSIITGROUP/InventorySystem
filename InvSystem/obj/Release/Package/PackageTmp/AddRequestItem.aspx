@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddRequestItem.aspx.cs" Inherits="InvSystem.AddRequestItem" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,6 +15,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
         <div>
             <div>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="RequestID" ShowHeaderWhenEmpty="true" OnRowCommand="GridView1_RowCommand" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit"
@@ -58,7 +61,8 @@
                             <asp:Label ID="lblItemCode" Text='<%# Eval("ItemCode") %>' runat="server"/>
                         </EditItemTemplate>
                         <FooterTemplate>
-                            <asp:DropDownList ID="ddItemCodeFooter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddItemCodeFooter_SelectedIndexChanged"></asp:DropDownList>
+                            <%--<asp:DropDownList ID="ddItemCodeFooter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddItemCodeFooter_SelectedIndexChanged"></asp:DropDownList>--%>
+                            <ajaxToolkit:ComboBox ID="ddItemCodeFooter" runat="server"  AutoCompleteMode="SuggestAppend" AutoPostBack="true" OnSelectedIndexChanged="ddItemCodeFooter_SelectedIndexChanged"></ajaxToolkit:ComboBox>
                         </FooterTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Item Description" ItemStyle-Width="300px">
@@ -81,6 +85,28 @@
                         </EditItemTemplate>
                         <FooterTemplate>
                             <asp:TextBox ID="txtQtyFooter" runat="server" TextMode="Number"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="QtyGI" ItemStyle-Width="100px">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("QtyGI") %>' runat="server"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:Label ID="lblQtyGI" Text='<%# Eval("QtyGI") %>' runat="server"/>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:Label ID="lblQtyGIFooter" Text='<%# Eval("QtyGI") %>' runat="server"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Remaining Qty" ItemStyle-Width="100px">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("RemainingQty") %>' runat="server"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:Label ID="lblRemainingQty" Text='<%# Eval("RemainingQty") %>' runat="server"/>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:Label ID="lblRemainingQtyFooter" Text='<%# Eval("RemainingQty") %>' runat="server"/>
                         </FooterTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Unit" ItemStyle-Width="80px">

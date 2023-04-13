@@ -27,19 +27,19 @@ namespace InvSystem
                 {
                     if (btnAdd.Text == "Add")
                     {
-                        int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode='" + txtAssetCode.Text + "'", 1));
-                        if (temp == 1)
-                        {
-                            bIsExist = true;
-                        }
-                        else
-                        {
-                            temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSerialNo.Text + "'))", 1));
+                        //int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode='" + txtAssetCode.Text + "'", 1));
+                        //if (temp == 1)
+                        //{
+                        //    bIsExist = true;
+                        //}
+                        //else
+                        //{
+                         int   temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSerialNo.Text + "'))", 1));
                             if (temp == 1)
                             {
                                 bIsExist = true;
                             }
-                        }
+                        //}
                     }
                 }
                 else
@@ -212,73 +212,73 @@ namespace InvSystem
                     {
                         if (btnAdd.Text == "Add")
                         {
-                            sparamVal = "@action:A,";
+                            sparamVal = "@action~A|";
                         }
                         else
                         {
-                            sparamVal = "@action:U,";
+                            sparamVal = "@action~U|";
                         }
 
-                        sparamVal = sparamVal + "@AssetCode:" + txtAssetCode.Text + ",";
-                        sparamVal = sparamVal + "@AssetDesc:" + txtAssetDesc.Text + ",";
-                        sparamVal = sparamVal + "@ActivaNo:" + txtActivaNO.Text + ",";
-                        sparamVal = sparamVal + "@PurchaseDate:" + txtPurchaseDate.Text + ",";
-                        sparamVal = sparamVal + "@GRPODocNo:" + txtGRPODocNum.Text + ",";
-                        sparamVal = sparamVal + "@Placement:" + ddPlacement.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@LocationCode:" + ddLocation.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@AreaCode:" + ddArea.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Spot:" + txtSpot.Text + ",";
-                        sparamVal = sparamVal + "@Type:" + ddType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Brand:" + ddBrand.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Model:" + txtModel.Text + ",";
-                        sparamVal = sparamVal + "@Series:" + txtSeries.Text + ",";
-                        sparamVal = sparamVal + "@SerialNo:" + txtSerialNo.Text + ",";
-                        sparamVal = sparamVal + "@Color:" + ddColor.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@ScreenSize:" + ddScrSize.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@ScreenResolution:" + ddScrRsl.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@TouchScreen:" + ddTchScr.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Processor:" + ddProcessor.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@VGABrand:" + ddVGABrand.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@VGAType:" + ddVGAType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@VGASize:" + txtVGASize.Text + ",";
-                        sparamVal = sparamVal + "@RAMType:" + ddRAMType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@RAMMHz:" + txtRAMMHz.Text + ",";
-                        sparamVal = sparamVal + "@RAMSize:" + txtRAMSize.Text + ",";
-                        sparamVal = sparamVal + "@Storagetype:" + ddStrType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@StorageSize:" + txtStrSize.Text + ",";
-                        sparamVal = sparamVal + "@ChargerType:" + ddChrType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@UnitVoltage:" + ddUnitVoltage.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@UnitAmps:" + ddUnitAmps.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@UnitWatt:" + ddUnitWatt.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@BatteryType:" + ddBtrType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@BatteryVoltage:" + ddBtrVoltage.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@BatteryAmps:" + ddBtrAmps.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@BatteryWatt:" + ddBtrWatt.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Motherboard:" + txtMotherboard.Text + ",";
-                        sparamVal = sparamVal + "@ChasingSize:" + ddCshSize.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@CameraResolution:" + ddResolution.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@CameraType:" + ddCameraType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Health:" + ddHealth.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@OperatingSystem:" + ddOperatingSystem.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Imei:" + txtImei.Text + ",";
-                        sparamVal = sparamVal + "@MACAddress:" + txtMacAddr.Text + ",";
-                        sparamVal = sparamVal + "@IP:" + txtIP.Text + ",";
-                        sparamVal = sparamVal + "@MobileNumber:" + txtPhone.Text + ",";
-                        sparamVal = sparamVal + "@Remarks:" + txtRemark.Text + ",";
-                        sparamVal = sparamVal + "@HostName:" + txtHostName.Text + ",";
-                        sparamVal = sparamVal + "@User:" + ddUser.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@TypeQuality:" + ddTypeQuality.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@TypePort:" + ddTypePort.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@TypeSystem:" + ddTypeSystem.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@PortQuantity:" + ddPortQuantity.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@SFPPortQuantity:" + ddSFPPortQuantity.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@FrequencyBand:" + ddFrequencyBand.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@TypeConnectivity:" + ddTypeConnectivity.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@TypeFunctionality:" + ddTypeFunctionality.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                        sparamVal = sparamVal + "@AssetCode~" + txtAssetCode.Text + "|";
+                        sparamVal = sparamVal + "@AssetDesc~" + txtAssetDesc.Text + "|";
+                        sparamVal = sparamVal + "@ActivaNo~" + txtActivaNO.Text + "|";
+                        sparamVal = sparamVal + "@PurchaseDate~" + txtPurchaseDate.Text + "|";
+                        sparamVal = sparamVal + "@GRPODocNo~" + txtGRPODocNum.Text + "|";
+                        sparamVal = sparamVal + "@Placement~" + ddPlacement.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@LocationCode~" + ddLocation.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@AreaCode~" + ddArea.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Spot~" + txtSpot.Text + "|";
+                        sparamVal = sparamVal + "@Type~" + ddType.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Brand~" + ddBrand.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Model~" + txtModel.Text + "|";
+                        sparamVal = sparamVal + "@Series~" + txtSeries.Text + "|";
+                        sparamVal = sparamVal + "@SerialNo~" + txtSerialNo.Text + "|";
+                        sparamVal = sparamVal + "@Color~" + ddColor.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@ScreenSize~" + ddScrSize.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@ScreenResolution~" + ddScrRsl.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@TouchScreen~" + ddTchScr.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Processor~" + ddProcessor.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@VGABrand~" + ddVGABrand.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@VGAType~" + ddVGAType.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@VGASize~" + txtVGASize.Text + "|";
+                        sparamVal = sparamVal + "@RAMType~" + ddRAMType.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@RAMMHz~" + txtRAMMHz.Text + "|";
+                        sparamVal = sparamVal + "@RAMSize~" + txtRAMSize.Text + "|";
+                        sparamVal = sparamVal + "@Storagetype~" + ddStrType.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@StorageSize~" + txtStrSize.Text + "|";
+                        sparamVal = sparamVal + "@ChargerType~" + ddChrType.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@UnitVoltage~" + ddUnitVoltage.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@UnitAmps~" + ddUnitAmps.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@UnitWatt~" + ddUnitWatt.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@BatteryType~" + ddBtrType.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@BatteryVoltage~" + ddBtrVoltage.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@BatteryAmps~" + ddBtrAmps.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@BatteryWatt~" + ddBtrWatt.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Motherboard~" + txtMotherboard.Text + "|";
+                        sparamVal = sparamVal + "@ChasingSize~" + ddCshSize.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@CameraResolution~" + ddResolution.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@CameraType~" + ddCameraType.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Health~" + ddHealth.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@OperatingSystem~" + ddOperatingSystem.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Imei~" + txtImei.Text + "|";
+                        sparamVal = sparamVal + "@MACAddress~" + txtMacAddr.Text + "|";
+                        sparamVal = sparamVal + "@IP~" + txtIP.Text + "|";
+                        sparamVal = sparamVal + "@MobileNumber~" + txtPhone.Text + "|";
+                        sparamVal = sparamVal + "@Remarks~" + txtRemark.Text +"|";
+                        sparamVal = sparamVal + "@HostName~" + txtHostName.Text + "|";
+                        sparamVal = sparamVal + "@User~" + ddUser.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@TypeQuality~" + ddTypeQuality.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@TypePort~" + ddTypePort.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@TypeSystem~" + ddTypeSystem.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@PortQuantity~" + ddPortQuantity.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@SFPPortQuantity~" + ddSFPPortQuantity.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@FrequencyBand~" + ddFrequencyBand.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@TypeConnectivity~" + ddTypeConnectivity.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@TypeFunctionality~" + ddTypeFunctionality.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"];
 
                         DataSet oDs = new DataSet();
-                        oDs = oGnl.ExecuteSP("SP_VAL_ASSET", sparamVal, 1);
+                        oDs = oGnl.ExecuteSP("SP_VAL_ASSET", sparamVal, '|', 1);
 
                         errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                         errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -290,10 +290,11 @@ namespace InvSystem
 
                         if (errNo == 0)
                         {
-                            oDs = oGnl.ExecuteSP("SP_POST_ASSET", sparamVal, 1);
+                            oDs = oGnl.ExecuteSP("SP_POST_ASSET", sparamVal, '|', 1);
 
                             errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                             errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
+                            txtAssetCode.Text= oDs.Tables[0].Rows[0]["AssetCode"].ToString();
                             if (errNo == 0)
                             {
                                 lblError.ForeColor = System.Drawing.Color.Green;
@@ -424,9 +425,9 @@ namespace InvSystem
             Detail8.Visible = false;
 
             DataSet oDs = new DataSet();
-            sparamVal = sparamVal + "@type:" + type + ",";
-            sparamVal = sparamVal + "@action:1";
-            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal, 1);
+            sparamVal = sparamVal + "@type~" + type + "|";
+            sparamVal = sparamVal + "@action~1";
+            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal, '|', 1);
             if (oDs.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in oDs.Tables[0].Rows)

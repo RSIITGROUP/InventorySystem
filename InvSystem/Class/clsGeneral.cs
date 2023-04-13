@@ -67,6 +67,30 @@ namespace InvSystem.Class
             }            
         }
 
+        public void SeComboBox(string sSqlStr, AjaxControlToolkit.ComboBox cb, int typeConn)
+        {
+            DataTable dt = new DataTable();
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
+
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                using (SqlCommand cmd = new SqlCommand(sSqlStr))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = con;
+                    con.Open();
+                    cb.DataSource = cmd.ExecuteReader();
+                    cb.DataTextField = "Name";
+                    cb.DataValueField = "Code";
+                    cb.DataBind();
+                    con.Close();
+                }
+            }
+        }
+
+
         public void SeListBox(string sSqlStr, ListBox dr, int typeConn)
         {
             DataTable dt = new DataTable();
@@ -140,7 +164,7 @@ namespace InvSystem.Class
             
             foreach (string str in sParam)
             {
-                sValue= str.Split(':');
+                sValue= str.Split('~');
                 oComm.Parameters.AddWithValue(sValue[0], sValue[1]);
             }
 
@@ -148,9 +172,9 @@ namespace InvSystem.Class
             oCon.Close();
         }
 
-        public DataSet ExecuteSP(string sSqlStr, string sPrmVal, int typeConn)
+        public DataSet ExecuteSP(string sSqlStr, string sPrmVal, char separator, int typeConn)
         {
-            string[] sParam = sPrmVal.Split(',');
+            string[] sParam = sPrmVal.Split(separator);
             string[] sValue = null;
 
             string conStr = "";
@@ -161,10 +185,13 @@ namespace InvSystem.Class
             //oCon.Open();
             SqlCommand oComm = new SqlCommand(sSqlStr, oCon);
 
-            foreach (string str in sParam)
+            if (!sPrmVal.Equals(""))
             {
-                sValue = str.Split(':');
-                oComm.Parameters.AddWithValue(sValue[0], sValue[1]);
+                foreach (string str in sParam)
+                {
+                    sValue = str.Split('~');
+                    oComm.Parameters.AddWithValue(sValue[0], sValue[1]);
+                }
             }
             oComm.CommandType = CommandType.StoredProcedure;
 

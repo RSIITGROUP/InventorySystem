@@ -30,7 +30,7 @@ namespace InvSystem
             
             if (Request.QueryString["action"].ToString().Equals("add"))
             {
-                strQuerys = "select * from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"];
+                strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"];
             }
             else
             {
@@ -45,20 +45,29 @@ namespace InvSystem
                 {
                     if (Session["UserId"].Equals(usrId) && reqState.Equals("8001"))
                     {
-                        strQuerys = "select * from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"];
+                        strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"];
                     }
                     else
                     {
-                        strQuerys = "select * from RequestDetail where Requestid=" + Request.QueryString["RequestID"];
+                        strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetail where Requestid=" + Request.QueryString["RequestID"];
                     }
                 }
                 else if (Request.QueryString["action"].ToString().Equals("approve"))
                 {
-                    strQuerys = "select * from RequestDetail where Requestid=" + Request.QueryString["RequestID"];
+                    strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetail where Requestid=" + Request.QueryString["RequestID"];
+                }
+                else if (Request.QueryString["action"].ToString().Equals("save"))
+                {
+                    strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetail where Requestid=" + Request.QueryString["RequestID"];
                 }
                 else
                 {
-                    strQuerys = "select * from RequestDetail where Requestid=" + Request.QueryString["RequestID"];
+                    //strQuerys = "select * from RequestDetail where Requestid=" + Request.QueryString["RequestID"];
+                    strQuerys = "select T0.*, sum(t1.Qty)[QtyGI], SUm(T0.Qty) - isnull(sum(t1.Qty), 0)[RemainingQty] ";
+                    strQuerys = strQuerys + "from RequestDetail T0 ";
+                    strQuerys = strQuerys + "left join [GIDetail] T1 on t0.RequestID = T1.RequestID and t0.LineId = t1.LineId ";
+                    strQuerys = strQuerys + "left join[GIHeader] t2 on t1.GIID = t2.GIID where T0.Requestid=" + Request.QueryString["RequestID"];
+                    strQuerys = strQuerys + " group by t0.RequestID, t0.LineId,t0.ItemCode,t0.ItemDesc,t0.Qty,t0.Unit ";
                 }
             }
             DataTable dt = oGnl.GetDataTable(strQuerys, 1);
@@ -95,30 +104,46 @@ namespace InvSystem
                     lblLineID.Text = "1";
                 }
 
-                DropDownList ddItemCode = GridView1.FooterRow.FindControl("ddItemCodeFooter") as DropDownList;
+                //DropDownList ddItemCode = GridView1.FooterRow.FindControl("ddItemCodeFooter") as DropDownList;
+                AjaxControlToolkit.ComboBox ddItemCode = GridView1.FooterRow.FindControl("ddItemCodeFooter") as AjaxControlToolkit.ComboBox;
                 string strQuery = "select a.idbarang [Code], a.idbarang [Name] from (";
                 strQuery = strQuery + "select ROW_NUMBER() over(partition by t0.idbarang order by t0.idbarang, t0.idtrans, t0.tglproduksi desc)[num], ";
                 strQuery = strQuery + "t0.idtrans, t0.tglproduksi, t0.idbarang, t1.nmbarang, t0.stock,t1.satuan ";
                 strQuery = strQuery + "from [tbltransaksigudang] t0 inner join [tblbarang] t1 on t1.idbarang = t0.idbarang ";
                 strQuery = strQuery + ") a where a.num = 1 and a.stock > 0 order by a.idbarang";
-                oGnl.SeDropDown(strQuery, ddItemCode, 2);
+                //oGnl.SeDropDown(strQuery, ddItemCode, 2);
+                oGnl.SeComboBox(strQuery, ddItemCode, 2);
+                ddItemCode.Items.Insert(0, new ListItem("--Select--", "0"));
+                this.GridView1.Columns[5].Visible = false;
+                this.GridView1.Columns[6].Visible = false;
+            }
+            else if (Request.QueryString["action"].ToString().Equals("save"))
+            {
+                this.GridView1.Columns[5].Visible = false;
+                this.GridView1.Columns[6].Visible = false;
+                this.GridView1.Columns[8].Visible = false;
+                GridView1.FooterRow.Visible = false;
             }
             else
             {
-                this.GridView1.Columns[6].Visible = false;
+                this.GridView1.Columns[5].Visible = true;
+                this.GridView1.Columns[6].Visible = true;
+                this.GridView1.Columns[8].Visible = false;
                 GridView1.FooterRow.Visible = false;
             }
         }
 
         protected void GridViedReload()
         {
-            string itemcode = ((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedItem.Value;
+            //string itemcode = ((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedItem.Value;
+            string itemcode = ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedItem.Value;
             string itemdesc = (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text;
             string qty = (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text;
             string unit = (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text;
             GridView1.EditIndex = -1;
             BindGrid();
-            ((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = itemcode;
+            //((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = itemcode;
+            ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = itemcode;
             (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = itemdesc;
             (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text = qty;
             (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = unit;
@@ -130,13 +155,21 @@ namespace InvSystem
             {
                 if (e.CommandName.Equals("AddNew"))
                 {
-                    if (((GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.ToString().Equals("")) || (Convert.ToInt64((GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.ToString()) <= 0))
+                    lblErrorMessage.Text = "";
+                    lblErrorMessage.ForeColor = System.Drawing.Color.Red;
+                    if ((GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text.Trim().Equals(""))
+                    {
+                        GridViedReload();
+                        lblErrorMessage.Text = "Please Choose The Item";
+                        lblErrorMessage.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (((GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.ToString().Equals("")) || (Convert.ToInt64((GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.ToString()) <= 0))
                     {
                         GridViedReload();
                         lblErrorMessage.Text = "Quantity should be greater than 0";
                         lblErrorMessage.ForeColor = System.Drawing.Color.Red;
                     }
-                    else if (IsQtyExcessive((GridView1.FooterRow.FindControl("lblRequestIDFooter") as Label).Text.Trim(), (GridView1.FooterRow.FindControl("lblLineIDFooter") as Label).Text.Trim(), (GridView1.FooterRow.FindControl("ddItemCodeFooter") as DropDownList).SelectedItem.Value, (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.ToString()) == true)
+                    else if (IsQtyExcessive((GridView1.FooterRow.FindControl("lblRequestIDFooter") as Label).Text.Trim(), (GridView1.FooterRow.FindControl("lblLineIDFooter") as Label).Text.Trim(), (GridView1.FooterRow.FindControl("ddItemCodeFooter") as AjaxControlToolkit.ComboBox).SelectedItem.Value, (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.ToString()) == true)
                     {
                         GridViedReload();
                         lblErrorMessage.Text = "Quantity excessed";
@@ -144,12 +177,13 @@ namespace InvSystem
                     }
                     else
                     {
-                        string sparamVal = "@RequestId:" + (GridView1.FooterRow.FindControl("lblRequestIDFooter") as Label).Text.Trim() + "|";
-                        sparamVal = sparamVal + "@LineId:" + (GridView1.FooterRow.FindControl("lblLineIDFooter") as Label).Text.Trim() + "|";
-                        sparamVal = sparamVal + "@ItemCode:" + (GridView1.FooterRow.FindControl("ddItemCodeFooter") as DropDownList).SelectedItem.Value + "|";
-                        sparamVal = sparamVal + "@ItemDesc:" + (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text.Trim() + "|";
-                        sparamVal = sparamVal + "@Qty:" + (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.Trim() + "|";
-                        sparamVal = sparamVal + "@Unit:" + (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text.Trim();
+                        string sparamVal = "@RequestId~" + (GridView1.FooterRow.FindControl("lblRequestIDFooter") as Label).Text.Trim() + "|";
+                        sparamVal = sparamVal + "@LineId~" + (GridView1.FooterRow.FindControl("lblLineIDFooter") as Label).Text.Trim() + "|";
+                        //sparamVal = sparamVal + "@ItemCode~" + (GridView1.FooterRow.FindControl("ddItemCodeFooter") as DropDownList).SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@ItemCode~" + (GridView1.FooterRow.FindControl("ddItemCodeFooter") as AjaxControlToolkit.ComboBox).SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@ItemDesc~" + (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text.Trim() + "|";
+                        sparamVal = sparamVal + "@Qty~" + (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.Trim() + "|";
+                        sparamVal = sparamVal + "@Unit~" + (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text.Trim();
                         oGnl.ExecuteDataQuery("insert into RequestDetailtemp (RequestId,LineId,ItemCode,ItemDesc,Qty,Unit) values (@RequestId,@LineId,@ItemCode,@ItemDesc,@Qty,@Unit)", sparamVal, Convert.ToChar("|"), 1);
 
                         BindGrid();
@@ -169,12 +203,16 @@ namespace InvSystem
         
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            lblErrorMessage.Text = "";
+            lblErrorMessage.ForeColor = System.Drawing.Color.Red;
             GridView1.EditIndex = e.NewEditIndex;
             BindGrid();
         }
 
         protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
+            lblErrorMessage.Text = "";
+            lblErrorMessage.ForeColor = System.Drawing.Color.Red;
             GridView1.EditIndex = -1;
             BindGrid();
         }       
@@ -183,13 +221,24 @@ namespace InvSystem
         {
             try
             {
-                string sparamVal = "@LineId:"+ (GridView1.Rows[e.RowIndex].FindControl("lblLineID") as Label).Text.Trim() + "|";
-                sparamVal = sparamVal + "@Qty:" + (GridView1.Rows[e.RowIndex].FindControl("txtQty") as TextBox).Text.Trim() + "|";
-                sparamVal = sparamVal + "@RequestId:" + GridView1.DataKeys[e.RowIndex].Value.ToString();
-                oGnl.ExecuteDataQuery("update RequestDetailtemp set Qty=@Qty where RequestId=@RequestId and LineId=@LineId", sparamVal, Convert.ToChar("|"), 1);
+                lblErrorMessage.Text = "";
+                lblErrorMessage.ForeColor = System.Drawing.Color.Red;
+                if (IsQtyExcessive(GridView1.DataKeys[e.RowIndex].Value.ToString(), (GridView1.Rows[e.RowIndex].FindControl("lblLineID") as Label).Text.Trim(), (GridView1.Rows[e.RowIndex].FindControl("lblItemCode") as Label).Text.Trim(), (GridView1.Rows[e.RowIndex].FindControl("txtQty") as TextBox).Text.Trim()) == true)
+                {
+                    lblErrorMessage.Text = "Quantity excessed";
+                    lblErrorMessage.ForeColor = System.Drawing.Color.Red;
+                    GridView1.EditIndex = e.RowIndex;
+                }
+                else
+                {
+                    string sparamVal = "@LineId~" + (GridView1.Rows[e.RowIndex].FindControl("lblLineID") as Label).Text.Trim() + "|";
+                    sparamVal = sparamVal + "@Qty~" + (GridView1.Rows[e.RowIndex].FindControl("txtQty") as TextBox).Text.Trim() + "|";
+                    sparamVal = sparamVal + "@RequestId~" + GridView1.DataKeys[e.RowIndex].Value.ToString();
+                    oGnl.ExecuteDataQuery("update RequestDetailtemp set Qty=@Qty where RequestId=@RequestId and LineId=@LineId", sparamVal, Convert.ToChar("|"), 1);
 
-                GridView1.EditIndex = -1;
-                BindGrid();
+                    GridView1.EditIndex = -1;
+                    BindGrid(); 
+                }
                 //lblErrorMessage.Text = "Selected Record Updated";
                 //lblErrorMessage.ForeColor = System.Drawing.Color.Red;
             }
@@ -204,8 +253,10 @@ namespace InvSystem
         {
             try
             {
-                string sparamVal = "@LineId:" + (GridView1.Rows[e.RowIndex].FindControl("lblLine") as Label).Text.Trim() + ",";
-                sparamVal = sparamVal + "@RequestId:" + GridView1.DataKeys[e.RowIndex].Value.ToString();
+                lblErrorMessage.Text = "";
+                lblErrorMessage.ForeColor = System.Drawing.Color.Red;
+                string sparamVal = "@LineId~" + (GridView1.Rows[e.RowIndex].FindControl("lblLine") as Label).Text.Trim() + ",";
+                sparamVal = sparamVal + "@RequestId~" + GridView1.DataKeys[e.RowIndex].Value.ToString();
                 oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId and LineId=@LineId", sparamVal, Convert.ToChar(","), 1);
 
                 GridView1.EditIndex = -1;
@@ -225,8 +276,9 @@ namespace InvSystem
         {
             try
             {
-               
-                DropDownList ddItemCode = (DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter");
+
+                //DropDownList ddItemCode = (DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter");
+                AjaxControlToolkit.ComboBox ddItemCode = (AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter");
                 string ItemCode = ddItemCode.SelectedItem.Value;
                 
                 DataSet oDs = new DataSet();
@@ -237,7 +289,8 @@ namespace InvSystem
                     BindGrid();
                     (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text= oDs.Tables[0].Rows[0]["nmbarang"].ToString();
                     (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text= oDs.Tables[0].Rows[0]["satuan"].ToString();
-                    ((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
+                    //((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
+                    ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
                 }
             }
             catch (Exception ex)

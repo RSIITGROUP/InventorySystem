@@ -22,7 +22,7 @@
     <form id="form1" runat="server">
         <div class="row mb-2">
             <div class="col">
-                <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Approval</span></h4>                 
+                <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Request State</span></h4>                 
             </div>
         </div>
         <div class="row mb-2">

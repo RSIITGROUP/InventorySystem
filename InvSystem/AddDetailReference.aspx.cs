@@ -75,11 +75,11 @@ namespace InvSystem
                 {
                     if (!bIsExist)
                     {
-                        string sparamVal = "@code:" + txtCode.Text.Trim() + ",";
-                        sparamVal = sparamVal + "@RefCode:" + drType.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@name:" + txtName.Text + ",";
-                        sparamVal = sparamVal + "@status:" + drStatus.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                        string sparamVal = "@code~" + txtCode.Text.Trim() + ",";
+                        sparamVal = sparamVal + "@RefCode~" + drType.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@name~" + txtName.Text + ",";
+                        sparamVal = sparamVal + "@status~" + drStatus.SelectedItem.Value + ",";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                         oGnl.ExecuteDataQuery("insert into Reference ([Code],[RefCode],[Name],[Status],[UserCreate],[CreateDate]) values (@code,@RefCode,@name,@status,@UserId,getdate())", sparamVal, Convert.ToChar(","), 1);
 
                         lblError.ForeColor = System.Drawing.Color.Green;
@@ -99,11 +99,11 @@ namespace InvSystem
                     sInsUser += "[RefCode]=@RefCode, [Name]=@name, [Status] = @status,[UserUpdate] = @UserId, [UpdateDate] = getdate() ";
                     sInsUser += "where [Code] = @code";                    
 
-                    string sparamVal = "@code:" + txtCode.Text.Trim() + ",";
-                    sparamVal = sparamVal + "@RefCode:" + drType.SelectedItem.Value + ",";
-                    sparamVal = sparamVal + "@name:" + txtName.Text + ",";
-                    sparamVal = sparamVal + "@status:" + drStatus.SelectedItem.Value + ",";
-                    sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                    string sparamVal = "@code~" + txtCode.Text.Trim() + ",";
+                    sparamVal = sparamVal + "@RefCode~" + drType.SelectedItem.Value + ",";
+                    sparamVal = sparamVal + "@name~" + txtName.Text + ",";
+                    sparamVal = sparamVal + "@status~" + drStatus.SelectedItem.Value + ",";
+                    sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                     oGnl.ExecuteDataQuery(sInsUser, sparamVal, Convert.ToChar(","), 1);
 
                     lblError.ForeColor = System.Drawing.Color.Green;

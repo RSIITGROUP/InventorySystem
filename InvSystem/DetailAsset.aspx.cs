@@ -181,9 +181,9 @@ namespace InvSystem
             Detail8.Visible = false;
 
             DataSet oDs = new DataSet();
-            sparamVal = sparamVal + "@type:" + type + ",";
-            sparamVal = sparamVal + "@action:2";
-            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal, 1);
+            sparamVal = sparamVal + "@type~" + type + "|";
+            sparamVal = sparamVal + "@action~2";
+            oDs = oGnl.ExecuteSP("SP_GET_LISTFIELD", sparamVal, '|', 1);
             if (oDs.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in oDs.Tables[0].Rows)

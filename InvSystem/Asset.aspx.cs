@@ -209,8 +209,8 @@ namespace InvSystem
                 {
                     try
                     {
-                        string sparamVal = "@AssetCode:" + assetCode + ",";
-                        sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                        string sparamVal = "@AssetCode~" + assetCode + ",";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                         oGnl.ExecuteDataQuery("Update [Asset] set [IsDeleted]='Y',[UserUpdate] = @UserId, [UpdateDate]=getdate() where [AssetCode] = @AssetCode", sparamVal, Convert.ToChar(","), 1);
                         ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ClientScript", "alert(' Asset [" + assetCode + "] has been successfully deleted')", true);
                         GridView1.DataSource = null;

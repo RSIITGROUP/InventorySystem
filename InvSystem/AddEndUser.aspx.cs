@@ -121,25 +121,25 @@ namespace InvSystem
                     {
                         if (btnAdd.Text == "Add")
                         {
-                            sparamVal = "@action:A,";
+                            sparamVal = "@action~A|";
                         }
                         else
                         {
-                            sparamVal = "@action:U,";
+                            sparamVal = "@action~U|";
                         }
                         
-                        sparamVal = sparamVal + "@NIK:" + txtNIK.Text + ",";
-                        sparamVal = sparamVal + "@Name:" + txtName.Text + ",";
-                        sparamVal = sparamVal + "@Email:" + txtEmail.Text + ",";
-                        sparamVal = sparamVal + "@Region:" + ddRegion.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Department:" + ddDepartment.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@MobileNo:" + txtMobileNo.Text + ",";
-                        sparamVal = sparamVal + "@SAPUsrId:" + txtSapId.Text + ",";
-                        sparamVal = sparamVal + "@PeachUsrId:" + txtPeach.Text + ",";
-                        sparamVal = sparamVal + "@AQMUsrId:" + txtAQM.Text + ",";
-                        sparamVal = sparamVal + "@TalentaUsrId:" + txtTalenta.Text + ",";
-                        sparamVal = sparamVal + "@UsrStatus:" + ddStatus.SelectedItem.Value + ",";
-                        sparamVal = sparamVal + "@Remarks:" + txtRemark.Text + ",";
+                        sparamVal = sparamVal + "@NIK~" + txtNIK.Text + "|";
+                        sparamVal = sparamVal + "@Name~" + txtName.Text + "|";
+                        sparamVal = sparamVal + "@Email~" + txtEmail.Text + "|";
+                        sparamVal = sparamVal + "@Region~" + ddRegion.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Department~" + ddDepartment.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@MobileNo~" + txtMobileNo.Text + "|";
+                        sparamVal = sparamVal + "@SAPUsrId~" + txtSapId.Text + "|";
+                        sparamVal = sparamVal + "@PeachUsrId~" + txtPeach.Text + "|";
+                        sparamVal = sparamVal + "@AQMUsrId~" + txtAQM.Text + "|";
+                        sparamVal = sparamVal + "@TalentaUsrId~" + txtTalenta.Text +"|";
+                        sparamVal = sparamVal + "@UsrStatus~" + ddStatus.SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@Remarks~" + txtRemark.Text + "|";
 
                         if (lstDestination.Items.Count > 0)
                         {
@@ -148,11 +148,11 @@ namespace InvSystem
                                 sItem += item.Value + ";";
                             }
                         }
-                        sparamVal = sparamVal + "@AssetMap:" + sItem + ",";
-                        sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                        sparamVal = sparamVal + "@AssetMap~" + sItem +"|";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"];
 
                         DataSet oDs = new DataSet();
-                        oDs = oGnl.ExecuteSP("SP_POST_ENDUSR", sparamVal, 1);
+                        oDs = oGnl.ExecuteSP("SP_POST_ENDUSR", sparamVal, '|' , 1);
 
                         errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                         errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();

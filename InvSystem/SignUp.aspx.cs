@@ -34,11 +34,11 @@ namespace InvSystem
             {
                 if (!bIsExist)
                 {
-                    string sparamVal = "@firstname:" + txtFirstName.Text.Trim() + ",";
-                    sparamVal = sparamVal + "@lastname:" + txtLastName.Text + ",";
-                    sparamVal = sparamVal + "@usrname:" + txtUserName.Text.Trim() + ",";
-                    sparamVal = sparamVal + "@email:" + txtEmail.Text + ",";
-                    sparamVal = sparamVal + "@password:" + oGnl.Encrypt(txtPassword.Text);
+                    string sparamVal = "@firstname~" + txtFirstName.Text.Trim() + ",";
+                    sparamVal = sparamVal + "@lastname~" + txtLastName.Text + ",";
+                    sparamVal = sparamVal + "@usrname~" + txtUserName.Text.Trim() + ",";
+                    sparamVal = sparamVal + "@email~" + txtEmail.Text + ",";
+                    sparamVal = sparamVal + "@password~" + oGnl.Encrypt(txtPassword.Text);
                     oGnl.ExecuteDataQuery("insert into Users (FirstName,LastName,UserName,Email,Password) values (@firstname,@lastname,@usrname,@email,@password)", sparamVal, Convert.ToChar(","), 1)
                    
                    /* Response.Write("Registration is Success")*/;

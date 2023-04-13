@@ -94,6 +94,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.LinkButton UserAccessMenu;
         
         /// <summary>
+        /// UserAD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton UserAD;
+        
+        /// <summary>
         /// navbarWarehouse control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,15 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.LinkButton NewRequest;
         
         /// <summary>
+        /// ListApproval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ListApproval;
+        
+        /// <summary>
         /// ListRequest control.
         /// </summary>
         /// <remarks>
@@ -121,6 +139,24 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.LinkButton ListRequest;
         
         /// <summary>
+        /// NewGoodsIssue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton NewGoodsIssue;
+        
+        /// <summary>
+        /// ListGI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ListGI;
+        
+        /// <summary>
         /// LinkButton2 control.
         /// </summary>
         /// <remarks>
@@ -128,15 +164,6 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-        
-        /// <summary>
-        /// LinkButton3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
         
         /// <summary>
         /// LinkButton4 control.

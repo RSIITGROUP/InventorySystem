@@ -115,12 +115,12 @@ namespace InvSystem
                     {
                         sItem += item.Value + ";";
                     }
-                    sparamVal = sparamVal + "@Type:" + ddType.SelectedItem.Value + ",";
-                    sparamVal = sparamVal + "@AssetConf:" + sItem + ",";
-                    sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                    sparamVal = sparamVal + "@Type~" + ddType.SelectedItem.Value + "|";
+                    sparamVal = sparamVal + "@AssetConf~" + sItem + "|";
+                    sparamVal = sparamVal + "@UserId~" + Session["UserId"];
 
                     DataSet oDs = new DataSet();
-                    oDs = oGnl.ExecuteSP("SP_POST_ASSETCONFIGURATION", sparamVal, 1);
+                    oDs = oGnl.ExecuteSP("SP_POST_ASSETCONFIGURATION", sparamVal, '|', 1);
 
                     errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                     errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();

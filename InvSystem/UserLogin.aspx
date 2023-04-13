@@ -56,9 +56,9 @@
                                 <div class="d-grid gap-2 mb-2">
                                     <asp:Button class="btn btn-success btn-lg" ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
                                 </div>
-                                <div class="d-grid gap-2">
+                                <%--<div class="d-grid gap-2">
                                      <a href="SignUp.aspx" class="btn btn-info"><input class="btn btn-info" id="Button2" type="button" value="Sign Up" /></a>
-                                </div>
+                                </div>--%>
                             </div>
                         </div>
                     </div>

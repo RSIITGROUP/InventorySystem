@@ -156,65 +156,65 @@ namespace InvSystem
                                     }
                                     if (errNo == 0)
                                     {
-                                        sparamVal = sparamVal + "@AssetDesc:" + oAsset.AssetDesc + ",";
-                                        sparamVal = sparamVal + "@ActivaNo:" + oAsset.ActivaNo + ",";
-                                        sparamVal = sparamVal + "@PurchaseDate:" + oAsset.PurchaseDate + ",";
-                                        sparamVal = sparamVal + "@GRPODocNo:" + oAsset.GRPODocNo + ",";
-                                        sparamVal = sparamVal + "@Placement:" + oAsset.Placement + ",";
-                                        sparamVal = sparamVal + "@LocationCode:" + oAsset.LocationCode + ",";
-                                        sparamVal = sparamVal + "@AreaCode:" + oAsset.AreaCode + ",";
-                                        sparamVal = sparamVal + "@Spot:" + oAsset.Spot + ",";
-                                        sparamVal = sparamVal + "@Type:" + oAsset.Type + ",";
-                                        sparamVal = sparamVal + "@Brand:" + oAsset.Brand + ",";
-                                        sparamVal = sparamVal + "@Model:" + oAsset.Model + ",";
-                                        sparamVal = sparamVal + "@Series:" + oAsset.Series + ",";
-                                        sparamVal = sparamVal + "@SerialNo:" + oAsset.SerialNo + ",";
-                                        sparamVal = sparamVal + "@Color:" + oAsset.Color + ",";
-                                        sparamVal = sparamVal + "@ScreenSize:" + oAsset.ScreenSize + ",";
-                                        sparamVal = sparamVal + "@ScreenResolution:" + oAsset.ScreenreSolution + ",";
-                                        sparamVal = sparamVal + "@TouchScreen:" + oAsset.TouchScreen + ",";
-                                        sparamVal = sparamVal + "@Processor:" + oAsset.Processor + ",";
-                                        sparamVal = sparamVal + "@VGABrand:" + oAsset.VgaBrand + ",";
-                                        sparamVal = sparamVal + "@VGAType:" + oAsset.VgaType + ",";
-                                        sparamVal = sparamVal + "@VGASize:" + oAsset.VgaSize + ",";
-                                        sparamVal = sparamVal + "@RAMType:" + oAsset.RamType + ",";
-                                        sparamVal = sparamVal + "@RAMMHz:" + oAsset.RamMhz + ",";
-                                        sparamVal = sparamVal + "@RAMSize:" + oAsset.RamSize + ",";
-                                        sparamVal = sparamVal + "@Storagetype:" + oAsset.StorageType + ",";
-                                        sparamVal = sparamVal + "@StorageSize:" + oAsset.StorageSize + ",";
-                                        sparamVal = sparamVal + "@ChargerType:" + oAsset.ChargerType + ",";
-                                        sparamVal = sparamVal + "@UnitVoltage:" + oAsset.UnitVoltage + ",";
-                                        sparamVal = sparamVal + "@UnitAmps:" + oAsset.UnitAmps + ",";
-                                        sparamVal = sparamVal + "@UnitWatt:" + oAsset.UnitWatt + ",";
-                                        sparamVal = sparamVal + "@BatteryType:" + oAsset.BatteryType + ",";
-                                        sparamVal = sparamVal + "@BatteryVoltage:" + oAsset.BatteryVoltage + ",";
-                                        sparamVal = sparamVal + "@BatteryAmps:" + oAsset.BatteryAmps + ",";
-                                        sparamVal = sparamVal + "@BatteryWatt:" + oAsset.BatteryWatt + ",";
-                                        sparamVal = sparamVal + "@Motherboard:" + oAsset.MotherBoard + ",";
-                                        sparamVal = sparamVal + "@ChasingSize:" + oAsset.ChasingSize + ",";
-                                        sparamVal = sparamVal + "@CameraResolution:" + oAsset.CameraResolution + ",";
-                                        sparamVal = sparamVal + "@CameraType:" + oAsset.CameraType + ",";
-                                        sparamVal = sparamVal + "@Health:" + oAsset.Health + ",";
-                                        sparamVal = sparamVal + "@OperatingSystem:" + oAsset.OperatingSystem + ",";
-                                        sparamVal = sparamVal + "@Imei:" + oAsset.Imei + ",";
-                                        sparamVal = sparamVal + "@MACAddress:" + oAsset.MacAddress + ",";
-                                        sparamVal = sparamVal + "@IP:" + oAsset.IP + ",";
-                                        sparamVal = sparamVal + "@MobileNumber:" + oAsset.MobileNumber + ",";
-                                        sparamVal = sparamVal + "@Remarks:" + oAsset.Remarks + ",";
-                                        sparamVal = sparamVal + "@HostName:" + oAsset.HostName + ",";
-                                        sparamVal = sparamVal + "@User:" + oAsset.User + ",";
+                                        sparamVal = sparamVal + "@AssetDesc~" + oAsset.AssetDesc + "|";
+                                        sparamVal = sparamVal + "@ActivaNo~" + oAsset.ActivaNo + "|";
+                                        sparamVal = sparamVal + "@PurchaseDate~" + oAsset.PurchaseDate + "|";
+                                        sparamVal = sparamVal + "@GRPODocNo~" + oAsset.GRPODocNo + "|";
+                                        sparamVal = sparamVal + "@Placement~" + oAsset.Placement + "|";
+                                        sparamVal = sparamVal + "@LocationCode~" + oAsset.LocationCode + "|";
+                                        sparamVal = sparamVal + "@AreaCode~" + oAsset.AreaCode + "|";
+                                        sparamVal = sparamVal + "@Spot~" + oAsset.Spot + "|";
+                                        sparamVal = sparamVal + "@Type~" + oAsset.Type + "|";
+                                        sparamVal = sparamVal + "@Brand~" + oAsset.Brand + "|";
+                                        sparamVal = sparamVal + "@Model~" + oAsset.Model + "|";
+                                        sparamVal = sparamVal + "@Series~" + oAsset.Series + "|";
+                                        sparamVal = sparamVal + "@SerialNo~" + oAsset.SerialNo + "|";
+                                        sparamVal = sparamVal + "@Color~" + oAsset.Color + "|";
+                                        sparamVal = sparamVal + "@ScreenSize~" + oAsset.ScreenSize + "|";
+                                        sparamVal = sparamVal + "@ScreenResolution~" + oAsset.ScreenreSolution + "|";
+                                        sparamVal = sparamVal + "@TouchScreen~" + oAsset.TouchScreen + "|";
+                                        sparamVal = sparamVal + "@Processor~" + oAsset.Processor + "|";
+                                        sparamVal = sparamVal + "@VGABrand~" + oAsset.VgaBrand + "|";
+                                        sparamVal = sparamVal + "@VGAType~" + oAsset.VgaType + "|";
+                                        sparamVal = sparamVal + "@VGASize~" + oAsset.VgaSize + "|";
+                                        sparamVal = sparamVal + "@RAMType~" + oAsset.RamType + "|";
+                                        sparamVal = sparamVal + "@RAMMHz~" + oAsset.RamMhz + "|";
+                                        sparamVal = sparamVal + "@RAMSize~" + oAsset.RamSize + "|";
+                                        sparamVal = sparamVal + "@Storagetype~" + oAsset.StorageType + "|";
+                                        sparamVal = sparamVal + "@StorageSize~" + oAsset.StorageSize + "|";
+                                        sparamVal = sparamVal + "@ChargerType~" + oAsset.ChargerType + "|";
+                                        sparamVal = sparamVal + "@UnitVoltage~" + oAsset.UnitVoltage + "|";
+                                        sparamVal = sparamVal + "@UnitAmps~" + oAsset.UnitAmps + "|";
+                                        sparamVal = sparamVal + "@UnitWatt~" + oAsset.UnitWatt + "|";
+                                        sparamVal = sparamVal + "@BatteryType~" + oAsset.BatteryType + "|";
+                                        sparamVal = sparamVal + "@BatteryVoltage~" + oAsset.BatteryVoltage + "|";
+                                        sparamVal = sparamVal + "@BatteryAmps~" + oAsset.BatteryAmps + "|";
+                                        sparamVal = sparamVal + "@BatteryWatt~" + oAsset.BatteryWatt + "|";
+                                        sparamVal = sparamVal + "@Motherboard~" + oAsset.MotherBoard + "|";
+                                        sparamVal = sparamVal + "@ChasingSize~" + oAsset.ChasingSize + "|";
+                                        sparamVal = sparamVal + "@CameraResolution~" + oAsset.CameraResolution + "|";
+                                        sparamVal = sparamVal + "@CameraType~" + oAsset.CameraType + "|";
+                                        sparamVal = sparamVal + "@Health~" + oAsset.Health + "|";
+                                        sparamVal = sparamVal + "@OperatingSystem~" + oAsset.OperatingSystem + "|";
+                                        sparamVal = sparamVal + "@Imei~" + oAsset.Imei + "|";
+                                        sparamVal = sparamVal + "@MACAddress~" + oAsset.MacAddress + "|";
+                                        sparamVal = sparamVal + "@IP~" + oAsset.IP + "|";
+                                        sparamVal = sparamVal + "@MobileNumber~" + oAsset.MobileNumber + "|";
+                                        sparamVal = sparamVal + "@Remarks~" + oAsset.Remarks + "|";
+                                        sparamVal = sparamVal + "@HostName~" + oAsset.HostName + "|";
+                                        sparamVal = sparamVal + "@User~" + oAsset.User + "|";
 
-                                        sparamVal = sparamVal + "@TypeQuality:" + oAsset.TypeQuality + ",";
-                                        sparamVal = sparamVal + "@TypePort:" + oAsset.TypePort + ",";
-                                        sparamVal = sparamVal + "@TypeSystem:" + oAsset.TypeSystem + ",";
-                                        sparamVal = sparamVal + "@PortQuantity:" + oAsset.PortQuantity + ",";
-                                        sparamVal = sparamVal + "@SFPPortQuantity:" + oAsset.SfpPortQuantity + ",";
-                                        sparamVal = sparamVal + "@FrequencyBand:" + oAsset.FrequencyBand + ",";
-                                        sparamVal = sparamVal + "@TypeConnectivity:" + oAsset.TypeConnectivity + ",";
-                                        sparamVal = sparamVal + "@TypeFunctionality:" + oAsset.TypeFunctionality + ",";
+                                        sparamVal = sparamVal + "@TypeQuality~" + oAsset.TypeQuality + "|";
+                                        sparamVal = sparamVal + "@TypePort~" + oAsset.TypePort + "|";
+                                        sparamVal = sparamVal + "@TypeSystem~" + oAsset.TypeSystem + "|";
+                                        sparamVal = sparamVal + "@PortQuantity~" + oAsset.PortQuantity + "|";
+                                        sparamVal = sparamVal + "@SFPPortQuantity~" + oAsset.SfpPortQuantity + "|";
+                                        sparamVal = sparamVal + "@FrequencyBand~" + oAsset.FrequencyBand + "|";
+                                        sparamVal = sparamVal + "@TypeConnectivity~" + oAsset.TypeConnectivity + "|";
+                                        sparamVal = sparamVal + "@TypeFunctionality~" + oAsset.TypeFunctionality + "|";
                                         //sparamVal = sparamVal + "@UserId:" + Session["UserId"] + ",";
-                                        sparamVal = sparamVal + "@BulkId:" + bulkId.ToString() + ",@UserId:" + Session["UserId"];
-                                        oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal, 1);                                       
+                                        sparamVal = sparamVal + "@BulkId~" + bulkId.ToString() + ",@UserId~" + Session["UserId"];
+                                        oDs = oGnl.ExecuteSP("SP_POST_ASSETTEMP", sparamVal, '|', 1);                                       
 
                                         errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                                         errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -230,8 +230,8 @@ namespace InvSystem
                                 if (errNo == 0)
                                 {
                                     sparamVal = "";
-                                    sparamVal = "@BulkId:" + bulkId.ToString();
-                                    oDs = oGnl.ExecuteSP("SP_VALIDATE_ASSET", sparamVal, 1);
+                                    sparamVal = "@BulkId~" + bulkId.ToString();
+                                    oDs = oGnl.ExecuteSP("SP_VALIDATE_ASSET", sparamVal, '|', 1);
 
                                     errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                                     errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -245,8 +245,8 @@ namespace InvSystem
                                 if (errNo == 0)
                                 {
                                     sparamVal = "";
-                                    sparamVal = "@BulkId:" + bulkId.ToString();
-                                    oDs = oGnl.ExecuteSP("SP_POST_ASSETBULK", sparamVal, 1);
+                                    sparamVal = "@BulkId~" + bulkId.ToString();
+                                    oDs = oGnl.ExecuteSP("SP_POST_ASSETBULK", sparamVal, '|', 1);
 
                                     errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                                     errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();

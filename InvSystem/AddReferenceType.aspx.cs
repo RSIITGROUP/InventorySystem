@@ -67,10 +67,10 @@ namespace InvSystem
                     {
                         if (!bIsExist)
                         {
-                            string sparamVal = "@code:" + txtCode.Text.Trim() + ",";
-                            sparamVal = sparamVal + "@name:" + txtType.Text + ",";
-                            sparamVal = sparamVal + "@TagCode:" + txtTagCode.Text.Trim() + ",";
-                            sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                            string sparamVal = "@code~" + txtCode.Text.Trim() + ",";
+                            sparamVal = sparamVal + "@name~" + txtType.Text + ",";
+                            sparamVal = sparamVal + "@TagCode~" + txtTagCode.Text.Trim() + ",";
+                            sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                             oGnl.ExecuteDataQuery("insert into ReferenceType ([Code],[Name],[TagCode],[UserCreate],[CreateDate]) values (@code,@name,@TagCode,@UserId,getdate())", sparamVal, Convert.ToChar(","), 1);
 
                             lblError.ForeColor = System.Drawing.Color.Green;
@@ -84,10 +84,10 @@ namespace InvSystem
                         string sInsUser = "Update ReferenceType set ";
                         sInsUser += "[Name]=@name, [TagCode] = @TagCode,[UserUpdate] = @UserId, [UpdateDate] = getdate() ";
                         sInsUser += "where [Code] = @code";
-                        string sparamVal = "@code:" + txtCode.Text.Trim() + ",";
-                        sparamVal = sparamVal + "@name:" + txtType.Text + ",";
-                        sparamVal = sparamVal + "@TagCode:" + txtTagCode.Text.Trim() + ",";
-                        sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                        string sparamVal = "@code~" + txtCode.Text.Trim() + ",";
+                        sparamVal = sparamVal + "@name~" + txtType.Text + ",";
+                        sparamVal = sparamVal + "@TagCode~" + txtTagCode.Text.Trim() + ",";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                         oGnl.ExecuteDataQuery(sInsUser, sparamVal, Convert.ToChar(","), 1);
 
                         lblError.ForeColor = System.Drawing.Color.Green;

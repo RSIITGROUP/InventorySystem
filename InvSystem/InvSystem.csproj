@@ -45,8 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=1.0.10123.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <HintPath>..\packages\AjaxControlToolkit.dll.1.0.10123\lib\2.0\AjaxControlToolkit.dll</HintPath>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\dede.antini\Documents\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Carbon.Data.Protection, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Carbon.Data.Protection.1.3.0\lib\netstandard2.0\Carbon.Data.Protection.dll</HintPath>
@@ -99,6 +100,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -179,6 +183,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddEndUser.aspx" />
+    <Content Include="AddGoodsIssue.aspx" />
+    <Content Include="AddGoodsIssueItem.aspx" />
     <Content Include="AddRequest.aspx" />
     <Content Include="AddRequestItem.aspx" />
     <Content Include="ajax\css\font-awesome.min.css" />
@@ -2338,6 +2344,8 @@
     <Content Include="imgs\generaluser.png" />
     <Content Include="imgs\home.png" />
     <Content Include="imgs\save.png" />
+    <Content Include="ListApproval.aspx" />
+    <Content Include="ListGoodsIssue.aspx" />
     <Content Include="ListRequest.aspx" />
     <Content Include="Reference.aspx" />
     <Content Include="ReferenceType.aspx" />
@@ -2373,6 +2381,7 @@
     <Content Include="TestBarcode.aspx" />
     <Content Include="UploadAsset.aspx" />
     <Content Include="UserAccessMenu.aspx" />
+    <Content Include="UserAD.aspx" />
     <Content Include="UserLogin.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2393,6 +2402,20 @@
     </Compile>
     <Compile Include="AddEndUser.aspx.designer.cs">
       <DependentUpon>AddEndUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddGoodsIssue.aspx.cs">
+      <DependentUpon>AddGoodsIssue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGoodsIssue.aspx.designer.cs">
+      <DependentUpon>AddGoodsIssue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddGoodsIssueItem.aspx.cs">
+      <DependentUpon>AddGoodsIssueItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGoodsIssueItem.aspx.designer.cs">
+      <DependentUpon>AddGoodsIssueItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddReferenceType.aspx.cs">
       <DependentUpon>AddReferenceType.aspx</DependentUpon>
@@ -2507,6 +2530,20 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ListApproval.aspx.cs">
+      <DependentUpon>ListApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListApproval.aspx.designer.cs">
+      <DependentUpon>ListApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListGoodsIssue.aspx.cs">
+      <DependentUpon>ListGoodsIssue.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListGoodsIssue.aspx.designer.cs">
+      <DependentUpon>ListGoodsIssue.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ListRequest.aspx.cs">
       <DependentUpon>ListRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2556,6 +2593,13 @@
     </Compile>
     <Compile Include="UserAccessMenu.aspx.designer.cs">
       <DependentUpon>UserAccessMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserAD.aspx.cs">
+      <DependentUpon>UserAD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserAD.aspx.designer.cs">
+      <DependentUpon>UserAD.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserLogin.aspx.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>

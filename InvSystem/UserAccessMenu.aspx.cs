@@ -123,12 +123,12 @@ namespace InvSystem
                 {
                     sItem += item.Value + ";";
                 }
-                sparamVal = sparamVal + "@UsrId:" + ddUser.SelectedItem.Value + ",";
-                sparamVal = sparamVal + "@MenuId:" + sItem + ",";
-                sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                sparamVal = sparamVal + "@UsrId~" + ddUser.SelectedItem.Value + "|";
+                sparamVal = sparamVal + "@MenuId~" + sItem + "|";
+                sparamVal = sparamVal + "@UserId~" + Session["UserId"];
 
                 DataSet oDs = new DataSet();
-                oDs = oGnl.ExecuteSP("SP_POST_USERMENUS", sparamVal, 1);
+                oDs = oGnl.ExecuteSP("SP_POST_USERMENUS", sparamVal, '|', 1);
 
                 errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                 errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -139,8 +139,8 @@ namespace InvSystem
                 }
                 else
                 {
-                    sparamVal = "@Approver:" + ddApprover.SelectedItem.Value + ",";
-                    sparamVal = sparamVal + "@usrid:" + ddUser.SelectedItem.Value;
+                    sparamVal = "@Approver~" + ddApprover.SelectedItem.Value + ",";
+                    sparamVal = sparamVal + "@usrid~" + ddUser.SelectedItem.Value;
                     oGnl.ExecuteDataQuery("Update [Users] set [Approver]=@Approver where id=@usrid", sparamVal, Convert.ToChar(","), 1);
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Configuration Updated";

@@ -26,6 +26,24 @@
                             </div>
                         </div>--%> 
                         <div class="row  mb-2">
+                            <div class="col-md-1">
+                                <div class="text-end">
+                                    <strong>Filter :
+                                </strong>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddType" Class="form-control" runat="server" OnSelectedIndexChanged="ddType_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddState" Class="form-control" runat="server" OnSelectedIndexChanged="ddState_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mb-2">
                             <div class="col">
                                 <asp:GridView  ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCreated="GridView1_RowCreated">
                                     <Columns>
@@ -36,21 +54,34 @@
                                                     Text='<%# Eval("ReqID") %>'>
                                                 </asp:HyperLink>
                                             </ItemTemplate>
-                                        </asp:TemplateField>        
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Item Code">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="HyperLink1" runat="server"
+                                                    NavigateUrl='<%# Eval("ItemCode", "~/ListRequest.aspx?Itemcode={0}&fil1=0&fil2=0") %>' 
+                                                    Text='<%# Eval("ItemCode") %>'>
+                                                </asp:HyperLink>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="ItemDesc" HeaderText="Item Desc" SortExpression="ItemDesc" />
+                                        <asp:BoundField DataField="QtyRequest" HeaderText="Qty Request" SortExpression="QtyRequest" />
+                                        <asp:BoundField DataField="QtyGI" HeaderText="Qty GI" SortExpression="QtyGI" />
+                                        <asp:BoundField DataField="RemainingQty" HeaderText="Remaining Qty" SortExpression="RemainingQty" />
+                                        <asp:BoundField DataField="Unit" HeaderText="RUnit" SortExpression="Unit" />
                                         <asp:BoundField DataField="ReqDesc" HeaderText="Request Desc" SortExpression="ReqDesc" />
                                         <asp:BoundField DataField="ReqDate" HeaderText="Request Date" SortExpression="ReqDate" />
                                         <asp:BoundField DataField="ReqState" HeaderText="Request State" SortExpression="ReqState" />
                                         <asp:BoundField DataField="ReqUsr" HeaderText="User Request" SortExpression="ReqUsr" />
-                                        <asp:BoundField DataField="ReqApr" HeaderText="Request Approver" SortExpression="ReqUApr" />
-                                        <asp:TemplateField HeaderText="Action" ItemStyle-HorizontalAlign="Justify">    
+                                        <asp:BoundField DataField="ReqApr" HeaderText="Approver" SortExpression="ReqUApr" />
+                                        <%--<asp:TemplateField HeaderText="Action" ItemStyle-HorizontalAlign="Justify">    
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="Edit" runat="server" OnCommand="Approve_Command"
                                                     CommandArgument='<%# Eval("ReqID") %>'
                                                     Text="Edit"><i class="fa fa-check-square-o"></i></asp:LinkButton>
                                             </ItemTemplate> 
 
-<ItemStyle HorizontalAlign="Justify"></ItemStyle>
-                                        </asp:TemplateField>
+                                            <ItemStyle HorizontalAlign="Justify"></ItemStyle>
+                                        </asp:TemplateField>--%>
                                     </Columns>
                                     <EmptyDataTemplate>
                                         <div><center>No records found.</center></div>
@@ -71,8 +102,8 @@
                 lengthMenu: [[5, 10, -1], [5, 10, "All"]],
                 bFilter: true,
                 bSort: true,
-                order: [[3, 'asc'],[0, 'desc']],
-                bPaginate: true
+                order: [[7, 'asc'],[0, 'desc']],
+                bPaginate: false
             });
         });        
 

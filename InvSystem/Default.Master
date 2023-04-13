@@ -71,9 +71,9 @@
                                     <li>
                                         <asp:LinkButton class="dropdown-item" ID="UserAccessMenu" runat="server" OnClick="LinkButton9_Click" Visible="false" CausesValidation="false">User Setting</asp:LinkButton>
                                     </li>
-                                     <%-- <li>
-                                        <asp:LinkButton class="dropdown-item" ID="RequestApprover" runat="server" OnClick="LinkButton12_Click" Visible="false" CausesValidation="false">Request Approver</asp:LinkButton>
-                                    </li>--%>
+                                      <li>
+                                        <asp:LinkButton class="dropdown-item" ID="UserAD" runat="server" OnClick="LinkButton15_Click" Visible="false" CausesValidation="false">User Active Directory</asp:LinkButton>
+                                    </li>
                                   </ul>
                                 </li>
                                  <%--<li class="nav-item">
@@ -85,12 +85,18 @@
                                     <li>
                                         <asp:LinkButton class="dropdown-item" ID="NewRequest" runat="server" OnClick="LinkButton10_Click" Visible="false" CausesValidation="false">New Request</asp:LinkButton>
                                     </li>
+                                      <li>
+                                        <asp:LinkButton class="dropdown-item" ID="ListApproval" runat="server" OnClick="LinkButton12_Click" Visible="false" CausesValidation="false">List Approval</asp:LinkButton>
+                                    </li>
                                     <li>
                                         <asp:LinkButton class="dropdown-item" ID="ListRequest" runat="server" OnClick="LinkButton11_Click" Visible="false" CausesValidation="false">List Request</asp:LinkButton>
                                     </li>
-                                      <%--<li>
-                                        <asp:LinkButton class="dropdown-item" ID="ApproveRequest" runat="server" OnClick="LinkButton12_Click" Visible="false" CausesValidation="false">Approve Request</asp:LinkButton>
-                                    </li>--%>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="NewGoodsIssue" runat="server" OnClick="LinkButton13_Click" Visible="false" CausesValidation="false">New Goods Issue</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="ListGI" runat="server" OnClick="LinkButton14_Click" Visible="false" CausesValidation="false">List Goods Issue</asp:LinkButton>
+                                    </li>
                                   </ul>
                                 </li>
                             </ul>
@@ -98,9 +104,9 @@
                                 <li class="nav-item active">
                                      <asp:LinkButton class="nav-link" ID="LinkButton2" runat="server" OnClick="LinkButton2_Click" CausesValidation="false">User Login</asp:LinkButton>
                                 </li>
-                                <li class="nav-item active">
+                                <%--<li class="nav-item active">
                                      <asp:LinkButton class="nav-link" ID="LinkButton3" runat="server" OnClick="LinkButton3_Click" CausesValidation="false">Sign Up</asp:LinkButton>
-                                </li>
+                                </li>--%>
                                 <li class="nav-item active">
                                      <asp:LinkButton class="nav-link" ID="LinkButton4" runat="server" OnClick="LinkButton4_Click" Visible="false" CausesValidation="false">Logout</asp:LinkButton>
                                 </li>

@@ -19,8 +19,11 @@ namespace InvSystem
             {
                 string sparamVal = "";
                 DataSet oDs = new DataSet();
-                sparamVal = sparamVal + "@UsrId:" + Session["UserId"];
-                oDs = oGnl.ExecuteSP("SP_GET_LISTMENU", sparamVal, 1);
+
+                oDs = oGnl.ExecuteSP("SP_REQUEST_CLOSED", sparamVal, '|', 1);
+
+                sparamVal = sparamVal + "@UsrId~" + Session["UserId"];
+                oDs = oGnl.ExecuteSP("SP_GET_LISTMENU", sparamVal, '|', 1);
                 if (oDs.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow row in oDs.Tables[0].Rows)
@@ -31,7 +34,7 @@ namespace InvSystem
                 }
 
                 LinkButton2.Visible = false;
-                LinkButton3.Visible = false;
+                //LinkButton3.Visible = false;
                 LinkButton4.Visible = true;
                 LinkButton5.Visible = true;
                 LinkButton5.Text = "Hello " + Session["User"].ToString();
@@ -40,7 +43,7 @@ namespace InvSystem
             {
                 AssetReferences.Visible = false;
                 LinkButton2.Visible = true;
-                LinkButton3.Visible = true;
+                //LinkButton3.Visible = true;
                 LinkButton4.Visible = false;
                 LinkButton5.Visible = false;
                 Inventory.Visible = false;
@@ -112,12 +115,27 @@ namespace InvSystem
 
         protected void LinkButton11_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ListRequest.aspx");
+            Response.Redirect("~/ListRequest.aspx?Itemcode=&fil1=0&fil2=0");
         }
 
-        //protected void LinkButton12_Click(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("~/AddRequest.aspx?action=add");
-        //}
+        protected void LinkButton12_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ListApproval.aspx");
+        }
+
+        protected void LinkButton13_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddGoodsIssue.aspx?action=add");
+        }
+
+        protected void LinkButton14_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ListGoodsIssue.aspx");
+        }
+
+        protected void LinkButton15_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UserAD.aspx");
+        }
     }
 }

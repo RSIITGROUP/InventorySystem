@@ -33,10 +33,11 @@ namespace InvSystem
                     if (Request.QueryString["action"].ToString().Equals("add"))
                     {
                         GenerateCode();
-                        sparamVal = "@RequestId:" + txtReqId.Text;
+                        sparamVal = "@RequestId~" + txtReqId.Text;
                         oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId", sparamVal, Convert.ToChar(","), 1);
                         frame1.Src = "AddRequestItem.aspx?action=add&&RequestID=" + txtReqId.Text;
                         divapproval.Visible = false;
+                        frame2.Src = "ApproveRequest.aspx?action=approve&&RequestID=" + txtReqId.Text;
                     }
                     else
                     {
@@ -63,7 +64,7 @@ namespace InvSystem
                         {
                             if (Session["UserId"].Equals(usrId) && reqState.Equals("8001"))
                             {
-                                sparamVal = "@RequestId:" + txtReqId.Text;
+                                sparamVal = "@RequestId~" + txtReqId.Text;
                                 oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId", sparamVal, Convert.ToChar(","), 1);
                                 oGnl.ExecuteDataQuery("insert into RequestDetailtemp select * from RequestDetail where RequestId=@RequestId", sparamVal, Convert.ToChar(","), 1);
                                 txtReqId.ReadOnly = false;
@@ -83,7 +84,8 @@ namespace InvSystem
                                 divSave.Visible = false;
                                 frame1.Src = "AddRequestItem.aspx?action=view&RequestID=" + txtReqId.Text;
                                 divapproval.Visible = true;
-                            }                            
+                            }
+                            frame2.Src = "ApproveRequest.aspx?action=approve&&RequestID=" + txtReqId.Text;
                         }
                         else if (Request.QueryString["action"].ToString().Equals("approve"))
                         {
@@ -101,9 +103,19 @@ namespace InvSystem
                                 frame1.Src = "AddRequestItem.aspx?action=view&RequestID=" + txtReqId.Text;
                                 divapproval.Visible = true;
                             }
+                            frame2.Src = "ApproveRequest.aspx?action=approve&&RequestID=" + txtReqId.Text;
                         }
-                    }
-                    frame2.Src = "ApproveRequest.aspx?action=approve&&RequestID=" + txtReqId.Text;
+                        else if (Request.QueryString["action"].ToString().Equals("close"))
+                        {
+                            txtReqId.ReadOnly = true;
+                            txtReqDesc.ReadOnly = true;
+                            txtReqDate.ReadOnly = true;
+                            divSave.Visible = false;
+                            frame1.Src = "AddRequestItem.aspx?action=close&RequestID=" + txtReqId.Text;
+                            divapproval.Visible = true;
+                            frame2.Src = "ApproveRequest.aspx?action=close&&RequestID=" + txtReqId.Text;
+                        }
+                    }                    
                 }
                 
             }
@@ -149,19 +161,19 @@ namespace InvSystem
                 string sparamVal = "";
                 if (Request.QueryString["action"].ToString().Equals("add"))
                 {
-                    sparamVal = "@action:A,";
+                    sparamVal = "@action~A|";
                 }
                 else
                 {
-                    sparamVal = "@action:U,";
+                    sparamVal = "@action~U|";
                 }
-                sparamVal = sparamVal + "@ReqId:" + txtReqId.Text + ",";
-                sparamVal = sparamVal + "@ReqDate:" + txtReqDate.Text + ",";
-                sparamVal = sparamVal + "@ReqDesc:" + txtReqDesc.Text + ",";
-                sparamVal = sparamVal + "@UserId:" + Session["UserId"];
+                sparamVal = sparamVal + "@ReqId~" + txtReqId.Text + "|";
+                sparamVal = sparamVal + "@ReqDate~" + txtReqDate.Text + "|";
+                sparamVal = sparamVal + "@ReqDesc~" + txtReqDesc.Text + "|";
+                sparamVal = sparamVal + "@UserId~" + Session["UserId"];
 
                 DataSet oDs = new DataSet();
-                oDs = oGnl.ExecuteSP("SP_POST_REQUEST", sparamVal, 1);
+                oDs = oGnl.ExecuteSP("SP_POST_REQUEST", sparamVal, '|',  1);
 
                 errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                 errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
@@ -179,7 +191,10 @@ namespace InvSystem
                     else
                     {
                         lblError.Text = "Request is Updated";
+                        btnAdd.Enabled = false;
+                        Reset1.Visible = false;
                     }
+                    frame1.Src = "AddRequestItem.aspx?action=save&&RequestID=" + txtReqId.Text;
                 }
                 else
                 {
