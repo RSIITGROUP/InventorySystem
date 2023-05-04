@@ -9,7 +9,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
     <div class="container">
         <div class="row mb-2">
-            <div class="col-md-10 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card" id="mains" runat="server">
                     <div class="card-body">                                
                         <%--<div class="row  mb-2">
@@ -19,7 +19,7 @@
                         </div>--%>
                         <div class="row">
                             <div class="col">
-                                 <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Good Issue</span></h4>                                
+                                 <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Goods Issue</span></h4>                                
                             </div>
                         </div> 
                         <div class="row  mb-2">
@@ -43,9 +43,9 @@
                                 </div>
                             </div>--%>
                         </div>           
-                        <div class="row  mb-2">                         
-                            <div class="col-md-10">
-                                <iframe height="170" width="1080" id="frame1" runat="server"></iframe>
+                        <div class="row">                         
+                            <div class="col-md-12">
+                                <iframe height="200" width="100%" id="frame1" runat="server"></iframe>
                             </div>
                         </div>
                         <div class="row mb-2">

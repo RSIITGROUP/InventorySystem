@@ -16,7 +16,7 @@
         <div>
             <div>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="GIID" ShowHeaderWhenEmpty="true" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit"
-                OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="1000px">
+                OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%">
                 
                 <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" VerticalAlign="Middle"  />
@@ -27,7 +27,7 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                 <Columns>
-                    <asp:TemplateField HeaderText="Request Id" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Request Id">
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("RequestId") %>' runat="server"/>
                         </ItemTemplate>
@@ -35,7 +35,7 @@
                             <asp:Label ID="lblRequestID" Text='<%# Eval("RequestId") %>' runat="server"/>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Line ID" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Line ID" >
                         <ItemTemplate>
                             <asp:Label ID="lblLine" Text='<%# Eval("LineId") %>' runat="server"/>
                         </ItemTemplate>
@@ -43,7 +43,7 @@
                             <asp:Label ID="lblLineID" Text='<%# Eval("LineId") %>' runat="server"/>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Item Code" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Item Code" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("ItemCode") %>' runat="server"/>
                         </ItemTemplate>
@@ -51,7 +51,7 @@
                             <asp:Label ID="lblItemCode" Text='<%# Eval("ItemCode") %>' runat="server"/>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Item Description" ItemStyle-Width="300px">
+                    <asp:TemplateField HeaderText="Item Description" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("ItemDesc") %>' runat="server"/>
                         </ItemTemplate>
@@ -59,7 +59,7 @@
                             <asp:Label ID="lblItemDesc" Text='<%# Eval("ItemDesc") %>' runat="server"/>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Quantity" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Quantity" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("Qty") %>' runat="server"/>
                         </ItemTemplate>
@@ -67,7 +67,7 @@
                             <asp:TextBox ID="txtQty" Text='<%# Eval("Qty") %>' runat="server" />
                         </EditItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Unit" ItemStyle-Width="80px">
+                    <asp:TemplateField HeaderText="Unit" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("Unit") %>' runat="server"/>
                         </ItemTemplate>

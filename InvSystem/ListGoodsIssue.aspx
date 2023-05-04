@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                       <h4>List Goods Issue</h4>
+                                       <h4>Goods Issue List</h4>
                                 </center>
                             </div>
                         </div>                       

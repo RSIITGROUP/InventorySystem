@@ -6,10 +6,29 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title></title>    
     <style type="text/css">
         .auto-style1 {
             text-align: justify;
+        }
+       .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_textboxcontainer input
+        {
+            margin: 0;
+            border: solid 1px #7F9DB9;
+            border-right: 0px none;
+            padding: 1px 0px 0px 5px;
+            font-size: 13px;
+            height: 18px;
+            position: relative;       
+        }
+        .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_buttoncontainer button
+        {
+            height: 21px;
+            width: 21px;
+        }
+        .WindowsStyle .ajax__combobox_itemlist
+        {
+            border-color: #7F9DB9;
         }
     </style>
 </head>
@@ -19,7 +38,7 @@
         <div>
             <div>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="RequestID" ShowHeaderWhenEmpty="true" OnRowCommand="GridView1_RowCommand" OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit"
-                OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="1000px">
+                OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%">
                 
                 <FooterStyle BackColor="White" ForeColor="#000066" />
                 <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -31,7 +50,7 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                 <Columns>
-                    <asp:TemplateField HeaderText="Request ID" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Request ID" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("RequestID") %>' runat="server"/>
                         </ItemTemplate>
@@ -42,7 +61,7 @@
                             <asp:Label ID="lblRequestIDFooter" Text='<%# Eval("RequestID") %>' runat="server" />
                         </FooterTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Line ID" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Line ID" >
                         <ItemTemplate>
                             <asp:Label ID="lblLine" Text='<%# Eval("LineId") %>' runat="server"/>
                         </ItemTemplate>
@@ -53,7 +72,7 @@
                             <asp:Label ID="lblLineIDFooter" runat="server" />
                         </FooterTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Item Code" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Item Code" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("ItemCode") %>' runat="server"/>
                         </ItemTemplate>
@@ -62,10 +81,10 @@
                         </EditItemTemplate>
                         <FooterTemplate>
                             <%--<asp:DropDownList ID="ddItemCodeFooter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddItemCodeFooter_SelectedIndexChanged"></asp:DropDownList>--%>
-                            <ajaxToolkit:ComboBox ID="ddItemCodeFooter" runat="server"  AutoCompleteMode="SuggestAppend" AutoPostBack="true" OnSelectedIndexChanged="ddItemCodeFooter_SelectedIndexChanged"></ajaxToolkit:ComboBox>
+                            <ajaxToolkit:ComboBox ID="ddItemCodeFooter" runat="server" CssClass="WindowsStyle"  AutoCompleteMode="SuggestAppend" AutoPostBack="true" OnSelectedIndexChanged="ddItemCodeFooter_SelectedIndexChanged"></ajaxToolkit:ComboBox>
                         </FooterTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Item Description" ItemStyle-Width="300px">
+                    <asp:TemplateField HeaderText="Item Description" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("ItemDesc") %>' runat="server"/>
                         </ItemTemplate>
@@ -87,7 +106,7 @@
                             <asp:TextBox ID="txtQtyFooter" runat="server" TextMode="Number"/>
                         </FooterTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="QtyGI" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="QtyGI" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("QtyGI") %>' runat="server"/>
                         </ItemTemplate>
@@ -98,7 +117,7 @@
                             <asp:Label ID="lblQtyGIFooter" Text='<%# Eval("QtyGI") %>' runat="server"/>
                         </FooterTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Remaining Qty" ItemStyle-Width="100px">
+                    <asp:TemplateField HeaderText="Remaining Qty" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("RemainingQty") %>' runat="server"/>
                         </ItemTemplate>
@@ -109,7 +128,7 @@
                             <asp:Label ID="lblRemainingQtyFooter" Text='<%# Eval("RemainingQty") %>' runat="server"/>
                         </FooterTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Unit" ItemStyle-Width="80px">
+                    <asp:TemplateField HeaderText="Unit" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("Unit") %>' runat="server"/>
                         </ItemTemplate>

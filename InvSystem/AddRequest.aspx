@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
     <div class="container">
         <div class="row mb-2">
-            <div class="col-md-10 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card" id="mains" runat="server">
                     <div class="card-body">                                
                         <%--<div class="row  mb-2">
@@ -49,14 +49,14 @@
                                 </div>
                             </div>
                         </div>--%>
-                        <div class="row  mb-2">                         
-                            <div class="col-md-10">
-                                <iframe height="170" width="1080" id="frame1" runat="server"></iframe>
+                        <div class="row">                         
+                            <div class="col-md-12">
+                                <iframe height="200" id="frame1" width="100%" runat="server"></iframe>
                             </div>
                         </div>
                         <div class="row  mb-2" id="divapproval" runat="server">                         
                             <div class="col-md-10">
-                                <iframe height="120" width="1000" id="frame2" runat="server" scrolling="no"></iframe>
+                                <iframe height="120" width="100%" id="frame2" runat="server" scrolling="no"></iframe>
                             </div>
                         </div>
                         <div class="row mb-2">

@@ -37,8 +37,10 @@ namespace InvSystem
                 if (temp == 1)
                 {
                     string sPassword = oGnl.GetValueField("select Password from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
+                    string sUserDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9002'", 1).Tables[0].Rows[0]["name"].ToString());
+                    string sPwdDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9003'", 1).Tables[0].Rows[0]["name"].ToString());
                     // if (sPassword == oGnl.Encrypt(txtPassword.Text))
-                    if (IsCorrectPws(txtUserName.Text, txtPassword.Text))
+                    if (IsCorrectPws(txtUserName.Text, txtPassword.Text, sUserDomain, sPwdDomain))
                     {
                         Session["User"] = txtUserName.Text.Trim();
                         Session["UserId"] = oGnl.GetValueField("select Id from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
@@ -62,14 +64,14 @@ namespace InvSystem
             }
         }
 
-        public bool IsCorrectPws(string username, string password)
+        public bool IsCorrectPws(string username, string password, string sUserDomain, string sPwdDomain)
         {
             string sDomainName = "";
             DataSet oDs = new DataSet();
             oDs = oGnl.GetDataSet("select [name] from Reference where Code='9001'", 1);
             sDomainName = oDs.Tables[0].Rows[0]["name"].ToString();
 
-            using (var context = new PrincipalContext(ContextType.Domain, sDomainName))
+            using (var context = new PrincipalContext(ContextType.Domain, sDomainName, sUserDomain, sPwdDomain))
             {
                 return context.ValidateCredentials(username, password);
             }

@@ -41,15 +41,15 @@ namespace InvSystem
             }
             else
             {
-                AssetReferences.Visible = false;
+                References.Visible = false;
                 LinkButton2.Visible = true;
                 //LinkButton3.Visible = true;
                 LinkButton4.Visible = false;
                 LinkButton5.Visible = false;
-                Inventory.Visible = false;
+                navbarInventory.Visible = false;
                 AssetAttributes.Visible = false;
                 EndUser.Visible = false;
-                navbarDropdown.Visible = false;
+                navbarConfig.Visible = false;
                 UserAccessMenu.Visible = false;
             }
         }

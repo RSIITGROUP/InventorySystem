@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                       <h4>List Request</h4>
+                                       <h4>Request List</h4>
                                 </center>
                             </div>
                         </div>                       
@@ -102,7 +102,7 @@
                 lengthMenu: [[5, 10, -1], [5, 10, "All"]],
                 bFilter: true,
                 bSort: true,
-                order: [[7, 'asc'],[0, 'desc']],
+                order: [[8, 'asc'],[0, 'desc']],
                 bPaginate: false
             });
         });        

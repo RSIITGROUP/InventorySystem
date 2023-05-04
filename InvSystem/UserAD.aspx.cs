@@ -74,13 +74,17 @@ namespace InvSystem
                 {
                     string sDomainName = "";
                     string sparamVal = "";
+                    string sUserDomain = "";
+                    string sPwdDomain = "";
                     int errNo = 0;
                     string errMsg = "";
                     DataSet oDs = new DataSet();
-                    oDs = oGnl.GetDataSet("select [name] from Reference where Code='9001'", 1);
-                    sDomainName = oDs.Tables[0].Rows[0]["name"].ToString();
 
-                    using (var context = new PrincipalContext(ContextType.Domain, sDomainName, "syahri.putra", "Juli2022"))
+                    sDomainName = oGnl.GetDataSet("select [name] from Reference where Code='9001'", 1).Tables[0].Rows[0]["name"].ToString();
+                    sUserDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9002'", 1).Tables[0].Rows[0]["name"].ToString());
+                    sPwdDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9003'", 1).Tables[0].Rows[0]["name"].ToString());
+
+                    using (var context = new PrincipalContext(ContextType.Domain, sDomainName, sUserDomain, sPwdDomain))
                     {
                         using (var searcher = new PrincipalSearcher(new UserPrincipal(context)))
                         {
@@ -108,7 +112,7 @@ namespace InvSystem
                                             lblError.Text = errMsg;
                                             break;
                                         }
-                                    }                                    
+                                    }
                                 }
                             }
 
@@ -116,7 +120,7 @@ namespace InvSystem
                             {
                                 errText.Visible = true;
                                 lblError.ForeColor = System.Drawing.Color.Green;
-                                lblError.Text = "Sync Use AD success";
+                                lblError.Text = "Sync User AD success";
                             }
                         }
                     }

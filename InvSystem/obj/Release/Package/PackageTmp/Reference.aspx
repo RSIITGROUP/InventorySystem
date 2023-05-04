@@ -10,7 +10,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <div class="row mb-2">
-            <div class="col-md-11 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card">
                     <div class="card-body">   
                         <div class="row  mb-2">

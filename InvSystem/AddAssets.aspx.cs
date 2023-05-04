@@ -34,7 +34,7 @@ namespace InvSystem
                         //}
                         //else
                         //{
-                         int   temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSerialNo.Text + "'))", 1));
+                         int   temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Asset where AssetCode <> '" + txtAssetCode.Text + "' and SerialNo=RTRIM(LTRIM('" + txtSerialNo.Text + "')) and isnull(IsDeleted,'N')='N'", 1));
                             if (temp == 1)
                             {
                                 bIsExist = true;

@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                       <h4>List Approval</h4>
+                                       <h4>Approval List</h4>
                                 </center>
                             </div>
                         </div>                       

@@ -30,7 +30,7 @@ namespace InvSystem
 
         private void BindGrid()
         {  
-            oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34'", ddState, 1);
+            oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34' and code <> '8005'", ddState, 1);
             ddState.Items.Insert(0, new ListItem("--Select--", "0"));
             ddState.SelectedValue = Request.QueryString["fil1"].ToString();
 
@@ -44,7 +44,7 @@ namespace InvSystem
             {
                 strQuery = "select 0 [ReqID],T1.ItemCode,T1.ItemDesc, SUm(T1.Qty) [QtyRequest], sum(t3.Qty) [QtyGI], SUm(T1.Qty) - isnull(sum(t3.Qty),0) [RemainingQty], T1.Unit, '' [ReqDesc], '' [ReqDate], '' [ReqState], '' [ReqUsr],'' [ReqApr] ";
                 strQuery = strQuery + "from RequestHeader T0 ";
-                strQuery = strQuery + "INNER JOIN RequestDetail T1 ON T0.RequestID = T1.RequestID ";
+                strQuery = strQuery + "INNER JOIN RequestDetail T1 ON T0.RequestID = T1.RequestID";
                 strQuery = strQuery + "left join [GIDetail] t3 on t3.LineId=t1.LineId and t3.RequestID=t1.RequestID  ";
                 strQuery = strQuery + "left join [GIHeader] t2 on t2.GIID=t3.GIID ";
                 if (!ddState.SelectedItem.Value.Equals("0"))
@@ -57,9 +57,10 @@ namespace InvSystem
                 }
                 else
                 {
+                    strQuery = strQuery + "where t0.RequestState <> '8005' ";
                     if (!Request.QueryString["ItemCode"].ToString().Equals(""))
                     {
-                        strQuery = strQuery + "where t1.ItemCode='" + Request.QueryString["ItemCode"].ToString() + "' ";
+                        strQuery = strQuery + "and  t1.ItemCode='" + Request.QueryString["ItemCode"].ToString() + "' ";
                     }
                 }
                 strQuery = strQuery + "Group By T1.ItemCode,T1.ItemDesc, T1.Unit ";
@@ -79,6 +80,7 @@ namespace InvSystem
                 }
                 else
                 {
+                    strQuery = strQuery + "where t0.RequestState <> '8005' ";
                     if (!Request.QueryString["ItemCode"].ToString().Equals(""))
                     {
                         strQuery = strQuery + "where t1.ItemCode='" + Request.QueryString["ItemCode"].ToString() + "' ";

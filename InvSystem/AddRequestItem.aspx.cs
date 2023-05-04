@@ -287,9 +287,17 @@ namespace InvSystem
                 {
                     GridView1.EditIndex = -1;
                     BindGrid();
-                    (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text= oDs.Tables[0].Rows[0]["nmbarang"].ToString();
-                    (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text= oDs.Tables[0].Rows[0]["satuan"].ToString();
+                    (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = oDs.Tables[0].Rows[0]["nmbarang"].ToString();
+                    (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = oDs.Tables[0].Rows[0]["satuan"].ToString();
                     //((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
+                    ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
+                }
+                else
+                {
+                    GridView1.EditIndex = -1;
+                    BindGrid();
+                    (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = "";
+                    (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = "";
                     ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
                 }
             }

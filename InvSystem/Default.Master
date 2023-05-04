@@ -53,13 +53,13 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item active">
+                                <%--<li class="nav-item active">
                                     <asp:LinkButton class="nav-link" ID="Inventory" runat="server" OnClick="LinkButton6_Click" Visible="false" CausesValidation="false">Inventory</asp:LinkButton>
-                                </li>
-                                <li class="nav-item">
+                                </li>--%>
+                                <%--<li class="nav-item">
                                     <asp:LinkButton class="nav-link" ID="EndUser" runat="server" OnClick="LinkButton8_Click" Visible="false" CausesValidation="false">End User</asp:LinkButton>
-                                </li>
-                                <li class="nav-item dropdown">                                  
+                                </li>--%>
+                                <%--<li class="nav-item dropdown">                                  
                                   <asp:LinkButton class="nav-link dropdown-toggle" ID="navbarDropdown" runat="server" data-bs-toggle="dropdown" aria-expanded="false"  Visible="false" CausesValidation="false">Configuration</asp:LinkButton>
                                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
@@ -75,11 +75,8 @@
                                         <asp:LinkButton class="dropdown-item" ID="UserAD" runat="server" OnClick="LinkButton15_Click" Visible="false" CausesValidation="false">User Active Directory</asp:LinkButton>
                                     </li>
                                   </ul>
-                                </li>
-                                 <%--<li class="nav-item">
-                                    <asp:LinkButton class="nav-link" ID="Warehouse" runat="server" OnClick="LinkButton10_Click" Visible="false" CausesValidation="false">Warehouse</asp:LinkButton>
-                                </li>--%>
-                                <li class="nav-item dropdown">                                  
+                                </li>--%>                                 
+                                <%--<li class="nav-item dropdown">                                  
                                   <asp:LinkButton class="nav-link dropdown-toggle" ID="navbarWarehouse" runat="server" data-bs-toggle="dropdown" aria-expanded="false"  Visible="false" CausesValidation="false">Warehouse</asp:LinkButton>
                                   <ul class="dropdown-menu" aria-labelledby="navbarWarehouse">
                                     <li>
@@ -96,6 +93,54 @@
                                     </li>
                                     <li>
                                         <asp:LinkButton class="dropdown-item" ID="ListGI" runat="server" OnClick="LinkButton14_Click" Visible="false" CausesValidation="false">List Goods Issue</asp:LinkButton>
+                                    </li>
+                                  </ul>
+                                </li>--%>
+                                <li class="nav-item dropdown">                                  
+                                  <asp:LinkButton class="nav-link dropdown-toggle" ID="navbarInventory" runat="server" data-bs-toggle="dropdown" aria-expanded="false"  Visible="false" CausesValidation="false">Inventory</asp:LinkButton>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarInventory">
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="Asset" runat="server" OnClick="LinkButton6_Click" Visible="false" CausesValidation="false">Asset</asp:LinkButton>
+                                    </li>
+                                      <li>
+                                        <asp:LinkButton class="dropdown-item" ID="EndUser" runat="server" OnClick="LinkButton8_Click" Visible="false" CausesValidation="false">End User</asp:LinkButton>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li class="nav-item dropdown">                                  
+                                  <asp:LinkButton class="nav-link dropdown-toggle" ID="navbarConfig" runat="server" data-bs-toggle="dropdown" aria-expanded="false"  Visible="false" CausesValidation="false">Configuration</asp:LinkButton>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarConfig">
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="AssetAttributes" runat="server" OnClick="LinkButton7_Click" Visible="false" CausesValidation="false">Asset Attributes</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="References" runat="server" OnClick="LinkButton1_Click" Visible="false" CausesValidation="false">References</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="UserAccessMenu" runat="server" OnClick="LinkButton9_Click" Visible="false" CausesValidation="false">User Access</asp:LinkButton>
+                                    </li>
+                                      <li>
+                                        <asp:LinkButton class="dropdown-item" ID="UserAD" runat="server" OnClick="LinkButton15_Click" Visible="false" CausesValidation="false">User Active Directory</asp:LinkButton>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li class="nav-item dropdown">                                  
+                                  <asp:LinkButton class="nav-link dropdown-toggle" ID="navbarWarehouse" runat="server" data-bs-toggle="dropdown" aria-expanded="false"  Visible="false" CausesValidation="false">Warehouse</asp:LinkButton>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarWarehouse">
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="RequestForm" runat="server" OnClick="LinkButton10_Click" Visible="false" CausesValidation="false">Request Form</asp:LinkButton>
+                                    </li>
+                                      <li>
+                                        <asp:LinkButton class="dropdown-item" ID="ApprovalList" runat="server" OnClick="LinkButton12_Click" Visible="false" CausesValidation="false">Approval List</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="RequestList" runat="server" OnClick="LinkButton11_Click" Visible="false" CausesValidation="false">Request List</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="GIForm" runat="server" OnClick="LinkButton13_Click" Visible="false" CausesValidation="false">Goods Issue Form</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="GIList" runat="server" OnClick="LinkButton14_Click" Visible="false" CausesValidation="false">Goods Issue List</asp:LinkButton>
                                     </li>
                                   </ul>
                                 </li>
