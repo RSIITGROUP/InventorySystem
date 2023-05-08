@@ -9,6 +9,7 @@ using System.Data;
 using System.DirectoryServices.AccountManagement;
 using System.DirectoryServices.ActiveDirectory;
 using System.DirectoryServices;
+using System.Net.NetworkInformation;
 
 namespace InvSystem
 {
@@ -39,18 +40,25 @@ namespace InvSystem
                     string sPassword = oGnl.GetValueField("select Password from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
                     string sUserDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9002'", 1).Tables[0].Rows[0]["name"].ToString());
                     string sPwdDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9003'", 1).Tables[0].Rows[0]["name"].ToString());
+                    string sIp = oGnl.GetDataSet("select [name] from Reference where Code='9004'", 1).Tables[0].Rows[0]["name"].ToString();
                     // if (sPassword == oGnl.Encrypt(txtPassword.Text))
-                    if (IsCorrectPws(txtUserName.Text, txtPassword.Text, sUserDomain, sPwdDomain))
-                    {
-                        Session["User"] = txtUserName.Text.Trim();
-                        Session["UserId"] = oGnl.GetValueField("select Id from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
-                        lblError.Text = "User Name and Password match";
-                        lblError.ForeColor = System.Drawing.Color.Green;
-                        Response.Redirect("Home.aspx");
+                    if (PingHost(sIp)) {
+                        if (IsCorrectPws(txtUserName.Text, txtPassword.Text, sUserDomain, sPwdDomain))
+                        {
+                            Session["User"] = txtUserName.Text.Trim();
+                            Session["UserId"] = oGnl.GetValueField("select Id from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
+                            lblError.Text = "User Name and Password match";
+                            lblError.ForeColor = System.Drawing.Color.Green;
+                            Response.Redirect("Home.aspx");
+                        }
+                        else
+                        {
+                            lblError.Text = "Incorrect User Name and Password";
+                        }
                     }
                     else
                     {
-                        lblError.Text = "Incorrect User Name and Password";
+                        lblError.Text = "Server is busy. Please wait.";
                     }
                 }
                 else
@@ -77,5 +85,30 @@ namespace InvSystem
             }
         }
 
+        public bool PingHost(string nameOrAddress)
+        {
+            bool pingable = false;
+            Ping pinger = null;
+
+            try
+            {
+                pinger = new Ping();
+                PingReply reply = pinger.Send(nameOrAddress);
+                pingable = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+                // Discard PingExceptions and return false;
+            }
+            finally
+            {
+                if (pinger != null)
+                {
+                    pinger.Dispose();
+                }
+            }
+
+            return pingable;
+        }
     }
 }

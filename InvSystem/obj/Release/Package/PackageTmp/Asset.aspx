@@ -1,8 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Asset.aspx.cs" Inherits="InvSystem.Asset" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            text-align: right;
+            font-size: large;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-md-12 mx-auto">
                 <div class="card">
@@ -28,6 +34,19 @@
                             </div>
                         </div>
                         <div class="row  mb-2">
+
+                            <div class="col-md-5">
+                                <div class="auto-style1">
+                                    <strong>Location : </strong>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddLocation" Class="form-control" runat="server" OnSelectedIndexChanged="ddLocation_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  mb-2">
                             <div class="col">
                                 <asp:GridView  ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCreated="GridView1_RowCreated">
                                     <Columns>
@@ -40,6 +59,7 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>        
                                         <asp:BoundField DataField="AssetDesc" HeaderText="Asset Desc" SortExpression="AssetDesc" />
+                                        <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
                                         <asp:BoundField DataField="ActivaNo" HeaderText="Activa No" SortExpression="ActivaNo" />
                                         <asp:BoundField DataField="SerialNo" HeaderText="Serial No" SortExpression="SerialNo" />
                                         <asp:BoundField DataField="User" HeaderText="User" SortExpression="User" />

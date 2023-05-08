@@ -90,7 +90,7 @@ namespace InvSystem
 
         protected void LinkButton6_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/asset.aspx");
+            Response.Redirect("~/asset.aspx?loc=0");
         }
 
         protected void LinkButton7_Click(object sender, EventArgs e)

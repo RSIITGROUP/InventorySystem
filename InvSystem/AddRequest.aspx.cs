@@ -33,8 +33,9 @@ namespace InvSystem
                     if (Request.QueryString["action"].ToString().Equals("add"))
                     {
                         GenerateCode();
-                        sparamVal = "@RequestId~" + txtReqId.Text;
-                        oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId", sparamVal, Convert.ToChar(","), 1);
+                        sparamVal = "@RequestId~" + txtReqId.Text + "|";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"];
+                        oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
                         frame1.Src = "AddRequestItem.aspx?action=add&&RequestID=" + txtReqId.Text;
                         divapproval.Visible = false;
                         frame2.Src = "ApproveRequest.aspx?action=approve&&RequestID=" + txtReqId.Text;
@@ -64,9 +65,10 @@ namespace InvSystem
                         {
                             if (Session["UserId"].Equals(usrId) && reqState.Equals("8001"))
                             {
-                                sparamVal = "@RequestId~" + txtReqId.Text;
-                                oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId", sparamVal, Convert.ToChar(","), 1);
-                                oGnl.ExecuteDataQuery("insert into RequestDetailtemp select * from RequestDetail where RequestId=@RequestId", sparamVal, Convert.ToChar(","), 1);
+                                sparamVal = "@RequestId~" + txtReqId.Text + ",";
+                                sparamVal = sparamVal + "@UserId~" + Session["UserId"];
+                                oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId and UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
+                                oGnl.ExecuteDataQuery("insert into RequestDetailtemp (RequestId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit) select [RequestID],[LineId]," + Session["UserId"] + " [UserId],[ItemCode],[ItemDesc],[Qty],[Unit] from RequestDetail where RequestId=@RequestId", sparamVal, Convert.ToChar(","), 1);
                                 txtReqId.ReadOnly = false;
                                 txtReqDesc.ReadOnly = false;
                                 txtReqDate.ReadOnly = false;
@@ -177,6 +179,7 @@ namespace InvSystem
 
                 errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                 errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
+                txtReqId.Text = oDs.Tables[0].Rows[0]["RequestId"].ToString();
                 if (errNo == 0)
                 {
                     lblError.Visible = true;
@@ -233,7 +236,7 @@ namespace InvSystem
             bool isExists = false;
             try
             {
-                string strQuery = "select * from [RequestDetailTemp] where RequestID=" + RequestId;
+                string strQuery = "select * from [RequestDetailTemp] where RequestID=" + RequestId + " and UserId = " + Session["UserId"];
                 DataSet oDs = new DataSet();
                 oDs = oGnl.GetDataSet(strQuery, 1);
                 if (oDs.Tables[0].Rows.Count > 0)

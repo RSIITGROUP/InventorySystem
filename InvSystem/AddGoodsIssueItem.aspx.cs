@@ -27,7 +27,7 @@ namespace InvSystem
 
             if (Request.QueryString["action"].ToString().Equals("add"))
             {
-                strQuerys = "select * from GIDetailtemp where [GIID]=" + Request.QueryString["GIID"];
+                strQuerys = "select * from GIDetailtemp where [GIID]=" + Request.QueryString["GIID"] + " and UserId=" + Session["UserId"];
             }
             else
             {
@@ -92,9 +92,10 @@ namespace InvSystem
                 else
                 {
                     string sparamVal = "@LineId~" + (GridView1.Rows[e.RowIndex].FindControl("lblLineID") as Label).Text.Trim() + "|";
+                    sparamVal = sparamVal + "@UserId~" + Session["UserId"] + "|";
                     sparamVal = sparamVal + "@Qty~" + (GridView1.Rows[e.RowIndex].FindControl("txtQty") as TextBox).Text.Trim() + "|";
-                    sparamVal = sparamVal + "@GIID~" + GridView1.DataKeys[e.RowIndex].Value.ToString();
-                    oGnl.ExecuteDataQuery("update GIDetailtemp set Qty=@Qty where [GIID]=@GIID and LineId=@LineId", sparamVal, Convert.ToChar("|"), 1);
+                    sparamVal = sparamVal + "@GIID~" + GridView1.DataKeys[e.RowIndex].Value.ToString(); 
+                    oGnl.ExecuteDataQuery("update GIDetailtemp set Qty=@Qty where [GIID]=@GIID and LineId=@LineId and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
 
                     GridView1.EditIndex = -1;
                     BindGrid();
@@ -116,8 +117,9 @@ namespace InvSystem
                 lblErrorMessage.Text = "";
                 lblErrorMessage.ForeColor = System.Drawing.Color.Red;
                 string sparamVal = "@LineId~" + (GridView1.Rows[e.RowIndex].FindControl("lblLine") as Label).Text.Trim() + ",";
+                sparamVal = sparamVal + "@UserId~" + Session["UserId"] + ",";
                 sparamVal = sparamVal + "@GIID~" + GridView1.DataKeys[e.RowIndex].Value.ToString();
-                oGnl.ExecuteDataQuery("Delete from GIDetailtemp where [GIID]=@GIID and LineId=@LineId", sparamVal, Convert.ToChar(","), 1);
+                oGnl.ExecuteDataQuery("Delete from GIDetailtemp where [GIID]=@GIID and LineId=@LineId and UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
 
                 GridView1.EditIndex = -1;
                 BindGrid();

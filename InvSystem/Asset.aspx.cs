@@ -33,8 +33,18 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], t0.[ActivaNo], t0.[SerialNo], t2.[Name] [User],  [GRPODocNo], T0.[Remarks] [Remark] ";
-            strQuery = strQuery + "FROM [Asset] T0 left join PlacementHistory T1 on t0.RID = t1.RID and t0.PlacementVersion = t1.[Version] Left JOIN [EndUser] T2 on T2.[ID] = T1.[User] WHERE isnull(T0.[IsDeleted],'N') in ('N','')";
+            oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='01' and code <> 'L001'", ddLocation, 1);
+            ddLocation.Items.Insert(0, new ListItem("--Select--", "0"));
+            ddLocation.SelectedValue = Request.QueryString["loc"].ToString();
+
+            string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], T3.[Name] [Type], t0.[ActivaNo], t0.[SerialNo], t2.[Name] [User],  [GRPODocNo], T0.[Remarks] [Remark] ";
+            strQuery = strQuery + "FROM [Asset] T0 inner join [Reference] T3 on T0.[Type] = T3.Code ";
+            strQuery = strQuery + "left join PlacementHistory T1 on t0.RID = t1.RID and t0.PlacementVersion = t1.[Version] Left JOIN [EndUser] T2 on T2.[ID] = T1.[User]  ";
+            strQuery = strQuery + "WHERE isnull(T0.[IsDeleted],'N') in ('N','')";
+            if (!Request.QueryString["loc"].ToString().Equals("0"))
+            {
+                strQuery = strQuery + " and T1.LocationCode = '" + Request.QueryString["loc"].ToString() + "'";
+            }
             DataTable dt = oGnl.GetDataTable(strQuery, 1);
             GridView1.DataSource = dt;
             GridView1.DataBind();
@@ -222,6 +232,11 @@ namespace InvSystem
                     }                    
                 }
             }
+        }
+
+        protected void ddLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Response.Redirect("~/asset.aspx?loc=" + ddLocation.SelectedValue );
         }
     }
 }

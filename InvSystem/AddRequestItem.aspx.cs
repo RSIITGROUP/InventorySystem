@@ -30,7 +30,7 @@ namespace InvSystem
             
             if (Request.QueryString["action"].ToString().Equals("add"))
             {
-                strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"];
+                strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"] + " and UserId=" + Session["UserId"];
             }
             else
             {
@@ -45,7 +45,7 @@ namespace InvSystem
                 {
                     if (Session["UserId"].Equals(usrId) && reqState.Equals("8001"))
                     {
-                        strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"];
+                        strQuerys = "select *, 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"] + " and UserId=" + Session["UserId"];
                     }
                     else
                     {
@@ -94,7 +94,7 @@ namespace InvSystem
                 lblRequestID.Text = Request.QueryString["RequestID"];
 
                 Label lblLineID = GridView1.FooterRow.FindControl("lblLineIDFooter") as Label;
-                oDs = oGnl.GetDataSet("select isnull(max(LineId),0) + 1 [LineId] from [RequestDetailtemp] where RequestId='" + Request.QueryString["RequestID"] + "'", 1);
+                oDs = oGnl.GetDataSet("select isnull(max(LineId),0) + 1 [LineId] from [RequestDetailtemp] where RequestId='" + Request.QueryString["RequestID"] + "' and UserId=" + Session["UserId"], 1);
                 if (oDs.Tables[0].Rows.Count > 0)
                 {
                     lblLineID.Text = oDs.Tables[0].Rows[0]["LineId"].ToString();
@@ -179,12 +179,12 @@ namespace InvSystem
                     {
                         string sparamVal = "@RequestId~" + (GridView1.FooterRow.FindControl("lblRequestIDFooter") as Label).Text.Trim() + "|";
                         sparamVal = sparamVal + "@LineId~" + (GridView1.FooterRow.FindControl("lblLineIDFooter") as Label).Text.Trim() + "|";
-                        //sparamVal = sparamVal + "@ItemCode~" + (GridView1.FooterRow.FindControl("ddItemCodeFooter") as DropDownList).SelectedItem.Value + "|";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"] + "|";
                         sparamVal = sparamVal + "@ItemCode~" + (GridView1.FooterRow.FindControl("ddItemCodeFooter") as AjaxControlToolkit.ComboBox).SelectedItem.Value + "|";
                         sparamVal = sparamVal + "@ItemDesc~" + (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text.Trim() + "|";
                         sparamVal = sparamVal + "@Qty~" + (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.Trim() + "|";
                         sparamVal = sparamVal + "@Unit~" + (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text.Trim();
-                        oGnl.ExecuteDataQuery("insert into RequestDetailtemp (RequestId,LineId,ItemCode,ItemDesc,Qty,Unit) values (@RequestId,@LineId,@ItemCode,@ItemDesc,@Qty,@Unit)", sparamVal, Convert.ToChar("|"), 1);
+                        oGnl.ExecuteDataQuery("insert into RequestDetailtemp (RequestId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit) values (@RequestId,@LineId,@UserId,@ItemCode,@ItemDesc,@Qty,@Unit)", sparamVal, Convert.ToChar("|"), 1);
 
                         BindGrid();
                         //lblErrorMessage.Text = "New Record Add";
@@ -232,9 +232,10 @@ namespace InvSystem
                 else
                 {
                     string sparamVal = "@LineId~" + (GridView1.Rows[e.RowIndex].FindControl("lblLineID") as Label).Text.Trim() + "|";
+                    sparamVal = sparamVal + "@UserId~" + Session["UserId"] + "|";
                     sparamVal = sparamVal + "@Qty~" + (GridView1.Rows[e.RowIndex].FindControl("txtQty") as TextBox).Text.Trim() + "|";
                     sparamVal = sparamVal + "@RequestId~" + GridView1.DataKeys[e.RowIndex].Value.ToString();
-                    oGnl.ExecuteDataQuery("update RequestDetailtemp set Qty=@Qty where RequestId=@RequestId and LineId=@LineId", sparamVal, Convert.ToChar("|"), 1);
+                    oGnl.ExecuteDataQuery("update RequestDetailtemp set Qty=@Qty where RequestId=@RequestId and LineId=@LineId and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
 
                     GridView1.EditIndex = -1;
                     BindGrid(); 
@@ -256,8 +257,9 @@ namespace InvSystem
                 lblErrorMessage.Text = "";
                 lblErrorMessage.ForeColor = System.Drawing.Color.Red;
                 string sparamVal = "@LineId~" + (GridView1.Rows[e.RowIndex].FindControl("lblLine") as Label).Text.Trim() + ",";
+                sparamVal = sparamVal + "@UserId~" + Session["UserId"] + ",";
                 sparamVal = sparamVal + "@RequestId~" + GridView1.DataKeys[e.RowIndex].Value.ToString();
-                oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId and LineId=@LineId", sparamVal, Convert.ToChar(","), 1);
+                oGnl.ExecuteDataQuery("Delete from RequestDetailtemp where RequestId=@RequestId and LineId=@LineId and UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
 
                 GridView1.EditIndex = -1;
                 BindGrid();
@@ -332,7 +334,7 @@ namespace InvSystem
                 strQuery = strQuery + "inner join[dbo].[RequestHeader] t1 on t0.RequestID= t1.RequestID ";
                 strQuery = strQuery + "and t1.RequestState in (1,2) and t0.ItemCode = '" + itemCode + "' ";
                 strQuery = strQuery + "union ";
-                strQuery = strQuery + "select sum(qty) Qty from[RequestDetailTemp] where ItemCode = '" + itemCode + "' and RequestID = " + RequestId + " and LineId <> " + lineId + ")a ";
+                strQuery = strQuery + "select sum(qty) Qty from[RequestDetailTemp] where ItemCode = '" + itemCode + "' and RequestID = " + RequestId + " and LineId <> " + lineId + " and UserId = " + Session["UserId"] +")a ";
 
                 oDs = oGnl.GetDataSet(strQuery, 1);
                 if (oDs.Tables[0].Rows.Count > 0)

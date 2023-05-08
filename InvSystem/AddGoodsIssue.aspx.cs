@@ -36,10 +36,11 @@ namespace InvSystem
                         cbReqId.Items.Insert(0, new ListItem("--Select--", "0"));
                         cbReqId.SelectedValue = "0";
                         GenerateCode();
-                        sparamVal = "@GIID~" + txtGIId.Text;
-                        oGnl.ExecuteDataQuery("Delete from GIDetailtemp where [GIID]=@GIID", sparamVal, Convert.ToChar(","), 1);
+                        sparamVal = "@GIID~" + txtGIId.Text + "|";
+                        sparamVal = sparamVal + "@UserId~" + Session["UserId"];
+                        oGnl.ExecuteDataQuery("Delete from GIDetailtemp where [GIID]=@GIID and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
                         sparamVal = "@RequestId~" + cbReqId.SelectedItem.Value;
-                        oGnl.ExecuteDataQuery("insert into GIDetailtemp select '" + txtGIId.Text + "' as [GIID], LineId, " + cbReqId.SelectedItem.Value + " [RequestId], ItemCode, ItemDesc, 0 [Qty], Unit from RequestDetail where RequestID=@RequestId", sparamVal, Convert.ToChar(","), 1);
+                        oGnl.ExecuteDataQuery("insert into GIDetailtemp select '" + txtGIId.Text + "' as [GIID], LineId," + Session["UserId"] + " [UserId]," + cbReqId.SelectedItem.Value + "[RequestId], ItemCode, ItemDesc, 0 [Qty], Unit from RequestDetail where RequestID=@RequestId", sparamVal, Convert.ToChar("|"), 1);
                         frame1.Src = "AddGoodsIssueItem.aspx?action=add&&GIID=" + txtGIId.Text + "&&RequestId=" + cbReqId.SelectedItem.Value;
                     }
                     else
@@ -89,10 +90,11 @@ namespace InvSystem
             string sparamVal = "";
             try
             {
-                sparamVal = "@GIID~" + txtGIId.Text;
-                oGnl.ExecuteDataQuery("Delete from GIDetailtemp where [GIID]=@GIID", sparamVal, Convert.ToChar(","), 1);
+                sparamVal = "@GIID~" + txtGIId.Text + "|";
+                sparamVal = sparamVal + "@UserId~" + Session["UserId"];
+                oGnl.ExecuteDataQuery("Delete from GIDetailtemp where [GIID]=@GIID and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
                 sparamVal = "@RequestId~" + cbReqId.SelectedItem.Value;
-                oGnl.ExecuteDataQuery("insert into GIDetailtemp select '" + txtGIId.Text + "' as [GIID], LineId, " + cbReqId.SelectedItem.Value + " [RequestId], ItemCode, ItemDesc, 0 [Qty], Unit from RequestDetail where RequestID=@RequestId", sparamVal, Convert.ToChar(","), 1);
+                oGnl.ExecuteDataQuery("insert into GIDetailtemp select '" + txtGIId.Text + "' as [GIID], LineId, " + Session["UserId"] + " [UserId]," + cbReqId.SelectedItem.Value + " [RequestId], ItemCode, ItemDesc, 0 [Qty], Unit from RequestDetail where RequestID=@RequestId", sparamVal, Convert.ToChar("|"), 1);
                 frame1.Src = "AddGoodsIssueItem.aspx?action=add&&GIId=" + txtGIId.Text + "&&RequestId=" + cbReqId.SelectedItem.Value;
             }
             catch (Exception ex)
@@ -134,6 +136,7 @@ namespace InvSystem
 
                 errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
                 errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
+                txtGIId.Text = oDs.Tables[0].Rows[0]["GIID"].ToString();
                 if (errNo == 0)
                 {
                     lblError.Visible = true;
@@ -142,12 +145,14 @@ namespace InvSystem
                     lblError.Text = "Good Issue is Created";
                     btnAdd.Enabled = false;
                     Reset1.Visible = false;
+                    frame1.Src = "AddGoodsIssueItem.aspx?action=view&GIID=" + txtGIId.Text + "&&RequestId=" + cbReqId.SelectedItem.Value;
                 }
                 else
                 {
                     lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Red;
                     lblError.Text = errMsg;
+                    frame1.Src = "AddGoodsIssueItem.aspx?action=add&&GIID=" + txtGIId.Text + "&&RequestId=" + cbReqId.SelectedItem.Value;
                 }
             }
         }

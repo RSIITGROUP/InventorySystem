@@ -102,7 +102,7 @@
                 lengthMenu: [[5, 10, -1], [5, 10, "All"]],
                 bFilter: true,
                 bSort: true,
-                order: [[8, 'asc'],[0, 'desc']],
+                order: [[9, 'asc'],[0, 'desc']],
                 bPaginate: false
             });
         });        

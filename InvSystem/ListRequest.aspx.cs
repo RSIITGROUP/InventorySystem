@@ -44,7 +44,7 @@ namespace InvSystem
             {
                 strQuery = "select 0 [ReqID],T1.ItemCode,T1.ItemDesc, SUm(T1.Qty) [QtyRequest], sum(t3.Qty) [QtyGI], SUm(T1.Qty) - isnull(sum(t3.Qty),0) [RemainingQty], T1.Unit, '' [ReqDesc], '' [ReqDate], '' [ReqState], '' [ReqUsr],'' [ReqApr] ";
                 strQuery = strQuery + "from RequestHeader T0 ";
-                strQuery = strQuery + "INNER JOIN RequestDetail T1 ON T0.RequestID = T1.RequestID";
+                strQuery = strQuery + "INNER JOIN RequestDetail T1 ON T0.RequestID = T1.RequestID ";
                 strQuery = strQuery + "left join [GIDetail] t3 on t3.LineId=t1.LineId and t3.RequestID=t1.RequestID  ";
                 strQuery = strQuery + "left join [GIHeader] t2 on t2.GIID=t3.GIID ";
                 if (!ddState.SelectedItem.Value.Equals("0"))
@@ -154,5 +154,6 @@ namespace InvSystem
         {
             Response.Redirect("~/ListRequest.aspx?Itemcode=&fil1=" + ddState.SelectedValue + "&fil2=" + ddType.SelectedValue);
         }
+        
     }
 }
