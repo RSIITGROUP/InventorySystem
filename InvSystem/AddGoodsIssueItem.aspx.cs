@@ -27,11 +27,27 @@ namespace InvSystem
 
             if (Request.QueryString["action"].ToString().Equals("add"))
             {
-                strQuerys = "select * from GIDetailtemp where [GIID]=" + Request.QueryString["GIID"] + " and UserId=" + Session["UserId"];
+                //strQuerys = "select * from GIDetailtemp where [GIID]=" + Request.QueryString["GIID"] + " and UserId=" + Session["UserId"];
+                strQuerys = "select t0.*, t1.RemainingQty from GIDetailtemp t0 ";
+                strQuerys = strQuerys + "inner join( ";
+                strQuerys = strQuerys + "select T0.RequestID, t0.LineId, t0.ItemCode, T0.Qty -isnull(sum(t1.Qty), 0)[RemainingQty] ";
+                strQuerys = strQuerys + "from RequestDetail T0 ";
+                strQuerys = strQuerys + "left join [GIDetail] T1 on t0.RequestID = T1.RequestID and t0.LineId = t1.LineId ";
+                strQuerys = strQuerys + "left join[GIHeader] t2 on t1.GIID = t2.GIID ";
+                strQuerys = strQuerys + "group by t0.RequestID, t0.LineId,t0.ItemCode,t0.Qty) t1 on t0.RequestID = t1.RequestID and t0.LineId = t1.LineId and t1.ItemCode = t0.ItemCode ";
+                strQuerys = strQuerys + "where t0.[GIID]=" + Request.QueryString["GIID"] + " and t0.UserId=" + Session["UserId"];
             }
             else
             {
-                strQuerys = "select * from GIDetail where [GIID]=" + Request.QueryString["GIID"];                
+                //strQuerys = "select * from GIDetail where [GIID]=" + Request.QueryString["GIID"];
+                strQuerys = "select t0.*, t1.RemainingQty from GIDetail t0 ";
+                strQuerys = strQuerys + "inner join( ";
+                strQuerys = strQuerys + "select T0.RequestID, t0.LineId, t0.ItemCode, T0.Qty -isnull(sum(t1.Qty), 0)[RemainingQty] ";
+                strQuerys = strQuerys + "from RequestDetail T0 ";
+                strQuerys = strQuerys + "left join [GIDetail] T1 on t0.RequestID = T1.RequestID and t0.LineId = t1.LineId ";
+                strQuerys = strQuerys + "left join[GIHeader] t2 on t1.GIID = t2.GIID ";
+                strQuerys = strQuerys + "group by t0.RequestID, t0.LineId,t0.ItemCode,t0.Qty) t1 on t0.RequestID = t1.RequestID and t0.LineId = t1.LineId and t1.ItemCode = t0.ItemCode ";
+                strQuerys = strQuerys + "where t0.[GIID]=" + Request.QueryString["GIID"];
             }
             DataTable dt = oGnl.GetDataTable(strQuerys, 1);
 

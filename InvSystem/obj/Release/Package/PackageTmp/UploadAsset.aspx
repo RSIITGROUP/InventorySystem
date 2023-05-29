@@ -129,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="Asset.aspx"><< Back To List Asset</a><br />
+                <a href="Asset.aspx?loc=0"><< Back To List Asset</a><br />
             </div>
         </div>
     </div>

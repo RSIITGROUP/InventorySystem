@@ -33,7 +33,7 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='01' and code <> 'L001'", ddLocation, 1);
+            oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='01' and code <> 'L001' and [status]='A'", ddLocation, 1);
             ddLocation.Items.Insert(0, new ListItem("--Select--", "0"));
             ddLocation.SelectedValue = Request.QueryString["loc"].ToString();
 

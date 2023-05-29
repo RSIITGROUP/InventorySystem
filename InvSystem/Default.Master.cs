@@ -137,5 +137,20 @@ namespace InvSystem
         {
             Response.Redirect("~/UserAD.aspx");
         }
+
+        protected void LinkButton16_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddGoodsReturn.aspx?action=add");
+        }
+
+        protected void LinkButton17_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ListGoodsReturn.aspx");
+        }
+
+        protected void LinkButton18_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/VerifiedGoodsReturn.aspx");
+        }
     }
 }

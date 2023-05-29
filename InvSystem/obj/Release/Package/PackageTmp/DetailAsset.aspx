@@ -40,7 +40,7 @@
                     <div class="card-body">                                
                         <div class="row  mb-2">
                             <div class="col">
-                                <a href="Asset.aspx"><< Back To Asset List</a><br />
+                                <a href="Asset.aspx?loc=0"><< Back To Asset List</a><br />
                             </div>
                         </div>
                         <div class="row">

@@ -48,7 +48,7 @@ namespace InvSystem
             txtRemark.Text = comment;
             if (Session["UserId"].Equals(approver) && reqState.Equals("8001"))
             {
-                oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34' and Code not in ('8001','8004','8005') order by name", ddState, 1);
+                oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34' and Code not in ('8001','8004','8005') and [status]='A' order by name", ddState, 1);
                 ddState.Items.Insert(0, new ListItem("--Select--", "0"));
                 txtRemark.ReadOnly = false;
                 ddState.Enabled = true;
@@ -56,7 +56,7 @@ namespace InvSystem
             }
             else if (Request.QueryString["action"].ToString().Equals("close") && reqState.Equals("8004"))
             {
-                oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34' and Code in ('8005') order by name", ddState, 1);
+                oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34' and Code in ('8005') and [status]='A' order by name", ddState, 1);
                 ddState.Items.Insert(0, new ListItem("--Select--", "0"));
                 txtRemark.ReadOnly = false;
                 txtRemark.Text = "";
@@ -65,7 +65,7 @@ namespace InvSystem
             }
             else
             {
-                oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34' and code='" + state + "' order by name", ddState, 1);                
+                oGnl.SeDropDown("select [Code],[Name] from Reference where refcode='34' and code='" + state + "' and [status]='A' order by name", ddState, 1);                
                 txtRemark.ReadOnly = true;
                 ddState.Enabled = false;
                 btnAdd.Visible = false;

@@ -185,6 +185,8 @@
     <Content Include="AddEndUser.aspx" />
     <Content Include="AddGoodsIssue.aspx" />
     <Content Include="AddGoodsIssueItem.aspx" />
+    <Content Include="AddGoodsReturn.aspx" />
+    <Content Include="AddGoodsReturnItem.aspx" />
     <Content Include="AddRequest.aspx" />
     <Content Include="AddRequestItem.aspx" />
     <Content Include="ajax\css\font-awesome.min.css" />
@@ -2346,6 +2348,7 @@
     <Content Include="imgs\save.png" />
     <Content Include="ListApproval.aspx" />
     <Content Include="ListGoodsIssue.aspx" />
+    <Content Include="ListGoodsReturn.aspx" />
     <Content Include="ListRequest.aspx" />
     <Content Include="Reference.aspx" />
     <Content Include="ReferenceType.aspx" />
@@ -2383,6 +2386,7 @@
     <Content Include="UserAccessMenu.aspx" />
     <Content Include="UserAD.aspx" />
     <Content Include="UserLogin.aspx" />
+    <Content Include="VerifiedGoodsReturn.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2416,6 +2420,20 @@
     </Compile>
     <Compile Include="AddGoodsIssueItem.aspx.designer.cs">
       <DependentUpon>AddGoodsIssueItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddGoodsReturn.aspx.cs">
+      <DependentUpon>AddGoodsReturn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGoodsReturn.aspx.designer.cs">
+      <DependentUpon>AddGoodsReturn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddGoodsReturnItem.aspx.cs">
+      <DependentUpon>AddGoodsReturnItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGoodsReturnItem.aspx.designer.cs">
+      <DependentUpon>AddGoodsReturnItem.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddReferenceType.aspx.cs">
       <DependentUpon>AddReferenceType.aspx</DependentUpon>
@@ -2544,6 +2562,13 @@
     <Compile Include="ListGoodsIssue.aspx.designer.cs">
       <DependentUpon>ListGoodsIssue.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ListGoodsReturn.aspx.cs">
+      <DependentUpon>ListGoodsReturn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListGoodsReturn.aspx.designer.cs">
+      <DependentUpon>ListGoodsReturn.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ListRequest.aspx.cs">
       <DependentUpon>ListRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2607,6 +2632,13 @@
     </Compile>
     <Compile Include="UserLogin.aspx.designer.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VerifiedGoodsReturn.aspx.cs">
+      <DependentUpon>VerifiedGoodsReturn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerifiedGoodsReturn.aspx.designer.cs">
+      <DependentUpon>VerifiedGoodsReturn.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

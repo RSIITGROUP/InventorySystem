@@ -62,6 +62,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <br />
+                                <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Work Group</span></h4>
+                            </div>
+                        </div>
+                        <div class="row  mb-2">
+                            <div class="col-md-5">
+                                <div class="form-group">  
+                                    <asp:DropDownList ID="ddWorkGroup" CssClass="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row mb-2">
                             <div class="col">                                
                                 <div class="form-group">

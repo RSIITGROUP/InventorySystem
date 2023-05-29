@@ -10,70 +10,52 @@
 namespace InvSystem {
     
     
-    public partial class UserAccessMenu {
+    public partial class AddGoodsReturn {
         
         /// <summary>
-        /// ddUser control.
+        /// mains control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddUser;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mains;
         
         /// <summary>
-        /// lstSource control.
+        /// txtGRId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstSource;
+        protected global::System.Web.UI.WebControls.TextBox txtGRId;
         
         /// <summary>
-        /// Button1 control.
+        /// txtGRDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
+        protected global::System.Web.UI.WebControls.TextBox txtGRDate;
         
         /// <summary>
-        /// Button2 control.
+        /// txtGRReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Button2;
+        protected global::System.Web.UI.WebControls.TextBox txtGRReason;
         
         /// <summary>
-        /// lstDestination control.
+        /// frame1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstDestination;
-        
-        /// <summary>
-        /// ddApprover control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddApprover;
-        
-        /// <summary>
-        /// ddWorkGroup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddWorkGroup;
+        protected global::System.Web.UI.HtmlControls.HtmlIframe frame1;
         
         /// <summary>
         /// lblError control.
@@ -85,12 +67,30 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
-        /// btnSave control.
+        /// divSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSave;
+        
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
+        
+        /// <summary>
+        /// Reset1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputReset Reset1;
     }
 }

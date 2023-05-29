@@ -59,6 +59,17 @@
                             <asp:Label ID="lblItemDesc" Text='<%# Eval("ItemDesc") %>' runat="server"/>
                         </EditItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Remaining Qty" >
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("RemainingQty") %>' runat="server"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:Label ID="lblRemainingQty" Text='<%# Eval("RemainingQty") %>' runat="server"/>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:Label ID="lblRemainingQtyFooter" Text='<%# Eval("RemainingQty") %>' runat="server"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity" >
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("Qty") %>' runat="server"/>

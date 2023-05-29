@@ -236,5 +236,25 @@ namespace InvSystem.Class
 
             return oDs;
         }
+
+        public bool IsDBConnect(int typeConn)
+        {
+            string conStr = "";
+            if (typeConn == 1) { conStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; }
+            else { conStr = ConfigurationManager.ConnectionStrings["whsConnection"].ConnectionString; }
+            try
+            {
+                using (var con = new SqlConnection(conStr))
+                {
+                    con.Open();
+                    con.Close();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
