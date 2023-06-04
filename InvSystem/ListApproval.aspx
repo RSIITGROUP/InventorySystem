@@ -25,7 +25,7 @@
                                     <Columns> 
                                         <asp:BoundField DataField="ReqID" HeaderText="Request ID" SortExpression="ReqID" />
                                         <asp:BoundField DataField="ReqDesc" HeaderText="Request Desc" SortExpression="ReqDesc" />
-                                        <asp:BoundField DataField="ReqDate" HeaderText="Request Date" SortExpression="ReqDate" />
+                                        <asp:BoundField DataField="ReqDate" HeaderText="Production Date" SortExpression="ReqDate" />
                                         <asp:BoundField DataField="ReqState" HeaderText="Request State" SortExpression="ReqState" />
                                         <asp:BoundField DataField="ReqUsr" HeaderText="User Request" SortExpression="ReqUsr" />
                                         <asp:BoundField DataField="ReqApr" HeaderText="Request Approver" SortExpression="ReqUApr" />

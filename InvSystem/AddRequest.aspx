@@ -26,7 +26,7 @@
                                 </div>                                
                             </div>
                             <div class="col-md-3">
-                                <label>Request Date</label>
+                                <label>Production Date</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtReqDate" CssClass="form-control" runat="server" placeholder="Request Date"  TextMode="Date"></asp:TextBox> 
                                     

@@ -35,21 +35,38 @@ namespace InvSystem
             {
                 if (oGnl.IsDBConnect(1) && oGnl.IsDBConnect(2))
                 {
-                    int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Users where UserName='" + txtUserName.Text.Trim() + "'", 1));
+                    string userName = "";
+                    if (txtUserName.Text.Trim().Contains("@regalsprings.com"))
+                    {
+                        userName = txtUserName.Text.Trim();
+                    }
+                    else
+                    {
+                        userName = txtUserName.Text.Trim() + "@regalsprings.com";
+                    }
+                    //int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Users where UserName='" + txtUserName.Text.Trim() + "' or Email='" + txtUserName.Text.Trim() + "'", 1));
+                    int temp = Convert.ToInt32(oGnl.GetValueField("select count(*) from Users where Email='" + userName + "'", 1));
 
                     if (temp == 1)
                     {
-                        string sPassword = oGnl.GetValueField("select Password from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
+                        //string sPassword = oGnl.GetValueField("select Password from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
                         string sUserDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9002' and [status]='A'", 1).Tables[0].Rows[0]["name"].ToString());
                         string sPwdDomain = oGnl.decryptStr(oGnl.GetDataSet("select [name] from Reference where Code='9003' and [status]='A'", 1).Tables[0].Rows[0]["name"].ToString());
                         string sIp = oGnl.GetDataSet("select [name] from Reference where Code='9004' and [status]='A'", 1).Tables[0].Rows[0]["name"].ToString();
                         // if (sPassword == oGnl.Encrypt(txtPassword.Text))
                         if (PingHost(sIp))
                         {
-                            if (IsCorrectPws(txtUserName.Text, txtPassword.Text, sUserDomain, sPwdDomain))
+                            if (IsCorrectPws(userName, txtPassword.Text, sUserDomain, sPwdDomain))
                             {
-                                Session["User"] = txtUserName.Text.Trim();
-                                Session["UserId"] = oGnl.GetValueField("select Id from Users where UserName='" + txtUserName.Text.Trim() + "'", 1);
+                                DataSet oDs = new DataSet();
+                                //Session["User"] = txtUserName.Text.Trim();
+                                //Session["UserId"] = oGnl.GetValueField("select Id from Users where UserName='" + txtUserName.Text.Trim() + "' or Email='" + txtUserName.Text.Trim() + "'", 1);
+                                oDs = oGnl.GetDataSet("select Id, case when ISNULL(LastName,'') <> '' then FirstName + ' ' + LastName else FirstName end [UserName] from Users where Email='" + userName + "'", 1);
+                                if (oDs.Tables[0].Rows.Count > 0)
+                                {
+                                    Session["User"] = oDs.Tables[0].Rows[0]["UserName"].ToString();
+                                    Session["UserId"] = oDs.Tables[0].Rows[0]["Id"].ToString();
+                                }
                                 lblError.Text = "User Name and Password match";
                                 lblError.ForeColor = System.Drawing.Color.Green;
                                 Response.Redirect("Home.aspx");

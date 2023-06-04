@@ -29,6 +29,7 @@ namespace InvSystem
                 string sparamVal = "";
                 if (!IsPostBack)
                 {
+                    btnAdd.Text = "Submit";
                     if (Request.QueryString["action"].ToString().Equals("add"))
                     {
                         GenerateCode();
@@ -87,6 +88,7 @@ namespace InvSystem
                             txtGRReason.ReadOnly = true;
                             txtGRDate.ReadOnly = true;
                             divSave.Visible = true;
+                            btnAdd.Text = "Verified";
                             frame1.Src = "AddGoodsReturnItem.aspx?action=verified&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text;
                         }
                     }

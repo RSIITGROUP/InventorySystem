@@ -34,7 +34,7 @@ namespace InvSystem
             }
             else
             {
-                oDs = oGnl.GetDataSet("select * from [GRHeader] where GRId='" + Request.QueryString["ReqID"] + "'", 1);
+                oDs = oGnl.GetDataSet("select * from [GRHeader] where GRId='" + Request.QueryString["GRID"] + "'", 1);
                 if (oDs.Tables[0].Rows.Count > 0)
                 {
                     usrId = oDs.Tables[0].Rows[0]["UsrCreate"].ToString();
@@ -127,7 +127,7 @@ namespace InvSystem
             else if (Request.QueryString["action"].ToString().Equals("verified"))
             {
                 //this.GridView1.Columns[5].Visible = true;
-                this.GridView1.Columns[6].Visible = true;
+                this.GridView1.Columns[6].Visible = false;
                 //this.GridView1.Columns[8].Visible = false;
                 GridView1.FooterRow.Visible = false;
             }

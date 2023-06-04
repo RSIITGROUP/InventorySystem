@@ -183,7 +183,7 @@ namespace InvSystem
             bool isExists = false;
             try
             {
-                string strQuery = "select [GIID] from [GIDetailTemp] where [GIID]=" + giId + " and Qty <= 0";
+                string strQuery = "select [GIID] from [GIDetailTemp] where [GIID]=" + giId + " and UserId=" + Session["UserId"] + "and Qty <= 0";
                 DataSet oDs = new DataSet();
                 oDs = oGnl.GetDataSet(strQuery, 1);
                 if (oDs.Tables[0].Rows.Count > 0)

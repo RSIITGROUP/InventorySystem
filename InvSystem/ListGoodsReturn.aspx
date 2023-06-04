@@ -31,7 +31,7 @@
                                                 </asp:HyperLink>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="GRDate" HeaderText="Request Date" SortExpression="GRDate" />
+                                        <asp:BoundField DataField="GRDate" HeaderText="Production Date" SortExpression="GRDate" />
                                         <asp:BoundField DataField="GRState" HeaderText="State" SortExpression="GRState" />
                                         <asp:BoundField DataField="GRUsr" HeaderText="User Create" SortExpression="GRUsr" />                                      
                                     </Columns>

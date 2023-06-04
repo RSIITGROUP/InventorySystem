@@ -95,6 +95,17 @@
                             <asp:Label ID="lblItemDescFooter"  runat="server" />
                         </FooterTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Stock" >
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("Stock") %>' runat="server"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:Label ID="lblStock" Text='<%# Eval("Stock") %>' runat="server"/>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:Label ID="lblStockFooter"  runat="server" />
+                        </FooterTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity" ItemStyle-Width="100px">
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("Qty") %>' runat="server"/>

@@ -1,7 +1,33 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="UserAccessMenu.aspx.cs" Inherits="InvSystem.UserAccessMenu" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            text-align: justify;
+        }
+       .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_textboxcontainer input
+        {
+            margin: 0;
+            border: solid 1px #7F9DB9;
+            border-right: 0px none;
+            padding: 1px 0px 0px 5px;
+            font-size: 14px;
+            height: 25px;
+            position: relative;       
+        }
+        .WindowsStyle .ajax__combobox_inputcontainer .ajax__combobox_buttoncontainer button
+        {
+            height: 40px;
+            width: 21px;
+        }
+        .WindowsStyle .ajax__combobox_itemlist
+        {
+            border-color: #7F9DB9;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
     <div class="container">
         <div class="row mb-2">
             <div class="col-md-7 mx-auto">
@@ -21,7 +47,8 @@
                             <div class="col-md-4">                                
                                 <label>User</label>                                    
                                 <div class="form-group">  
-                                    <asp:DropDownList ID="ddUser" runat="server" Class="form-control" OnSelectedIndexChanged="ddUser_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                    <%--<asp:DropDownList ID="ddUser" runat="server" Class="form-control" OnSelectedIndexChanged="ddUser_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>--%>
+                                    <ajaxToolkit:ComboBox ID="ddUsers" runat="server" CssClass="WindowsStyle"  AutoCompleteMode="SuggestAppend" AutoPostBack="true" OnSelectedIndexChanged="ddUsers_SelectedIndexChanged"></ajaxToolkit:ComboBox>
                                 </div>                                
                             </div>
                         </div>
@@ -58,7 +85,8 @@
                         <div class="row  mb-2">
                             <div class="col-md-5">
                                 <div class="form-group">  
-                                    <asp:DropDownList ID="ddApprover" CssClass="form-control" runat="server"></asp:DropDownList>
+                                    <%--<asp:DropDownList ID="ddApprover" CssClass="form-control" runat="server"></asp:DropDownList>--%>
+                                    <ajaxToolkit:ComboBox ID="ddApprovers" runat="server" CssClass="WindowsStyle"  AutoCompleteMode="SuggestAppend"></ajaxToolkit:ComboBox>
                                 </div>
                             </div>
                         </div>

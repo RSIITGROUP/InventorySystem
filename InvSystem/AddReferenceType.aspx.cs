@@ -61,7 +61,7 @@ namespace InvSystem
         {
             try
             {
-                if (txtTagCode.Text.Trim().Length == 1)
+                if (txtTagCode.Text.Trim().Length <= 2)
                 {
                     if (btnAdd.Text == "Add")
                     {
@@ -98,7 +98,7 @@ namespace InvSystem
                 }
                 else
                 {
-                    lblError.Text = "Tag Code must be one character";
+                    lblError.Text = "Tag Code must be two characters";
                     lblError.ForeColor = System.Drawing.Color.Red;
                 }
             }

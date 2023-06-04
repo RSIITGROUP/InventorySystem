@@ -27,15 +27,17 @@ namespace InvSystem
                 if (!IsPostBack)
                 {
                     DataSet oDs = new DataSet();
-                    oGnl.SeDropDown("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users ORDER BY CONCAT(FirstName , ' ' , LastName)", ddUser, 1);
-                    oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId not in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUser.SelectedItem.Value + ")", lstSource, 1);
-                    oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUser.SelectedItem.Value + ")", lstDestination, 1);
-                    oGnl.SeDropDown("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users where id not in (" + ddUser.SelectedItem.Value + ") ORDER BY CONCAT(FirstName , ' ' , LastName)", ddApprover, 1);
-                    ddApprover.Items.Insert(0, new ListItem("--Select--", "0"));
-                    oDs = oGnl.GetDataSet("select isnull(Approver,0) [Approver] from Users where id='" + ddUser.SelectedItem.Value + "'", 1);
+                    oGnl.SeComboBox("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users ORDER BY CONCAT(FirstName , ' ' , LastName)", ddUsers, 1);
+                    ddUsers.Items.Insert(0, new ListItem("--Select--", "0"));
+                    ddUsers.SelectedValue = "0";
+                    oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId not in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstSource, 1);
+                    oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstDestination, 1);
+                    oGnl.SeComboBox("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users where id not in (" + ddUsers.SelectedItem.Value + ") ORDER BY CONCAT(FirstName , ' ' , LastName)", ddApprovers, 1);
+                    ddApprovers.Items.Insert(0, new ListItem("--Select--", "0"));
+                    oDs = oGnl.GetDataSet("select isnull(Approver,0) [Approver] from Users where id='" + ddUsers.SelectedItem.Value + "'", 1);
                     if (oDs.Tables[0].Rows.Count > 0)
                     {
-                        ddApprover.SelectedValue = oDs.Tables[0].Rows[0]["Approver"].ToString();
+                        ddApprovers.SelectedValue = oDs.Tables[0].Rows[0]["Approver"].ToString();
                     }
                     oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]= 36  and [Status] = 'A' ORDER BY [Name]", ddWorkGroup, 1);
                     //frame1.Src = "ApproverConfiguration.aspx?usr=" + ddUser.SelectedItem.Value;
@@ -97,18 +99,18 @@ namespace InvSystem
             }
         }
 
-        protected void ddUser_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataSet oDs = new DataSet();
-            oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId not in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUser.SelectedItem.Value + ")", lstSource, 1);
-            oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUser.SelectedItem.Value + ")", lstDestination, 1);
+            oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId not in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstSource, 1);
+            oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstDestination, 1);
             //frame1.Src = "ApproverConfiguration.aspx?usr=" + ddUser.SelectedItem.Value;
-            oGnl.SeDropDown("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users where id not in (" + ddUser.SelectedItem.Value + ") ORDER BY CONCAT(FirstName , ' ' , LastName)", ddApprover, 1);
-            ddApprover.Items.Insert(0, new ListItem("--Select--", "0"));
-            oDs = oGnl.GetDataSet("select isnull(Approver,0) [Approver], isnull(workgroup,'0001') [WorkGroup] from Users where id='" + ddUser.SelectedItem.Value + "'", 1);
+            oGnl.SeComboBox("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users where id not in (" + ddUsers.SelectedItem.Value + ") ORDER BY CONCAT(FirstName , ' ' , LastName)", ddApprovers, 1);
+            ddApprovers.Items.Insert(0, new ListItem("--Select--", "0"));
+            oDs = oGnl.GetDataSet("select isnull(Approver,0) [Approver], isnull(workgroup,'0001') [WorkGroup] from Users where id='" + ddUsers.SelectedItem.Value + "'", 1);
             if (oDs.Tables[0].Rows.Count > 0)
             {
-                ddApprover.SelectedValue = oDs.Tables[0].Rows[0]["Approver"].ToString();
+                ddApprovers.SelectedValue = oDs.Tables[0].Rows[0]["Approver"].ToString();
                 ddWorkGroup.SelectedValue = oDs.Tables[0].Rows[0]["WorkGroup"].ToString();
             }
         }
@@ -125,7 +127,7 @@ namespace InvSystem
                 {
                     sItem += item.Value + ";";
                 }
-                sparamVal = sparamVal + "@UsrId~" + ddUser.SelectedItem.Value + "|";
+                sparamVal = sparamVal + "@UsrId~" + ddUsers.SelectedItem.Value + "|";
                 sparamVal = sparamVal + "@MenuId~" + sItem + "|";
                 sparamVal = sparamVal + "@UserId~" + Session["UserId"];
 
@@ -141,9 +143,9 @@ namespace InvSystem
                 }
                 else
                 {
-                    sparamVal = "@Approver~" + ddApprover.SelectedItem.Value + ",";
+                    sparamVal = "@Approver~" + ddApprovers.SelectedItem.Value + ",";
                     sparamVal = sparamVal + "@WorkGroup~" + ddWorkGroup.SelectedItem.Value + ",";
-                    sparamVal = sparamVal + "@usrid~" + ddUser.SelectedItem.Value;
+                    sparamVal = sparamVal + "@usrid~" + ddUsers.SelectedItem.Value;
                     oGnl.ExecuteDataQuery("Update [Users] set [Approver]=@Approver, [WorkGroup]=@WorkGroup where id=@usrid", sparamVal, Convert.ToChar(","), 1);
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Configuration Updated";

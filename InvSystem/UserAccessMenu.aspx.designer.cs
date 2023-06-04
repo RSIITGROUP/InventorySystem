@@ -13,13 +13,22 @@ namespace InvSystem {
     public partial class UserAccessMenu {
         
         /// <summary>
-        /// ddUser control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddUser;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// ddUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ComboBox ddUsers;
         
         /// <summary>
         /// lstSource control.
@@ -58,13 +67,13 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.ListBox lstDestination;
         
         /// <summary>
-        /// ddApprover control.
+        /// ddApprovers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddApprover;
+        protected global::AjaxControlToolkit.ComboBox ddApprovers;
         
         /// <summary>
         /// ddWorkGroup control.

@@ -30,7 +30,13 @@ namespace InvSystem
             
             if (Request.QueryString["action"].ToString().Equals("add"))
             {
-                strQuerys = "select *, 0 [Stock], 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"] + " and UserId=" + Session["UserId"];
+                //strQuerys = "select *, 0 [Stock], 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"] + " and UserId=" + Session["UserId"];
+
+                strQuerys = "select T0.*, convert(int, a.stock) [Stock], 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp T0 ";
+                strQuerys = strQuerys + "inner join(select ROW_NUMBER() over(partition by t0.idbarang order by t0.idbarang, t0.idtrans, t0.tglproduksi desc)[num], ";
+                strQuerys = strQuerys + "t0.idtrans, t0.tglproduksi, t0.idbarang, t1.nmbarang, t0.stock,t1.satuan ";
+                strQuerys = strQuerys + "from [CS_Online].dbo.[tbltransaksigudang] t0 inner join[CS_Online].dbo.[tblbarang] t1 on t1.idbarang = t0.idbarang ";
+                strQuerys = strQuerys + ") a on t0.ItemCode=a.idbarang where a.num = 1 and a.stock > 0  and t0.Requestid=" + Request.QueryString["RequestID"] + " and T0.UserId=" + Session["UserId"];
             }
             else
             {
@@ -45,7 +51,12 @@ namespace InvSystem
                 {
                     if (Session["UserId"].Equals(usrId) && reqState.Equals("8001"))
                     {
-                        strQuerys = "select *, 0 [Stock], 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"] + " and UserId=" + Session["UserId"];
+                        //strQuerys = "select *, 0 [Stock], 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp where Requestid=" + Request.QueryString["RequestID"] + " and UserId=" + Session["UserId"];
+                        strQuerys = "select T0.*, convert(int, a.stock) [Stock], 0 [QtyGI], 0 [RemainingQty] from RequestDetailtemp T0 ";
+                        strQuerys = strQuerys + "inner join(select ROW_NUMBER() over(partition by t0.idbarang order by t0.idbarang, t0.idtrans, t0.tglproduksi desc)[num], ";
+                        strQuerys = strQuerys + "t0.idtrans, t0.tglproduksi, t0.idbarang, t1.nmbarang, t0.stock,t1.satuan ";
+                        strQuerys = strQuerys + "from [CS_Online].dbo.[tbltransaksigudang] t0 inner join[CS_Online].dbo.[tblbarang] t1 on t1.idbarang = t0.idbarang ";
+                        strQuerys = strQuerys + ") a on t0.ItemCode=a.idbarang where a.num = 1 and a.stock > 0  and t0.Requestid=" + Request.QueryString["RequestID"] + " and T0.UserId=" + Session["UserId"];
                     }
                     else
                     {
@@ -115,24 +126,24 @@ namespace InvSystem
                 oGnl.SeComboBox(strQuery, ddItemCode, 2);
                 ddItemCode.Items.Insert(0, new ListItem("--Select--", "0"));
                 ddItemCode.SelectedValue = "0";
-                //this.GridView1.Columns[4].Visible = true;
-                this.GridView1.Columns[5].Visible = false;
+                this.GridView1.Columns[4].Visible = true;
                 this.GridView1.Columns[6].Visible = false;
+                this.GridView1.Columns[7].Visible = false;
             }
             else if (Request.QueryString["action"].ToString().Equals("save"))
             {
-                //this.GridView1.Columns[4].Visible = false;
-                this.GridView1.Columns[5].Visible = false;
+                this.GridView1.Columns[4].Visible = false;
                 this.GridView1.Columns[6].Visible = false;
-                this.GridView1.Columns[8].Visible = false;
+                this.GridView1.Columns[7].Visible = false;
+                this.GridView1.Columns[9].Visible = false;
                 GridView1.FooterRow.Visible = false;
             }
             else
             {
-                //this.GridView1.Columns[4].Visible = false;
-                this.GridView1.Columns[5].Visible = true;
+                this.GridView1.Columns[4].Visible = false;
                 this.GridView1.Columns[6].Visible = true;
-                this.GridView1.Columns[8].Visible = false;
+                this.GridView1.Columns[7].Visible = true;
+                this.GridView1.Columns[9].Visible = false;
                 GridView1.FooterRow.Visible = false;
             }
         }
@@ -142,7 +153,7 @@ namespace InvSystem
             //string itemcode = ((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedItem.Value;
             string itemcode = ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedItem.Value;
             string itemdesc = (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text;
-           // string stock = (GridView1.FooterRow.FindControl("lblStockFooter") as TextBox).Text;
+            string stock = (GridView1.FooterRow.FindControl("lblStockFooter") as TextBox).Text;
             string qty = (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text;
             string unit = (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text;
             GridView1.EditIndex = -1;
@@ -150,7 +161,7 @@ namespace InvSystem
             //((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = itemcode;
             ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = itemcode;
             (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = itemdesc;
-           // (GridView1.FooterRow.FindControl("lblStockFooter") as Label).Text = stock;
+            (GridView1.FooterRow.FindControl("lblStockFooter") as Label).Text = stock;
             (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text = qty;
             (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = unit;
         }
@@ -290,22 +301,22 @@ namespace InvSystem
                 string ItemCode = ddItemCode.SelectedItem.Value;
                 
                 DataSet oDs = new DataSet();
-                oDs = oGnl.GetDataSet("select nmbarang, satuan from [tblbarang] where idbarang='" + ItemCode + "'", 2);
+                //oDs = oGnl.GetDataSet("select nmbarang, satuan from [tblbarang] where idbarang='" + ItemCode + "'", 2);
 
-                //string strQuery = "select a.nmbarang, a.satuan, a.idbarang, a.stock from (";
-                //strQuery = strQuery + "select ROW_NUMBER() over(partition by t0.idbarang order by t0.idbarang, t0.idtrans, t0.tglproduksi desc)[num], ";
-                //strQuery = strQuery + "t0.idtrans, t0.tglproduksi, t0.idbarang, t1.nmbarang, t0.stock,t1.satuan ";
-                //strQuery = strQuery + "from [tbltransaksigudang] t0 inner join [tblbarang] t1 on t1.idbarang = t0.idbarang ";
-                //strQuery = strQuery + ") a where a.num = 1 and a.stock > 0 and a.idbarang='" + ItemCode + "'";
+                string strQuery = "select a.nmbarang, a.satuan, a.idbarang, convert(int,a.stock) stock from (";
+                strQuery = strQuery + "select ROW_NUMBER() over(partition by t0.idbarang order by t0.idbarang, t0.idtrans, t0.tglproduksi desc)[num], ";
+                strQuery = strQuery + "t0.idtrans, t0.tglproduksi, t0.idbarang, t1.nmbarang, t0.stock,t1.satuan ";
+                strQuery = strQuery + "from [tbltransaksigudang] t0 inner join [tblbarang] t1 on t1.idbarang = t0.idbarang ";
+                strQuery = strQuery + ") a where a.num = 1 and a.stock > 0 and a.idbarang='" + ItemCode + "'";
 
-                //oDs = oGnl.GetDataSet(strQuery, 2);
+                oDs = oGnl.GetDataSet(strQuery, 2);
                 if (oDs.Tables[0].Rows.Count > 0)
                 {
                     GridView1.EditIndex = -1;
                     BindGrid();
                     (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = oDs.Tables[0].Rows[0]["nmbarang"].ToString();
                     (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = oDs.Tables[0].Rows[0]["satuan"].ToString();
-                   // (GridView1.FooterRow.FindControl("lblStockFooter") as Label).Text = oDs.Tables[0].Rows[0]["stock"].ToString(); 
+                    (GridView1.FooterRow.FindControl("lblStockFooter") as Label).Text = oDs.Tables[0].Rows[0]["stock"].ToString();
                     ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
                 }
                 else
@@ -314,7 +325,7 @@ namespace InvSystem
                     BindGrid();
                     (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = "";
                     (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = "";
-                   // (GridView1.FooterRow.FindControl("lblStockFooter") as Label).Text = "0";
+                    (GridView1.FooterRow.FindControl("lblStockFooter") as Label).Text = "0";
                     ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
                 }
             }
