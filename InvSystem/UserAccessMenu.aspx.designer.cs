@@ -67,22 +67,13 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.ListBox lstDestination;
         
         /// <summary>
-        /// ddApprovers control.
+        /// frame1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ComboBox ddApprovers;
-        
-        /// <summary>
-        /// ddWorkGroup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddWorkGroup;
+        protected global::System.Web.UI.HtmlControls.HtmlIframe frame1;
         
         /// <summary>
         /// lblError control.

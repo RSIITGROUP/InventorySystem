@@ -40,13 +40,31 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.TextBox txtReqDate;
         
         /// <summary>
-        /// txtReqDesc control.
+        /// ddWorkGroup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReqDesc;
+        protected global::System.Web.UI.WebControls.DropDownList ddWorkGroup;
+        
+        /// <summary>
+        /// ddPurpose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddPurpose;
+        
+        /// <summary>
+        /// ddReqDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddReqDesc;
         
         /// <summary>
         /// frame1 control.

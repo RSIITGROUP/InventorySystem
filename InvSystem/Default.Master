@@ -94,6 +94,9 @@
                                         <asp:LinkButton class="dropdown-item" ID="RequestList" runat="server" OnClick="LinkButton11_Click" Visible="false" CausesValidation="false">Request List</asp:LinkButton>
                                     </li>
                                     <li>
+                                        <asp:LinkButton class="dropdown-item" ID="SelfReqList" runat="server" OnClick="LinkButton19_Click" Visible="false" CausesValidation="false">My Request List</asp:LinkButton>
+                                    </li>
+                                    <li>
                                         <asp:LinkButton class="dropdown-item" ID="GIForm" runat="server" OnClick="LinkButton13_Click" Visible="false" CausesValidation="false">Goods Issue Form</asp:LinkButton>
                                     </li>
                                     <li>

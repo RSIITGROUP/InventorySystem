@@ -67,9 +67,11 @@ namespace InvSystem
             }
             else
             {
-                strQuery = "select distinct T0.RequestID [ReqID], '' [ItemCode], '' [ItemDesc], 0 [QtyRequest], 0 [QtyGI], 0 [RemainingQty], '' [Unit], T0.RequestDesc [ReqDesc], T0.RequestDate [ReqDate], t2.[Name] [ReqState], t3.FirstName + ' ' + t3.LastName [ReqUsr],t4.FirstName + ' ' + t4.LastName [ReqApr] ";
+                strQuery = "select distinct T0.RequestID [ReqID], '' [ItemCode], '' [ItemDesc], 0 [QtyRequest], 0 [QtyGI], 0 [RemainingQty], '' [Unit], t5.[Name] [ReqDesc], T0.RequestDate [ReqDate], t2.[Name] [ReqState], t3.FirstName + ' ' + t3.LastName [ReqUsr],t4.FirstName + ' ' + t4.LastName [ReqApr] ";
                 strQuery = strQuery + "from [RequestHeader] t0 inner join [RequestDetail] t1 on t0.RequestId=t1.RequestId ";
-                strQuery = strQuery + "inner join [Reference] t2 on t0.RequestState=t2.Code and t2.RefCode= 34 left join [Users] t3 on t0.UsrCreate = t3.Id left join [Users] t4 on t3.[Approver] = t4.Id ";
+                strQuery = strQuery + "inner join [Reference] t2 on t0.RequestState=t2.Code and t2.RefCode= 34 left join [Users] t3 on t0.UsrCreate = t3.Id ";
+                strQuery = strQuery + "left join [Reference] t5 on t0.RequestDesc=t5.Code and t5.RefCode= 38 ";
+                strQuery = strQuery + "left join [Users] t4 on t0.UsrApprove = t4.Id ";
                 if (!ddState.SelectedItem.Value.Equals("0"))
                 {
                     strQuery = strQuery + "where t0.RequestState='" + ddState.SelectedItem.Value + "' ";
@@ -83,7 +85,7 @@ namespace InvSystem
                     strQuery = strQuery + "where t0.RequestState <> '8005' ";
                     if (!Request.QueryString["ItemCode"].ToString().Equals(""))
                     {
-                        strQuery = strQuery + "where t1.ItemCode='" + Request.QueryString["ItemCode"].ToString() + "' ";
+                        strQuery = strQuery + "and t1.ItemCode='" + Request.QueryString["ItemCode"].ToString() + "' ";
                     }
                 }
             }

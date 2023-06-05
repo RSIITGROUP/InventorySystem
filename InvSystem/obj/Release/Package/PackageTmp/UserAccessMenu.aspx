@@ -79,30 +79,15 @@
                         <div class="row">
                             <div class="col">
                                 <br />
-                                <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Approver</span></h4>
+                               <%-- <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Approver</span></h4>--%>
                             </div>
                         </div>
-                        <div class="row  mb-2">
-                            <div class="col-md-5">
-                                <div class="form-group">  
-                                    <%--<asp:DropDownList ID="ddApprover" CssClass="form-control" runat="server"></asp:DropDownList>--%>
-                                    <ajaxToolkit:ComboBox ID="ddApprovers" runat="server" CssClass="WindowsStyle"  AutoCompleteMode="SuggestAppend"></ajaxToolkit:ComboBox>
-                                </div>
+                        <div class="row">                         
+                            <div class="col-md-12">
+                                <iframe height="250" id="frame1" width="70%" runat="server"></iframe>
+                                
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <br />
-                                <h4><span class="badge text-bg-light"><i class="fa fa-bars"></i> Work Group</span></h4>
-                            </div>
-                        </div>
-                        <div class="row  mb-2">
-                            <div class="col-md-5">
-                                <div class="form-group">  
-                                    <asp:DropDownList ID="ddWorkGroup" CssClass="form-control" runat="server"></asp:DropDownList>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="row mb-2">
                             <div class="col">                                
                                 <div class="form-group">

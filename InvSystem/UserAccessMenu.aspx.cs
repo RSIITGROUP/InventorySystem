@@ -26,21 +26,18 @@ namespace InvSystem
                 lblError.ForeColor = System.Drawing.Color.Red;
                 if (!IsPostBack)
                 {
+                    string sparamVal = "";
                     DataSet oDs = new DataSet();
                     oGnl.SeComboBox("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users ORDER BY CONCAT(FirstName , ' ' , LastName)", ddUsers, 1);
                     ddUsers.Items.Insert(0, new ListItem("--Select--", "0"));
                     ddUsers.SelectedValue = "0";
                     oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId not in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstSource, 1);
                     oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstDestination, 1);
-                    oGnl.SeComboBox("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users where id not in (" + ddUsers.SelectedItem.Value + ") ORDER BY CONCAT(FirstName , ' ' , LastName)", ddApprovers, 1);
-                    ddApprovers.Items.Insert(0, new ListItem("--Select--", "0"));
-                    oDs = oGnl.GetDataSet("select isnull(Approver,0) [Approver] from Users where id='" + ddUsers.SelectedItem.Value + "'", 1);
-                    if (oDs.Tables[0].Rows.Count > 0)
-                    {
-                        ddApprovers.SelectedValue = oDs.Tables[0].Rows[0]["Approver"].ToString();
-                    }
-                    oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]= 36  and [Status] = 'A' ORDER BY [Name]", ddWorkGroup, 1);
-                    //frame1.Src = "ApproverConfiguration.aspx?usr=" + ddUser.SelectedItem.Value;
+                    sparamVal = "@UsrId~" + Session["UserId"];
+                    oGnl.ExecuteDataQuery("Delete from UserApprovalTmp where UsrId=@UsrId", sparamVal, Convert.ToChar("|"), 1);
+                    sparamVal = "@UserId~" + ddUsers.SelectedItem.Value;
+                    oGnl.ExecuteDataQuery("insert into UserApprovalTmp (UserId,ApproverId,UsrId,UserCreate,CreateDate) select UserId,ApproverId," + Session["UserId"] + " [UsrId],UserCreate,CreateDate from UserApproval where UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
+                    frame1.Src = "UserApproval.aspx?usr=" + ddUsers.SelectedItem.Value;
                 }
             }
         }
@@ -105,14 +102,18 @@ namespace InvSystem
             oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId not in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstSource, 1);
             oGnl.SeListBox("SELECT MenuId [Code], MenuName [Name] FROM [Menus] where MenuId in (SELECT [MenuId] FROM [dbo].[UserMenu] where [UserId] = " + ddUsers.SelectedItem.Value + ")", lstDestination, 1);
             //frame1.Src = "ApproverConfiguration.aspx?usr=" + ddUser.SelectedItem.Value;
-            oGnl.SeComboBox("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users where id not in (" + ddUsers.SelectedItem.Value + ") ORDER BY CONCAT(FirstName , ' ' , LastName)", ddApprovers, 1);
-            ddApprovers.Items.Insert(0, new ListItem("--Select--", "0"));
-            oDs = oGnl.GetDataSet("select isnull(Approver,0) [Approver], isnull(workgroup,'0001') [WorkGroup] from Users where id='" + ddUsers.SelectedItem.Value + "'", 1);
-            if (oDs.Tables[0].Rows.Count > 0)
-            {
-                ddApprovers.SelectedValue = oDs.Tables[0].Rows[0]["Approver"].ToString();
-                ddWorkGroup.SelectedValue = oDs.Tables[0].Rows[0]["WorkGroup"].ToString();
-            }
+            //oGnl.SeComboBox("select Id [Code], UPPER(CONCAT(FirstName , ' ' , LastName)) [Name] from Users where id not in (" + ddUsers.SelectedItem.Value + ") ORDER BY CONCAT(FirstName , ' ' , LastName)", ddApprovers, 1);
+            //ddApprovers.Items.Insert(0, new ListItem("--Select--", "0"));
+            //oDs = oGnl.GetDataSet("select isnull(Approver,0) [Approver], isnull(workgroup,'0001') [WorkGroup] from Users where id='" + ddUsers.SelectedItem.Value + "'", 1);
+            //if (oDs.Tables[0].Rows.Count > 0)
+            //{
+            //    ddApprovers.SelectedValue = oDs.Tables[0].Rows[0]["Approver"].ToString();
+            //}
+            string sparamVal = "@UsrId~" + Session["UserId"];
+            oGnl.ExecuteDataQuery("Delete from UserApprovalTmp where UsrId=@UsrId", sparamVal, Convert.ToChar("|"), 1);
+            sparamVal = "@UserId~" + ddUsers.SelectedItem.Value;
+            oGnl.ExecuteDataQuery("insert into UserApprovalTmp (UserId,ApproverId,UsrId,UserCreate,CreateDate) select UserId,ApproverId," + Session["UserId"] + " [UsrId],UserCreate,CreateDate from UserApproval where UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
+            frame1.Src = "UserApproval.aspx?usr=" + ddUsers.SelectedItem.Value;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -143,10 +144,11 @@ namespace InvSystem
                 }
                 else
                 {
-                    sparamVal = "@Approver~" + ddApprovers.SelectedItem.Value + ",";
-                    sparamVal = sparamVal + "@WorkGroup~" + ddWorkGroup.SelectedItem.Value + ",";
-                    sparamVal = sparamVal + "@usrid~" + ddUsers.SelectedItem.Value;
-                    oGnl.ExecuteDataQuery("Update [Users] set [Approver]=@Approver, [WorkGroup]=@WorkGroup where id=@usrid", sparamVal, Convert.ToChar(","), 1);
+                    sparamVal = "@UsrId~" + Session["UserId"];
+                    oGnl.ExecuteDataQuery("Delete from UserApprovalTmp where UsrId=@UsrId", sparamVal, Convert.ToChar("|"), 1);
+                    sparamVal = "@UserId~" + ddUsers.SelectedItem.Value;
+                    oGnl.ExecuteDataQuery("insert into UserApprovalTmp (UserId,ApproverId,UsrId,UserCreate,CreateDate) select UserId,ApproverId," + Session["UserId"] + " [UsrId],UserCreate,CreateDate from UserApproval where UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
+                    frame1.Src = "UserApproval.aspx?usr=" + ddUsers.SelectedItem.Value;
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Configuration Updated";
                 }

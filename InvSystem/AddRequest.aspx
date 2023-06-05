@@ -18,25 +18,36 @@
                             </div>
                         </div> 
                         <div class="row  mb-2">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Request Id</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtReqId" CssClass="form-control" runat="server" placeholder="Request Id" ReadOnly="True"></asp:TextBox>
                                     
                                 </div>                                
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Production Date</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtReqDate" CssClass="form-control" runat="server" placeholder="Request Date"  TextMode="Date"></asp:TextBox> 
                                     
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
+                                <label>Work Group</label>
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddWorkGroup" Class="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Purpose</label>
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddPurpose" Class="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <label>Request Description</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtReqDesc" CssClass="form-control" runat="server" placeholder="Requst Description"  MaxLength="500"></asp:TextBox>
-                                    
+                                    <asp:DropDownList ID="ddReqDesc" Class="form-control" runat="server"></asp:DropDownList>                                    
                                 </div>
                             </div>
                         </div>           
@@ -56,7 +67,7 @@
                         </div>
                         <div class="row  mb-2" id="divapproval" runat="server">                         
                             <div class="col-md-10">
-                                <iframe height="120" width="100%" id="frame2" runat="server" scrolling="no"></iframe>
+                                <iframe height="150" width="100%" id="frame2" runat="server" scrolling="no"></iframe>
                             </div>
                         </div>
                         <div class="row mb-2">

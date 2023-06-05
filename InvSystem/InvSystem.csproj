@@ -2380,11 +2380,13 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SelfRequestList.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="TestBarcode.aspx" />
     <Content Include="UploadAsset.aspx" />
     <Content Include="UserAccessMenu.aspx" />
     <Content Include="UserAD.aspx" />
+    <Content Include="UserApproval.aspx" />
     <Content Include="UserLogin.aspx" />
     <Content Include="VerifiedGoodsReturn.aspx" />
     <Content Include="Web.config">
@@ -2591,6 +2593,13 @@
     <Compile Include="ReferenceType.aspx.designer.cs">
       <DependentUpon>ReferenceType.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SelfRequestList.aspx.cs">
+      <DependentUpon>SelfRequestList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SelfRequestList.aspx.designer.cs">
+      <DependentUpon>SelfRequestList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2625,6 +2634,13 @@
     </Compile>
     <Compile Include="UserAD.aspx.designer.cs">
       <DependentUpon>UserAD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserApproval.aspx.cs">
+      <DependentUpon>UserApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserApproval.aspx.designer.cs">
+      <DependentUpon>UserApproval.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserLogin.aspx.cs">
       <DependentUpon>UserLogin.aspx</DependentUpon>
@@ -2693,7 +2709,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50256/</IISUrl>
+          <IISUrl>http://localhost:52170/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

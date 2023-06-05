@@ -27,13 +27,31 @@ namespace InvSystem
             string approver = "";
             string comment = "";
             string state = "";
+            lblError.Text = "";
 
-            oDs = oGnl.GetDataSet("select T0.RequestState [ReqState], T0.UsrCreate, isnull(t1.Approver,0) Approver,t0.[Comment],t0.[RequestState], t0.[ProcessedRemark] from [dbo].[RequestHeader] T0 inner join [Users] T1 on t0.UsrCreate=t1.Id where t0.RequestId='" + Request.QueryString["RequestId"] + "'", 1);
+            //oDs = oGnl.GetDataSet("select T0.RequestState [ReqState], T0.UsrCreate, isnull(t1.Approver,0) Approver,t0.[Comment],t0.[RequestState], t0.[ProcessedRemark] from [dbo].[RequestHeader] T0 inner join [Users] T1 on t0.UsrCreate=t1.Id where t0.RequestId='" + Request.QueryString["RequestId"] + "'", 1);
+            //if (oDs.Tables[0].Rows.Count > 0)
+            //{
+            //    usrId = oDs.Tables[0].Rows[0]["UsrCreate"].ToString();
+            //    reqState = oDs.Tables[0].Rows[0]["ReqState"].ToString();
+            //    approver = oDs.Tables[0].Rows[0]["Approver"].ToString();
+            //    if (reqState.Equals("8005"))
+            //    {
+            //        comment = oDs.Tables[0].Rows[0]["ProcessedRemark"].ToString();
+            //    }
+            //    else
+            //    {
+            //        comment = oDs.Tables[0].Rows[0]["Comment"].ToString();
+            //    }
+            //    state = oDs.Tables[0].Rows[0]["RequestState"].ToString();
+            //}
+
+            approver = "0";
+            oDs = oGnl.GetDataSet("select T0.RequestState [ReqState], T0.UsrCreate,t0.[RequestState], t0.[Comment],t0.[RequestState], t0.[ProcessedRemark]  from [dbo].[RequestHeader] T0 where t0.RequestId='" + Request.QueryString["RequestId"] + "'", 1);
             if (oDs.Tables[0].Rows.Count > 0)
             {
                 usrId = oDs.Tables[0].Rows[0]["UsrCreate"].ToString();
                 reqState = oDs.Tables[0].Rows[0]["ReqState"].ToString();
-                approver = oDs.Tables[0].Rows[0]["Approver"].ToString();
                 if (reqState.Equals("8005"))
                 {
                     comment = oDs.Tables[0].Rows[0]["ProcessedRemark"].ToString();
@@ -44,7 +62,13 @@ namespace InvSystem
                 }
                 state = oDs.Tables[0].Rows[0]["RequestState"].ToString();
             }
-            
+
+            oDs = oGnl.GetDataSet("select t1.ApproverId from [dbo].[RequestHeader] T0 left join [UserApproval] T1 on t0.UsrCreate= t1.UserID where t0.RequestId='" + Request.QueryString["RequestId"] + "' and t1.ApproverId=" + Session["UserId"], 1);
+            if (oDs.Tables[0].Rows.Count > 0)
+            {
+                approver = oDs.Tables[0].Rows[0]["ApproverId"].ToString();
+            }
+
             txtRemark.Text = comment;
             if (Session["UserId"].Equals(approver) && reqState.Equals("8001"))
             {
@@ -77,6 +101,7 @@ namespace InvSystem
             try
             {
                 string sparamVal = "";
+                lblError.Text = "";
                 DataSet oDs = new DataSet();
                 if (!ddState.SelectedItem.Value.Equals("0") && !txtRemark.Text.Trim().Equals(""))
                 {
@@ -97,15 +122,21 @@ namespace InvSystem
                         oGnl.ExecuteDataQuery("Update [RequestHeader] set [RequestState]=@RequestState, [Comment]=@Comment, [UsrApprove]=@UsrApprove,ApproveDate=getdate() where RequestID=@RequestID", sparamVal, Convert.ToChar(","), 1);
                     }
 
-                    lblError.Visible = true;
+                    //lblError.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.Green;
                     lblError.Text = "Request state change";
                     btnAdd.Enabled = false;
                 }
+                else
+                {
+                    //lblError.Visible = true;
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    lblError.Text = "Request State and Reamrk are required";
+                }
             }
             catch (Exception ex)
             {
-                lblError.Visible = true;
+                //lblError.Visible = true;
                 lblError.ForeColor = System.Drawing.Color.Red;
                 lblError.Text = ex.ToString();
             }

@@ -50,7 +50,7 @@
                                        <asp:TemplateField HeaderText="Request ID">
                                             <ItemTemplate>
                                                 <asp:HyperLink ID="HyperLink1" runat="server"
-                                                    NavigateUrl='<%# Eval("ReqID", "~/AddRequest.aspx?ReqID={0}&Action=edit") %>' 
+                                                    NavigateUrl='<%# Eval("ReqID", "~/AddRequest.aspx?ReqID={0}&Action=view") %>' 
                                                     Text='<%# Eval("ReqID") %>'>
                                                 </asp:HyperLink>
                                             </ItemTemplate>
