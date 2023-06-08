@@ -37,7 +37,7 @@ namespace InvSystem
             ddLocation.Items.Insert(0, new ListItem("--Select--", "0"));
             ddLocation.SelectedValue = Request.QueryString["loc"].ToString();
 
-            string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], T3.[Name] [Type], t0.[ActivaNo], t0.[SerialNo], t2.[Name] [User],  [GRPODocNo], T0.[Remarks] [Remark] ";
+            string strQuery = "SELECT t0.[AssetCode], t0.[AssetDesc], T3.[Name] [Type], t0.[ActivaNo], t0.[SerialNo], t2.[Name] [User],  [GRPODocNo], t0.[HostName], T0.[Remarks] [Remark] ";
             strQuery = strQuery + "FROM [Asset] T0 inner join [Reference] T3 on T0.[Type] = T3.Code ";
             strQuery = strQuery + "left join PlacementHistory T1 on t0.RID = t1.RID and t0.PlacementVersion = t1.[Version] Left JOIN [EndUser] T2 on T2.[ID] = T1.[User]  ";
             strQuery = strQuery + "WHERE isnull(T0.[IsDeleted],'N') in ('N','')";

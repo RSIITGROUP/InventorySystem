@@ -60,11 +60,12 @@
                                         </asp:TemplateField>        
                                         <asp:BoundField DataField="AssetDesc" HeaderText="Asset Desc" SortExpression="AssetDesc" />
                                         <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
-                                        <asp:BoundField DataField="ActivaNo" HeaderText="Activa No" SortExpression="ActivaNo" />
+                                        <%--<asp:BoundField DataField="ActivaNo" HeaderText="Activa No" SortExpression="ActivaNo" />--%>
                                         <asp:BoundField DataField="SerialNo" HeaderText="Serial No" SortExpression="SerialNo" />
                                         <asp:BoundField DataField="User" HeaderText="User" SortExpression="User" />
                                         <%--<asp:BoundField DataField="PurchaseDate" HeaderText="PurchaseDate" SortExpression="Purchase Date" />--%>
-                                        <asp:BoundField DataField="GRPODocNo" HeaderText="GRPODocNo" SortExpression="GRPO Doc No" />
+                                        <%--<asp:BoundField DataField="GRPODocNo" HeaderText="GRPODocNo" SortExpression="GRPO Doc No" />--%>
+                                        <asp:BoundField DataField="HostName" HeaderText="HostName" SortExpression="HostName" />
                                         <asp:BoundField DataField="Remark" HeaderText="Remark" SortExpression="Remark" />
                                         <asp:TemplateField HeaderText="Action" ItemStyle-HorizontalAlign="Justify">    
                                             <ItemTemplate>

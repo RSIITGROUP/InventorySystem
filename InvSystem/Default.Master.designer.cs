@@ -139,15 +139,6 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.LinkButton ApprovalList;
         
         /// <summary>
-        /// RequestList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton RequestList;
-        
-        /// <summary>
         /// SelfReqList control.
         /// </summary>
         /// <remarks>
@@ -155,6 +146,15 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton SelfReqList;
+        
+        /// <summary>
+        /// RequestList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton RequestList;
         
         /// <summary>
         /// GIForm control.
@@ -184,15 +184,6 @@ namespace InvSystem {
         protected global::System.Web.UI.WebControls.LinkButton GRForm;
         
         /// <summary>
-        /// GRList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton GRList;
-        
-        /// <summary>
         /// VerifiedGR control.
         /// </summary>
         /// <remarks>
@@ -200,6 +191,24 @@ namespace InvSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton VerifiedGR;
+        
+        /// <summary>
+        /// SelfGR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton SelfGR;
+        
+        /// <summary>
+        /// GRList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton GRList;
         
         /// <summary>
         /// LinkButton2 control.

@@ -29,6 +29,8 @@ namespace InvSystem
                 string sparamVal = "";
                 if (!IsPostBack)
                 {
+                    SeDropDown("36", ddWorkGroup);
+                    SeDropDown("37", ddPurpose);
                     btnAdd.Text = "Submit";
                     if (Request.QueryString["action"].ToString().Equals("add"))
                     {
@@ -36,7 +38,7 @@ namespace InvSystem
                         sparamVal = "@GRId~" + txtGRId.Text + "|";
                         sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                         oGnl.ExecuteDataQuery("Delete from GRDetailtemp where GRId=@GRId and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
-                        frame1.Src = "AddGoodsReturnItem.aspx?action=add&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text;
+                        frame1.Src = "AddGoodsReturnItem.aspx?action=add&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
                     }
                     else
                     {
@@ -47,6 +49,9 @@ namespace InvSystem
                             txtGRReason.Text = oDs.Tables[0].Rows[0]["GRReason"].ToString();
                             usrId = oDs.Tables[0].Rows[0]["UsrCreate"].ToString();
                             grState = oDs.Tables[0].Rows[0]["GRState"].ToString();
+                            ddWorkGroup.SelectedValue = oDs.Tables[0].Rows[0]["WorkGroup"].ToString();
+                            ddPurpose.SelectedValue = oDs.Tables[0].Rows[0]["Purpose"].ToString();
+
                             if (oDs.Tables[0].Rows[0]["GRDate"].ToString() != "")
                             {
                                 txtGRDate.Text = Convert.ToDateTime(oDs.Tables[0].Rows[0]["GRDate"]).ToString("yyyy-MM-dd");
@@ -55,27 +60,30 @@ namespace InvSystem
 
                         if (Request.QueryString["action"].ToString().Equals("edit"))
                         {
+                            txtGRId.ReadOnly = true;
+                            txtGRDate.ReadOnly = true;
+                            ddPurpose.Enabled = false;
+                            ddWorkGroup.Enabled = false;
                             if (Session["UserId"].Equals(usrId) && grState.Equals("0"))
                             {
                                 sparamVal = "@GRId~" + txtGRId.Text + ",";
                                 sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                                 oGnl.ExecuteDataQuery("Delete from GRDetailtemp where GRId=@GRId and UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
-                                oGnl.ExecuteDataQuery("insert into GRDetailtemp (GRId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit) select [GRID],[LineId]," + Session["UserId"] + " [UserId],[ItemCode],[ItemDesc],[Qty],[Unit] from GRDetail where GRId=@GRId", sparamVal, Convert.ToChar(","), 1);
-                                txtGRId.ReadOnly = false;
+                                oGnl.ExecuteDataQuery("insert into GRDetailtemp (GRId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit,Reason) select [GRID],[LineId]," + Session["UserId"] + " [UserId],[ItemCode],[ItemDesc],[Qty],[Unit],Reason from GRDetail where GRId=@GRId", sparamVal, Convert.ToChar(","), 1);
+
                                 txtGRReason.ReadOnly = false;
-                                txtGRDate.ReadOnly = false;
                                 btnAdd.Visible = true;
                                 Reset1.Visible = true;
                                 divSave.Visible = true;
-                                frame1.Src = "AddGoodsReturnItem.aspx?action=edit&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text;
+                                frame1.Src = "AddGoodsReturnItem.aspx?action=edit&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
                             }
                             else
                             {
-                                txtGRId.ReadOnly = true;
+                                //txtGRId.ReadOnly = true;
                                 txtGRReason.ReadOnly = true;
-                                txtGRDate.ReadOnly = true;
+                                //txtGRDate.ReadOnly = true;
                                 divSave.Visible = false;
-                                frame1.Src = "AddGoodsReturnItem.aspx?action=view&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text;
+                                frame1.Src = "AddGoodsReturnItem.aspx?action=view&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
                             }
                         }
                         else if (Request.QueryString["action"].ToString().Equals("verified"))
@@ -83,13 +91,26 @@ namespace InvSystem
                             sparamVal = "@GRId~" + txtGRId.Text + ",";
                             sparamVal = sparamVal + "@UserId~" + Session["UserId"];
                             oGnl.ExecuteDataQuery("Delete from GRDetailtemp where GRId=@GRId and UserId=@UserId", sparamVal, Convert.ToChar(","), 1);
-                            oGnl.ExecuteDataQuery("insert into GRDetailtemp (GRId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit) select [GRID],[LineId]," + Session["UserId"] + " [UserId],[ItemCode],[ItemDesc],[Qty],[Unit] from GRDetail where GRId=@GRId", sparamVal, Convert.ToChar(","), 1);
+                            oGnl.ExecuteDataQuery("insert into GRDetailtemp (GRId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit,Reason) select [GRID],[LineId]," + Session["UserId"] + " [UserId],[ItemCode],[ItemDesc],[Qty],[Unit],Reason from GRDetail where GRId=@GRId", sparamVal, Convert.ToChar(","), 1);
                             txtGRId.ReadOnly = true;
                             txtGRReason.ReadOnly = true;
                             txtGRDate.ReadOnly = true;
+                            ddPurpose.Enabled = false;
+                            ddWorkGroup.Enabled = false;
                             divSave.Visible = true;
                             btnAdd.Text = "Verified";
-                            frame1.Src = "AddGoodsReturnItem.aspx?action=verified&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text;
+                            frame1.Src = "AddGoodsReturnItem.aspx?action=verified&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
+                        }
+                        else
+                        {
+                            txtGRId.ReadOnly = true;
+                            txtGRDate.ReadOnly = true;
+                            ddPurpose.Enabled = false;
+                            ddWorkGroup.Enabled = false;
+                            txtGRReason.ReadOnly = true;
+                            //txtGRDate.ReadOnly = true;
+                            divSave.Visible = false;
+                            frame1.Src = "AddGoodsReturnItem.aspx?action=view&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
                         }
                     }
                 }
@@ -100,49 +121,34 @@ namespace InvSystem
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (txtGRId.Text == "")
+            int errNo = 0;
+            string errMsg = "";
+            string sparamVal = "";
+            if (Request.QueryString["action"].ToString().Equals("add"))
             {
-                lblError.Visible = true;
-                lblError.Text = "GR Id is required";
+                sparamVal = "@action~A|";
             }
-            else if (txtGRDate.Text == "")
+            else if (Request.QueryString["action"].ToString().Equals("verified"))
             {
-                lblError.Visible = true;
-                lblError.Text = "Request Date is required";
-            }
-            else if (txtGRReason.Text == "")
-            {
-                lblError.Visible = true;
-                lblError.Text = "Reason is required";
-            }
-            else if (IsItemExists(txtGRId.Text) == false)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Item is required";
+                sparamVal = "@action~V|";
             }
             else
             {
-                int errNo = 0;
-                string errMsg = "";
-                string sparamVal = "";
-                if (Request.QueryString["action"].ToString().Equals("add"))
-                {
-                    sparamVal = "@action~A|";
-                }
-                else if (Request.QueryString["action"].ToString().Equals("verified"))
-                {
-                    sparamVal = "@action~V|";
-                }
-                else
-                {
-                    sparamVal = "@action~U|";
-                }
-                sparamVal = sparamVal + "@GRId~" + txtGRId.Text + "|";
-                sparamVal = sparamVal + "@GRDate~" + txtGRDate.Text + "|";
-                sparamVal = sparamVal + "@GRReason~" + txtGRReason.Text + "|";
-                sparamVal = sparamVal + "@UserId~" + Session["UserId"];
+                sparamVal = "@action~U|";
+            }
+            sparamVal = sparamVal + "@GRId~" + txtGRId.Text + "|";
+            sparamVal = sparamVal + "@GRDate~" + txtGRDate.Text + "|";
+            sparamVal = sparamVal + "@GRReason~" + txtGRReason.Text + "|";
+            sparamVal = sparamVal + "@WorkGroup~" + ddWorkGroup.SelectedItem.Value + "|";
+            sparamVal = sparamVal + "@Purpose~" + ddPurpose.SelectedItem.Value + "|";
+            sparamVal = sparamVal + "@UserId~" + Session["UserId"];
 
-                DataSet oDs = new DataSet();
+            DataSet oDs = new DataSet();
+            oDs = oGnl.ExecuteSP("SP_VAL_GR", sparamVal, '|', 1);
+            errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
+            errMsg = oDs.Tables[0].Rows[0]["ERRMSG"].ToString();
+            if (errNo == 0)
+            {
                 oDs = oGnl.ExecuteSP("SP_POST_GR", sparamVal, '|', 1);
 
                 errNo = Convert.ToInt32(oDs.Tables[0].Rows[0]["ERRNO"].ToString());
@@ -173,7 +179,7 @@ namespace InvSystem
                         Reset1.Visible = false;
                     }
                     //frame1.Src = "AddRequestItem.aspx?action=save&&RequestID=" + txtGRId.Text;
-                    frame1.Src = "AddGoodsReturnItem.aspx?action=save&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text;
+                    frame1.Src = "AddGoodsReturnItem.aspx?action=save&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
                 }
                 else
                 {
@@ -182,6 +188,12 @@ namespace InvSystem
                     lblError.Text = errMsg;
                 }
             }
+            else
+            {
+                lblError.Visible = true;
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblError.Text = errMsg;
+            }            
         }
 
         protected string GenerateCode()
@@ -230,7 +242,29 @@ namespace InvSystem
 
         protected void txtGRDate_TextChanged(object sender, EventArgs e)
         {
-            frame1.Src = "AddGoodsReturnItem.aspx?action=add&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text;
+            frame1.Src = "AddGoodsReturnItem.aspx?action=add&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
+        }
+
+        protected void ddWorkGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            frame1.Src = "AddGoodsReturnItem.aspx?action=add&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
+        }
+
+        protected void ddPurpose_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            frame1.Src = "AddGoodsReturnItem.aspx?action=add&&GRID=" + txtGRId.Text + "&&ReqDate=" + txtGRDate.Text + "&&wgp=" + ddWorkGroup.SelectedItem.Value + "&&prp=" + ddPurpose.SelectedItem.Value;
+        }
+
+        protected void SeDropDown(string refCode, DropDownList dr)
+        {
+            try
+            {
+                oGnl.SeDropDown("SELECT [Code], [Name] FROM [Reference] WHERE [refCode]='" + refCode + "'  and [Status] = 'A' ORDER BY [Name]", dr, 1);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error:" + ex.ToString();
+            }
         }
     }
 }

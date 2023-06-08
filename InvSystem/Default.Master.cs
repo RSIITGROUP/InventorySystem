@@ -157,5 +157,9 @@ namespace InvSystem
         {
             Response.Redirect("~/SelfRequestList.aspx");
         }
+        protected void LinkButton20_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/SelfGoodsReturn.aspx");
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace InvSystem
 
             if (Request.QueryString["action"].ToString().Equals("add"))
             {
-                strQuerys = "select * from GRDetailtemp where GRid=" + Request.QueryString["GRID"] + " and UserId=" + Session["UserId"];
+                strQuerys = "select *,0 [GIQty] from GRDetailtemp where GRid=" + Request.QueryString["GRID"] + " and UserId=" + Session["UserId"];
             }
             else
             {
@@ -44,24 +44,42 @@ namespace InvSystem
                 {
                     if (Session["UserId"].Equals(usrId) && grState.Equals("0"))
                     {
-                        strQuerys = "select * from GRDetailtemp where GRid=" + Request.QueryString["GRID"] + " and UserId=" + Session["UserId"];
+                        //strQuerys = "select * from GRDetailtemp where GRid=" + Request.QueryString["GRID"] + " and UserId=" + Session["UserId"];
+                        strQuerys = "select T0.*,isnull(b.[QTY GI],0)-isnull(t1.[QTY GR],0) [GIQty] from GRDetailtemp T0 ";
+                        strQuerys = strQuerys + "inner join GRHeader T2 on t0.GRID=t2.GRID ";
+                        strQuerys = strQuerys + "left join (select a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode, ";
+                        strQuerys = strQuerys + "sum(isnull(a.[request qty],0)) [request qty], sum(isnull(a.[QTY GI],0)) [QTY GI] from ( ";
+                        strQuerys = strQuerys + "select t0.RequestDate,t0.WorkGroup, t0.Purpose,t1.ItemCode,t1.Qty [request qty],sum(isnull(t2.Qty,0)) [QTY GI] ";
+                        strQuerys = strQuerys + "from RequestHeader t0 inner join RequestDetail t1 on t0.RequestID = t1.RequestID ";
+                        strQuerys = strQuerys + "left join GIDetail t2 on t1.ItemCode=t2.ItemCode and t1.RequestID=t2.RequestID ";
+                        strQuerys = strQuerys + "where t0.RequestState not in ('8001', '8003') and t0.RequestDate = convert(date,'" + Request.QueryString["ReqDate"] + "') ";
+                        strQuerys = strQuerys + "and t0.WorkGroup='" + Request.QueryString["wgp"] + "' and t0.Purpose='" + Request.QueryString["prp"] + "' ";
+                        strQuerys = strQuerys + "group by t0.RequestID,t0.RequestDate,t0.WorkGroup,t0.Purpose, t1.ItemCode,t1.Qty ";
+                        strQuerys = strQuerys + ")a group by a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode ";
+                        strQuerys = strQuerys + ") b on t0.ItemCode = b.ItemCode and t2.GRDate=b.RequestDate and t2.WorkGroup=b.WorkGroup and t2.Purpose = b.Purpose ";
+                        strQuerys = strQuerys + "left join (select t0.GRDate,t0.WorkGroup,t0.Purpose,t1.ItemCode, sum(isnull(t1.Qty,0)) [QTY GR] ";
+                        strQuerys = strQuerys + "from GRHeader t0 inner join GRDetail t1 on t0.GRID=t1.GRID ";
+                        strQuerys = strQuerys + "where T0.GRID <> " + Request.QueryString["GRID"] + " and t0.GRDate = convert(date,'" + Request.QueryString["ReqDate"] + "') ";
+                        strQuerys = strQuerys + "and t0.WorkGroup='" + Request.QueryString["wgp"] + "' and t0.Purpose='" + Request.QueryString["prp"] + "' group by t0.GRDate,t0.WorkGroup,t0.Purpose,t1.ItemCode ";
+                        strQuerys = strQuerys + ") t1 on b.RequestDate=t1.GRDate and b.WorkGroup=t1.WorkGroup and b.Purpose=t1.Purpose and b.ItemCode=t1.ItemCode ";
+                        strQuerys = strQuerys + "where t0.GRid=" + Request.QueryString["GRID"] + " and UserId=" + Session["UserId"];
                     }
                     else
                     {
-                        strQuerys = "select * from GRDetail where GRid=" + Request.QueryString["GRID"];
+                        strQuerys = "select *,0 [GIQty] from GRDetail where GRid=" + Request.QueryString["GRID"];
                     }
                 }
                 else if (Request.QueryString["action"].ToString().Equals("verified"))
                 {
-                    strQuerys = "select * from GRDetailtemp where GRid=" + Request.QueryString["GRID"] + " and UserId=" + Session["UserId"];
+                    strQuerys = "select *,0 [GIQty] from GRDetailtemp where GRid=" + Request.QueryString["GRID"] + " and UserId=" + Session["UserId"];
                 }
                 else if (Request.QueryString["action"].ToString().Equals("save"))
                 {
-                    strQuerys = "select * from GRDetail where GRid=" + Request.QueryString["GRID"];
+                    strQuerys = "select *,0 [GIQty] from GRDetail where GRid=" + Request.QueryString["GRID"];
                 }
                 else
                 {
-                    strQuerys = "select * from GRDetail where GRid=" + Request.QueryString["GRID"];
+                    strQuerys = "select *,0 [GIQty] from GRDetail where GRid=" + Request.QueryString["GRID"];
                     //strQuerys = "select T0.*, sum(t1.Qty)[QtyGI], SUm(T0.Qty) - isnull(sum(t1.Qty), 0)[RemainingQty] ";
                     //strQuerys = strQuerys + "from RequestDetail T0 ";
                     //strQuerys = strQuerys + "left join [GIDetail] T1 on t0.RequestID = T1.RequestID and t0.LineId = t1.LineId ";
@@ -106,35 +124,46 @@ namespace InvSystem
                 //DropDownList ddItemCode = GridView1.FooterRow.FindControl("ddItemCodeFooter") as DropDownList;
                 AjaxControlToolkit.ComboBox ddItemCode = GridView1.FooterRow.FindControl("ddItemCodeFooter") as AjaxControlToolkit.ComboBox;
 
-                string strQuery = "select t1.ItemCode [Code], t1.ItemCode [Name] from RequestHeader t0 inner join RequestDetail t1 on t0.RequestID = t1.RequestID ";
-                strQuery = strQuery + "inner join Users t2 on t0.UsrCreate = t2.Id inner join Users t3 on t2.WorkGroup = t3.WorkGroup ";
-                strQuery = strQuery + "where t0.RequestState not in ('8001', '8003') and t3.Id = " + Session["UserId"] + " ";
-                strQuery = strQuery + "and t0.RequestDate = convert(date, '" + Request.QueryString["ReqDate"] + "') order by t1.ItemCode";
+                //string strQuery = "select t1.ItemCode [Code], t1.ItemCode [Name] from RequestHeader t0 inner join RequestDetail t1 on t0.RequestID = t1.RequestID ";
+                //strQuery = strQuery + "inner join Users t2 on t0.UsrCreate = t2.Id inner join Users t3 on t2.WorkGroup = t3.WorkGroup ";
+                //strQuery = strQuery + "where t0.RequestState not in ('8001', '8003') and t3.Id = " + Session["UserId"] + " ";
+                //strQuery = strQuery + "and t0.RequestDate = convert(date, '" + Request.QueryString["ReqDate"] + "') order by t1.ItemCode";
+                string strQuery = "select distinct b.ItemCode [Code], b.ItemCode [Name] from ( ";
+                strQuery = strQuery + "select a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode, ";
+                strQuery = strQuery + "sum(isnull(a.[request qty],0)) [request qty],sum(isnull(a.[QTY GI],0)) [QTY GI] ";
+                strQuery = strQuery + "from ( select t0.RequestDate,t0.WorkGroup,t0.Purpose,t1.ItemCode,t1.Qty [request qty], ";
+                strQuery = strQuery + "sum(isnull(t2.Qty,0)) [QTY GI] from RequestHeader t0 ";
+                strQuery = strQuery + "inner join RequestDetail t1 on t0.RequestID = t1.RequestID ";
+                strQuery = strQuery + "left join GIDetail t2 on t1.ItemCode=t2.ItemCode and t1.RequestID=t2.RequestID ";
+                strQuery = strQuery + "where t0.RequestState not in ('8001', '8003') and t0.RequestDate = convert(date,'" + Request.QueryString["ReqDate"] + "') ";
+                strQuery = strQuery + "and t0.WorkGroup='" + Request.QueryString["wgp"] + "' and t0.Purpose='" + Request.QueryString["prp"] + "' ";
+                strQuery = strQuery + "group by t0.RequestID,t0.RequestDate,t0.WorkGroup,t0.Purpose,t1.ItemCode,t1.Qty )a ";
+                strQuery = strQuery + "group by a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode ) b where b.[QTY GI] > 0  order by b.ItemCode";
 
                 oGnl.SeComboBox(strQuery, ddItemCode, 1);
                 ddItemCode.Items.Insert(0, new ListItem("--Select--", "0"));
                 ddItemCode.SelectedValue = "0";
-                //this.GridView1.Columns[5].Visible = false;
-                this.GridView1.Columns[6].Visible = true;
+                this.GridView1.Columns[4].Visible = true;
+                this.GridView1.Columns[8].Visible = true;
             }
             else if (Request.QueryString["action"].ToString().Equals("save"))
             {
-                //this.GridView1.Columns[5].Visible = false;
-                this.GridView1.Columns[6].Visible = false;
+                this.GridView1.Columns[4].Visible = false;
+                this.GridView1.Columns[8].Visible = false;
                 //this.GridView1.Columns[8].Visible = false;
                 GridView1.FooterRow.Visible = false;
             }
             else if (Request.QueryString["action"].ToString().Equals("verified"))
             {
-                //this.GridView1.Columns[5].Visible = true;
-                this.GridView1.Columns[6].Visible = false;
+                this.GridView1.Columns[4].Visible = false;
+                this.GridView1.Columns[8].Visible = false;
                 //this.GridView1.Columns[8].Visible = false;
                 GridView1.FooterRow.Visible = false;
             }
             else
             {
-                //this.GridView1.Columns[5].Visible = true;
-                this.GridView1.Columns[6].Visible = false;
+                this.GridView1.Columns[4].Visible = false;
+                this.GridView1.Columns[8].Visible = false;
                 //this.GridView1.Columns[8].Visible = false;
                 GridView1.FooterRow.Visible = false;
             }
@@ -145,15 +174,19 @@ namespace InvSystem
             //string itemcode = ((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedItem.Value;
             string itemcode = ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedItem.Value;
             string itemdesc = (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text;
+            string giQty = (GridView1.FooterRow.FindControl("lblGIQtyFooter") as Label).Text;
             string qty = (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text;
             string unit = (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text;
+            string reason = (GridView1.FooterRow.FindControl("txtReasonFooter") as TextBox).Text;
             GridView1.EditIndex = -1;
             BindGrid();
             //((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = itemcode;
             ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = itemcode;
             (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = itemdesc;
+            (GridView1.FooterRow.FindControl("lblGIQtyFooter") as Label).Text = giQty;
             (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text = qty;
             (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = unit;
+            (GridView1.FooterRow.FindControl("txtReasonFooter") as TextBox).Text = reason;
         }
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -190,8 +223,9 @@ namespace InvSystem
                         sparamVal = sparamVal + "@ItemCode~" + (GridView1.FooterRow.FindControl("ddItemCodeFooter") as AjaxControlToolkit.ComboBox).SelectedItem.Value + "|";
                         sparamVal = sparamVal + "@ItemDesc~" + (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text.Trim() + "|";
                         sparamVal = sparamVal + "@Qty~" + (GridView1.FooterRow.FindControl("txtQtyFooter") as TextBox).Text.Trim() + "|";
-                        sparamVal = sparamVal + "@Unit~" + (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text.Trim();
-                        oGnl.ExecuteDataQuery("insert into GRDetailtemp (GRId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit) values (@GRId,@LineId,@UserId,@ItemCode,@ItemDesc,@Qty,@Unit)", sparamVal, Convert.ToChar("|"), 1);
+                        sparamVal = sparamVal + "@Unit~" + (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text.Trim() + "|";
+                        sparamVal = sparamVal + "@Reason~" + (GridView1.FooterRow.FindControl("txtReasonFooter") as TextBox).Text.Trim();
+                        oGnl.ExecuteDataQuery("insert into GRDetailtemp (GRId,LineId,UserId,ItemCode,ItemDesc,Qty,Unit,reason) values (@GRId,@LineId,@UserId,@ItemCode,@ItemDesc,@Qty,@Unit,@Reason)", sparamVal, Convert.ToChar("|"), 1);
 
                         BindGrid();
                         //lblErrorMessage.Text = "New Record Add";
@@ -247,8 +281,9 @@ namespace InvSystem
                     string sparamVal = "@LineId~" + (GridView1.Rows[e.RowIndex].FindControl("lblLineID") as Label).Text.Trim() + "|";
                     sparamVal = sparamVal + "@UserId~" + Session["UserId"] + "|";
                     sparamVal = sparamVal + "@Qty~" + (GridView1.Rows[e.RowIndex].FindControl("txtQty") as TextBox).Text.Trim() + "|";
+                    sparamVal = sparamVal + "@Reason~" + (GridView1.Rows[e.RowIndex].FindControl("txReason") as TextBox).Text.Trim() + "|";
                     sparamVal = sparamVal + "@GRId~" + GridView1.DataKeys[e.RowIndex].Value.ToString();
-                    oGnl.ExecuteDataQuery("update GRDetailtemp set Qty=@Qty where GRId=@GRId and LineId=@LineId and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
+                    oGnl.ExecuteDataQuery("update GRDetailtemp set Qty=@Qty, Reason=@Reason where GRId=@GRId and LineId=@LineId and UserId=@UserId", sparamVal, Convert.ToChar("|"), 1);
 
                     GridView1.EditIndex = -1;
                     BindGrid();
@@ -297,13 +332,32 @@ namespace InvSystem
                 string ItemCode = ddItemCode.SelectedItem.Value;
 
                 DataSet oDs = new DataSet();
-                oDs = oGnl.GetDataSet("select nmbarang, satuan from [tblbarang] where idbarang='" + ItemCode + "'", 2);
+                //oDs = oGnl.GetDataSet("select nmbarang, satuan from [tblbarang] where idbarang='" + ItemCode + "'", 2);
+                string strQuery = "select  T0.nmbarang, T0.satuan,isnull(b.[QTY GI],0)-isnull(t1.[QTY GR],0) [GIQty] ";
+                strQuery = strQuery + "from [CS_Online].dbo.[tblbarang] T0 left join( ";
+                strQuery = strQuery + "select a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode, sum(isnull(a.[request qty],0)) [request qty], ";
+                strQuery = strQuery + "sum(isnull(a.[QTY GI],0)) [QTY GI] from ( select t0.RequestDate,t0.WorkGroup, ";
+                strQuery = strQuery + "t0.Purpose,t1.ItemCode,t1.Qty [request qty],sum(isnull(t2.Qty,0)) [QTY GI] ";
+                strQuery = strQuery + "from RequestHeader t0 inner join RequestDetail t1 on t0.RequestID = t1.RequestID ";
+                strQuery = strQuery + "left join GIDetail t2 on t1.ItemCode=t2.ItemCode and t1.RequestID=t2.RequestID ";
+                strQuery = strQuery + "where t0.RequestState not in ('8001', '8003') and t0.RequestDate = convert(date,'" + Request.QueryString["ReqDate"] + "') ";
+                strQuery = strQuery + "and t0.WorkGroup='" + Request.QueryString["wgp"] + "' and t0.Purpose='" + Request.QueryString["prp"] + "' ";
+                strQuery = strQuery + "and t1.ItemCode='" + ItemCode + "' group by t0.RequestID,t0.RequestDate,t0.WorkGroup,t0.Purpose, ";
+                strQuery = strQuery + "t1.ItemCode,t1.Qty )a group by a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode ) b ";
+                strQuery = strQuery + "on t0.idbarang = b.ItemCode left join ( ";
+                strQuery = strQuery + "select t0.GRDate,t0.WorkGroup,t0.Purpose,t1.ItemCode, sum(isnull(t1.Qty,0)) [QTY GR] ";
+                strQuery = strQuery + "from GRHeader t0 inner join GRDetail t1 on t0.GRID=t1.GRID where t0.GRDate = convert(date,'" + Request.QueryString["ReqDate"] + "') ";
+                strQuery = strQuery + "and t0.WorkGroup='" + Request.QueryString["wgp"] + "' and t0.Purpose='" + Request.QueryString["prp"] + "' group by t0.GRDate,t0.WorkGroup,t0.Purpose,t1.ItemCode ";
+                strQuery = strQuery + ") t1 on b.RequestDate=t1.GRDate and b.WorkGroup=t1.WorkGroup and b.Purpose=t1.Purpose and b.ItemCode=t1.ItemCode ";
+                strQuery = strQuery + "where t0.idbarang='" + ItemCode + "'";
+                oDs = oGnl.GetDataSet(strQuery, 1);
                 if (oDs.Tables[0].Rows.Count > 0)
                 {
                     GridView1.EditIndex = -1;
                     BindGrid();
                     (GridView1.FooterRow.FindControl("lblItemDescFooter") as Label).Text = oDs.Tables[0].Rows[0]["nmbarang"].ToString();
                     (GridView1.FooterRow.FindControl("lblUnitFooter") as Label).Text = oDs.Tables[0].Rows[0]["satuan"].ToString();
+                    (GridView1.FooterRow.FindControl("lblGIQtyFooter") as Label).Text = oDs.Tables[0].Rows[0]["GIQty"].ToString();
                     //((DropDownList)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
                     ((AjaxControlToolkit.ComboBox)GridView1.FooterRow.FindControl("ddItemCodeFooter")).SelectedValue = ItemCode;
                 }
@@ -330,14 +384,31 @@ namespace InvSystem
             {
                 Int64 stock = 0;
                 Int64 qtyused = 0;
-                string strQuery = "select sum(isnull(t4.Qty,0)) [stock] ";
-                strQuery = strQuery + "from RequestHeader t0 inner join RequestDetail t1 on t0.RequestID = t1.RequestID ";
-                strQuery = strQuery + "inner join Users t2 on t0.UsrCreate = t2.Id inner join Users t3 on t2.WorkGroup = t3.WorkGroup ";
-                strQuery = strQuery + "left join GIDetail t4 on t4.RequestID = t1.RequestID and t4.LineId = t1.LineId ";
-                strQuery = strQuery + "left join GIHeader t5 on t4.GIID = t5.GIID ";
-                strQuery = strQuery + "where t0.RequestState not in ('8001', '8003') ";
-                strQuery = strQuery + "and t3.Id = " + Session["UserId"] + "  and t0.RequestDate = convert(date, '" + sDate + "')  and t1.ItemCode =" + itemCode;
-                
+                //string strQuery = "select sum(isnull(t4.Qty,0)) [stock] ";
+                //strQuery = strQuery + "from RequestHeader t0 inner join RequestDetail t1 on t0.RequestID = t1.RequestID ";
+                //strQuery = strQuery + "inner join Users t2 on t0.UsrCreate = t2.Id inner join Users t3 on t2.WorkGroup = t3.WorkGroup ";
+                //strQuery = strQuery + "left join GIDetail t4 on t4.RequestID = t1.RequestID and t4.LineId = t1.LineId ";
+                //strQuery = strQuery + "left join GIHeader t5 on t4.GIID = t5.GIID ";
+                //strQuery = strQuery + "where t0.RequestState not in ('8001', '8003') ";
+                //strQuery = strQuery + "and t3.Id = " + Session["UserId"] + "  and t0.RequestDate = convert(date, '" + sDate + "')  and t1.ItemCode =" + itemCode;
+                string strQuery = "select isnull(b.[QTY GI],0)-isnull(t1.[QTY GR], 0)[stock] ";
+                strQuery = strQuery + "from (select a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode, ";
+                strQuery = strQuery + "sum(isnull(a.[request qty],0)) [request qty], sum(isnull(a.[QTY GI],0)) [QTY GI] ";
+                strQuery = strQuery + "from (select t0.RequestDate,t0.WorkGroup, t0.Purpose,t1.ItemCode,t1.Qty [request qty], ";
+                strQuery = strQuery + "sum(isnull(t2.Qty,0)) [QTY GI] from RequestHeader t0 inner join RequestDetail t1 ";
+                strQuery = strQuery + "on t0.RequestID = t1.RequestID left join GIDetail t2 on t1.ItemCode=t2.ItemCode ";
+                strQuery = strQuery + "and t1.RequestID=t2.RequestID where t0.RequestState not in ('8001', '8003') ";
+                strQuery = strQuery + "and t0.RequestDate = convert(date,'" + sDate + "') ";
+                strQuery = strQuery + "and t0.WorkGroup='" + Request.QueryString["wgp"] + "' and t0.Purpose='" + Request.QueryString["prp"] + "' ";
+                strQuery = strQuery + "and t1.ItemCode ='" + itemCode + "' group by t0.RequestID,t0.RequestDate,t0.WorkGroup,t0.Purpose, t1.ItemCode,t1.Qty ";
+                strQuery = strQuery + ")a group by a.RequestDate,a.WorkGroup,a.Purpose,a.ItemCode ) b left join ( ";
+                strQuery = strQuery + "select t0.GRDate,t0.WorkGroup,t0.Purpose,t1.ItemCode, sum(isnull(t1.Qty,0)) [QTY GR] from GRHeader t0 ";
+                strQuery = strQuery + "inner join GRDetail t1 on t0.GRID=t1.GRID where T0.GRID <> " + GRID + "  and t1.ItemCode ='" + itemCode + "' ";
+                strQuery = strQuery + "and t0.GRDate = convert(date,'" + sDate + "') ";
+                strQuery = strQuery + "and t0.WorkGroup='" + Request.QueryString["wgp"] + "' and t0.Purpose='" + Request.QueryString["prp"] + "' ";
+                strQuery = strQuery + "group by t0.GRDate,t0.WorkGroup,t0.Purpose,t1.ItemCode ";
+                strQuery = strQuery + ") t1 on b.RequestDate=t1.GRDate and b.WorkGroup=t1.WorkGroup and b.Purpose=t1.Purpose and b.ItemCode=t1.ItemCode ";
+
                 DataSet oDs = new DataSet();
                 oDs = oGnl.GetDataSet(strQuery, 1);
                 if (oDs.Tables[0].Rows.Count > 0)
@@ -345,14 +416,15 @@ namespace InvSystem
                     stock = Convert.ToInt64(oDs.Tables[0].Rows[0]["stock"]);
                 }
 
-                strQuery = "select sum(isnull(a.Qty,0)) QTY from( ";
-                strQuery = strQuery + "select sum(qty) Qty from[dbo].[GRDetail] t0 ";
-                strQuery = strQuery + "inner join[dbo].[GRHeader] t1 on t0.GRID= t1.GRID ";
-                strQuery = strQuery + "inner join Users t2 on t1.UsrCreate= t2.Id ";
-                strQuery = strQuery + "inner join Users t3 on t2.WorkGroup= t3.WorkGroup ";
-                strQuery = strQuery + "Where t0.ItemCode = '" + itemCode + "' and t3.Id=" + Session["UserId"] + " and t1.GRDate = convert(date, '" + sDate + "') and t0.GRID <> " + GRID + " ";
-                strQuery = strQuery + "union ";
-                strQuery = strQuery + "select sum(qty) Qty from[GRDetailTemp] where ItemCode = '" + itemCode + "' and GRID = " + GRID   + " and LineId <> " + lineId + " and UserId = " + Session["UserId"] + ")a ";
+                //strQuery = "select sum(isnull(a.Qty,0)) QTY from( ";
+                //strQuery = strQuery + "select sum(qty) Qty from[dbo].[GRDetail] t0 ";
+                //strQuery = strQuery + "inner join[dbo].[GRHeader] t1 on t0.GRID= t1.GRID ";
+                //strQuery = strQuery + "inner join Users t2 on t1.UsrCreate= t2.Id ";
+                //strQuery = strQuery + "inner join Users t3 on t2.WorkGroup= t3.WorkGroup ";
+                //strQuery = strQuery + "Where t0.ItemCode = '" + itemCode + "' and t3.Id=" + Session["UserId"] + " and t1.GRDate = convert(date, '" + sDate + "') and t0.GRID <> " + GRID + " ";
+                //strQuery = strQuery + "union ";
+                //strQuery = strQuery + "select sum(qty) Qty from[GRDetailTemp] where ItemCode = '" + itemCode + "' and GRID = " + GRID   + " and LineId <> " + lineId + " and UserId = " + Session["UserId"] + ")a ";
+                strQuery = "select sum(qty) Qty from[GRDetailTemp] where ItemCode = '" + itemCode + "' and GRID = " + GRID + " and LineId <> " + lineId + " and UserId = " + Session["UserId"];
 
                 oDs = oGnl.GetDataSet(strQuery, 1);
                 if (oDs.Tables[0].Rows.Count > 0)

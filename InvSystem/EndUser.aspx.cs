@@ -29,7 +29,7 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            string strQuery = "SELECT t0.[ID], t0.[NIK], t0.[Name], t1.[Name] [Region], t1.[Name] [Department], case when t0.[UsrStatus] = 'A' then 'Active' else 'Inactive' end[Status], t0.[Remarks] ";
+            string strQuery = "SELECT t0.[ID], t0.[NIK], t0.[Name], t1.[Name] [Region], t2.[Name] [Department], case when t0.[UsrStatus] = 'A' then 'Active' else 'Inactive' end[Status], t0.[Remarks] ";
             strQuery = strQuery + "FROM[EndUser] T0 inner join Reference T1 on t0.Region = t1.Code inner join Reference T2 on t0.Department = t2.Code WHERE isnull(T0.[IsDeleted],'N') in ('N','') and ltrim(rtrim(NIK)) <> 'NA'";
             
             DataTable dt = oGnl.GetDataTable(strQuery, 1);

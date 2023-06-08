@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="ListGoodsReturn.aspx.cs" Inherits="InvSystem.ListGoodsReturn" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="SelfGoodsReturn.aspx.cs" Inherits="InvSystem.SelfGoodsReturn" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -26,7 +26,7 @@
                                        <asp:TemplateField HeaderText="Goods Return Id">
                                             <ItemTemplate>
                                                 <asp:HyperLink ID="HyperLink1" runat="server"
-                                                    NavigateUrl='<%# Eval("GRID", "~/AddGoodsReturn.aspx?GRID={0}&Action=view") %>' 
+                                                    NavigateUrl='<%# Eval("GRID", "~/AddGoodsReturn.aspx?GRID={0}&Action=edit") %>' 
                                                     Text='<%# Eval("GRID") %>'>
                                                 </asp:HyperLink>
                                             </ItemTemplate>

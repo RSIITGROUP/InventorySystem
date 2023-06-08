@@ -13,25 +13,35 @@
                             </div>
                         </div> 
                         <div class="row  mb-2">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>GR Id</label>
                                 <div class="form-group mb-2">
                                     <asp:TextBox ID="txtGRId" CssClass="form-control" runat="server" placeholder="GR Id" ReadOnly="True"></asp:TextBox>
                                     
                                 </div>                                
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label>Production Date</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtGRDate" CssClass="form-control" runat="server" placeholder="Request Date"  TextMode="Date" OnTextChanged="txtGRDate_TextChanged" AutoPostBack="true"></asp:TextBox> 
-                                    
+                                    <asp:TextBox ID="txtGRDate" CssClass="form-control" runat="server" placeholder="Request Date"  TextMode="Date" OnTextChanged="txtGRDate_TextChanged" AutoPostBack="true"></asp:TextBox>                                     
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
+                                <label>Work Group</label>
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddWorkGroup" Class="form-control" runat="server" OnSelectedIndexChanged="ddWorkGroup_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Purpose</label>
+                                <div class="form-group mb-2">
+                                    <asp:DropDownList ID="ddPurpose" Class="form-control" runat="server" OnSelectedIndexChanged="ddPurpose_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <label>Reason</label>
                                 <div class="form-group mb-2">
-                                    <asp:TextBox ID="txtGRReason" CssClass="form-control" runat="server" placeholder="Reason"  MaxLength="500"></asp:TextBox>
-                                    
+                                    <asp:TextBox ID="txtGRReason" CssClass="form-control" runat="server" placeholder="Reason"  MaxLength="500"></asp:TextBox>                                    
                                 </div>
                             </div>
                         </div>           

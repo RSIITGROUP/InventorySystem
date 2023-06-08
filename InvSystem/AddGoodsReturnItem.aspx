@@ -92,6 +92,17 @@
                             <asp:Label ID="lblItemDescFooter"  runat="server" />
                         </FooterTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="GI GTY" ItemStyle-Width="100px">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("GIQty") %>' runat="server"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:Label ID="lblGIQty" Text='<%# Eval("GIQty") %>' runat="server" />
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:Label ID="lblGIQtyFooter" runat="server"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity" ItemStyle-Width="100px">
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("Qty") %>' runat="server"/>
@@ -112,6 +123,17 @@
                         </EditItemTemplate>
                         <FooterTemplate>
                             <asp:Label ID="lblUnitFooter"  runat="server" />
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Reason" ItemStyle-Width="300px">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("Reason") %>' runat="server"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtReason" Text='<%# Eval("Reason") %>' runat="server"  />
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtReasonFooter" runat="server" />
                         </FooterTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Action">

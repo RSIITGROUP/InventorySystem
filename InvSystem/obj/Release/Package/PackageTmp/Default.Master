@@ -91,10 +91,10 @@
                                         <asp:LinkButton class="dropdown-item" ID="ApprovalList" runat="server" OnClick="LinkButton12_Click" Visible="false" CausesValidation="false">Approval List</asp:LinkButton>
                                     </li>
                                     <li>
-                                        <asp:LinkButton class="dropdown-item" ID="RequestList" runat="server" OnClick="LinkButton11_Click" Visible="false" CausesValidation="false">Request List</asp:LinkButton>
+                                        <asp:LinkButton class="dropdown-item" ID="SelfReqList" runat="server" OnClick="LinkButton19_Click" Visible="false" CausesValidation="false">My Request List</asp:LinkButton>
                                     </li>
                                     <li>
-                                        <asp:LinkButton class="dropdown-item" ID="SelfReqList" runat="server" OnClick="LinkButton19_Click" Visible="false" CausesValidation="false">My Request List</asp:LinkButton>
+                                        <asp:LinkButton class="dropdown-item" ID="RequestList" runat="server" OnClick="LinkButton11_Click" Visible="false" CausesValidation="false">Request List</asp:LinkButton>
                                     </li>
                                     <li>
                                         <asp:LinkButton class="dropdown-item" ID="GIForm" runat="server" OnClick="LinkButton13_Click" Visible="false" CausesValidation="false">Goods Issue Form</asp:LinkButton>
@@ -106,10 +106,13 @@
                                         <asp:LinkButton class="dropdown-item" ID="GRForm" runat="server" OnClick="LinkButton16_Click" Visible="false" CausesValidation="false">Goods Return Form</asp:LinkButton>
                                     </li>
                                     <li>
-                                        <asp:LinkButton class="dropdown-item" ID="GRList" runat="server" OnClick="LinkButton17_Click" Visible="false" CausesValidation="false">Goods Return List</asp:LinkButton>
-                                    </li> 
-                                    <li>
                                         <asp:LinkButton class="dropdown-item" ID="VerifiedGR" runat="server" OnClick="LinkButton18_Click" Visible="false" CausesValidation="false">Verified Goods Return</asp:LinkButton>
+                                    </li>                                     
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="SelfGR" runat="server" OnClick="LinkButton20_Click" Visible="false" CausesValidation="false">My Goods Return</asp:LinkButton>
+                                    </li>
+                                    <li>
+                                        <asp:LinkButton class="dropdown-item" ID="GRList" runat="server" OnClick="LinkButton17_Click" Visible="false" CausesValidation="false">Goods Return List</asp:LinkButton>
                                     </li> 
                                   </ul>
                                 </li>

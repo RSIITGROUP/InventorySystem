@@ -26,7 +26,7 @@
                                        <asp:TemplateField HeaderText="Goods Return Id">
                                             <ItemTemplate>
                                                 <asp:HyperLink ID="HyperLink1" runat="server"
-                                                    NavigateUrl='<%# Eval("GRID", "~/AddGoodsReturn.aspx?GRID={0}&Action=edit") %>' 
+                                                    NavigateUrl='<%# Eval("GRID", "~/AddGoodsReturn.aspx?GRID={0}&Action=view") %>' 
                                                     Text='<%# Eval("GRID") %>'>
                                                 </asp:HyperLink>
                                             </ItemTemplate>

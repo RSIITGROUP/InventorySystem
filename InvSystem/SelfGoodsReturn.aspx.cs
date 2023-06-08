@@ -9,7 +9,7 @@ using System.Data;
 
 namespace InvSystem
 {
-    public partial class VerifiedGoodsReturn : System.Web.UI.Page
+    public partial class SelfGoodsReturn : System.Web.UI.Page
     {
         clsGeneral oGnl = new clsGeneral();
         protected void Page_Load(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace InvSystem
 
         private void BindGrid()
         {
-            string strQuery = "select distinct t0.GRID, t0.GRDate [GRDate], case when isnull(t0.GRState,0) = 0 then 'Pending' else 'Verified' end [GRState],  t2.FirstName + ' ' + t2.LastName [GRUsr] from GRHeader T0 inner join GRDetail t1 on T0.GRID=T1.GRID inner join [Users] t2 on t0.UsrCreate = t2.Id where isnull(t0.GRState,0)=0 and t0.UsrCreate <> " + Session["UserId"];
+            string strQuery = "select distinct t0.GRID, t0.GRDate [GRDate], case when isnull(t0.GRState,0) = 0 then 'Pending' else 'Verified' end [GRState],  t2.FirstName + ' ' + t2.LastName [GRUsr] from GRHeader T0 inner join GRDetail t1 on T0.GRID=T1.GRID inner join [Users] t2 on t0.UsrCreate = t2.Id where t0.UsrCreate = " + Session["UserId"];
 
             DataTable dt = oGnl.GetDataTable(strQuery, 1);
             GridView1.DataSource = dt;

@@ -79,7 +79,8 @@ namespace InvSystem
                     SeDropDown("30", ddBtrWatt);
                     SeDropDown("31", ddCameraType);
                     SeDropDown("32", ddResolution);
-                    oGnl.SeDropDown("select convert(nvarchar,[ID]) [Code], [Name] from EndUser where (UsrStatus='A' or ltrim(rtrim(NIK))='NA') order by [Name]", ddUser, 1);
+                    //oGnl.SeDropDown("select convert(nvarchar,[ID]) [Code], [Name] from EndUser where (UsrStatus='A' or ltrim(rtrim(NIK))='NA') order by [Name]", ddUser, 1);
+                    oGnl.SeDropDown("select convert(nvarchar,[ID]) [Code], case when [Id] = 1 then [Name] else CONCAT([Name],' - [',[NIK],']') end [Name] from EndUser where (UsrStatus='A' or ltrim(rtrim(NIK))='NA') order by [Name],[NIK]", ddUser, 1);
 
                     if (Request.QueryString["Action"] == "edit")
                     {

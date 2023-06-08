@@ -2380,6 +2380,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SelfGoodsReturn.aspx" />
     <Content Include="SelfRequestList.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="TestBarcode.aspx" />
@@ -2592,6 +2593,13 @@
     </Compile>
     <Compile Include="ReferenceType.aspx.designer.cs">
       <DependentUpon>ReferenceType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SelfGoodsReturn.aspx.cs">
+      <DependentUpon>SelfGoodsReturn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SelfGoodsReturn.aspx.designer.cs">
+      <DependentUpon>SelfGoodsReturn.aspx</DependentUpon>
     </Compile>
     <Compile Include="SelfRequestList.aspx.cs">
       <DependentUpon>SelfRequestList.aspx</DependentUpon>
